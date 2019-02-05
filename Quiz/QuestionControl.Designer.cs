@@ -45,7 +45,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.labelQuestion);
             this.Name = "QuestionControl";
-            this.Size = new System.Drawing.Size(737, 403);
+            this.Size = new System.Drawing.Size(737, 340);
             this.Load += new System.EventHandler(this.QuestionControl_Load);
             this.ResumeLayout(false);
 

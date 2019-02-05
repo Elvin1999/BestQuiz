@@ -13,5 +13,5 @@ namespace Quiz
         [XmlElement]
         public string Text { get; set; }
         [XmlArray]
-        public List<Answer> Answer { get; set; } }
+        public List<Answer> Answers { get; set; } = new List<Answer>();}
 }
