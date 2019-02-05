@@ -25,6 +25,8 @@ namespace Quiz
         }
         public List<QuestionBlock> QuestionBlock { get; set; }
         public List<QuestionControl> questionControls { get; set; }
+        public int CurrentIndex { get; set; }
+        QuestionControl questionControl1 = new QuestionControl();
         private void Form1_Load(object sender, EventArgs e)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
@@ -34,26 +36,36 @@ namespace Quiz
                 {
                     QuestionBlock = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
                 }
-                //using (StreamReader streamReader = new StreamReader("QuestionsXML.xml"))
+                labelQuestion.Text = QuestionBlock[CurrentIndex].Text;
+                //for (int i = 0; i < QuestionBlock[currentindex].Answers.Count; i++)
                 //{
-                //    var obj = (List<QuestionBlock>)serializer.Deserialize(streamReader);
-                //    QuestionBlock = obj;
+                //    var radioButton = new RadioButton();
+                //    radioButton.Location = new Point(100, 100 * (i + 1));
+                //    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                //    radioButton.Text = QuestionBlock[currentindex].Answers[i].Text;
+                //    radioButton.Size = new Size(300, 90);
+                //    this.Controls.Add(radioButton);
                 //}
-                QuestionControl questionControl1 = new QuestionControl();
-                questionControl1.Location = new Point(10, 10);
-                questionControl1.Question.Text = QuestionBlock[0].Text;
-                int y = 60;
-                for (int i = 0; i < QuestionBlock[0].Answers.Count; i++)
-                {
-                    RadioButton radioButton = new RadioButton();
-                    radioButton.Location = new Point(100,100*(i+1));
-                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                    radioButton.Text = QuestionBlock[0].Answers[i].Text;
-                    radioButton.Size = new Size(300,90);
-                    this.Controls.Add(radioButton);
-                }
-                this.Controls.Add(questionControl1);
+
             }
+        }
+
+        private void metroBackbtn_Click(object sender, EventArgs e)
+        {
+
+            --CurrentIndex;
+            labelQuestion.Text = QuestionBlock[CurrentIndex].Text;
+
+
+        }
+
+        private void metroNextbtn_Click(object sender, EventArgs e)
+        {
+
+            ++CurrentIndex;
+            labelQuestion.Text = QuestionBlock[CurrentIndex].Text;
+
+
         }
     }
 }

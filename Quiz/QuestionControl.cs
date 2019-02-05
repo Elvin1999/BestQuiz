@@ -13,7 +13,7 @@ namespace Quiz
     public partial class QuestionControl : UserControl
     {
 
-        public Label Question { get { return labelQuestion; } set { labelQuestion = value; } }
+ 
         public QuestionControl()
         {
             InitializeComponent();

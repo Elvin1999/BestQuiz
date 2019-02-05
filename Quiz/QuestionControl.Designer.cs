@@ -28,22 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelQuestion = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // labelQuestion
-            // 
-            this.labelQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelQuestion.Location = new System.Drawing.Point(49, 39);
-            this.labelQuestion.Name = "labelQuestion";
-            this.labelQuestion.Size = new System.Drawing.Size(624, 58);
-            this.labelQuestion.TabIndex = 0;
             // 
             // QuestionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelQuestion);
             this.Name = "QuestionControl";
             this.Size = new System.Drawing.Size(737, 340);
             this.Load += new System.EventHandler(this.QuestionControl_Load);
@@ -52,7 +42,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label labelQuestion;
     }
 }
