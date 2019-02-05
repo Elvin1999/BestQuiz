@@ -37,7 +37,7 @@
             // 
             // metroButtonExit
             // 
-            this.metroButtonExit.Location = new System.Drawing.Point(767, 1);
+            this.metroButtonExit.Location = new System.Drawing.Point(893, 0);
             this.metroButtonExit.Name = "metroButtonExit";
             this.metroButtonExit.Size = new System.Drawing.Size(34, 23);
             this.metroButtonExit.TabIndex = 0;
@@ -49,9 +49,9 @@
             // 
             this.metroBackbtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.metroBackbtn.Highlight = true;
-            this.metroBackbtn.Location = new System.Drawing.Point(125, 453);
+            this.metroBackbtn.Location = new System.Drawing.Point(144, 587);
             this.metroBackbtn.Name = "metroBackbtn";
-            this.metroBackbtn.Size = new System.Drawing.Size(75, 23);
+            this.metroBackbtn.Size = new System.Drawing.Size(88, 30);
             this.metroBackbtn.TabIndex = 1;
             this.metroBackbtn.Text = "Back";
             this.metroBackbtn.UseSelectable = true;
@@ -61,9 +61,9 @@
             // 
             this.metroAcceptbtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.metroAcceptbtn.Highlight = true;
-            this.metroAcceptbtn.Location = new System.Drawing.Point(307, 453);
+            this.metroAcceptbtn.Location = new System.Drawing.Point(326, 587);
             this.metroAcceptbtn.Name = "metroAcceptbtn";
-            this.metroAcceptbtn.Size = new System.Drawing.Size(75, 23);
+            this.metroAcceptbtn.Size = new System.Drawing.Size(88, 30);
             this.metroAcceptbtn.TabIndex = 1;
             this.metroAcceptbtn.Text = "Accept";
             this.metroAcceptbtn.UseSelectable = true;
@@ -72,9 +72,9 @@
             // 
             this.metroNextbtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.metroNextbtn.Highlight = true;
-            this.metroNextbtn.Location = new System.Drawing.Point(500, 453);
+            this.metroNextbtn.Location = new System.Drawing.Point(519, 587);
             this.metroNextbtn.Name = "metroNextbtn";
-            this.metroNextbtn.Size = new System.Drawing.Size(75, 23);
+            this.metroNextbtn.Size = new System.Drawing.Size(88, 30);
             this.metroNextbtn.TabIndex = 1;
             this.metroNextbtn.Text = "Next";
             this.metroNextbtn.UseSelectable = true;
@@ -84,16 +84,16 @@
             // 
             this.labelQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelQuestion.ForeColor = System.Drawing.Color.Maroon;
-            this.labelQuestion.Location = new System.Drawing.Point(95, 30);
+            this.labelQuestion.Location = new System.Drawing.Point(52, 9);
             this.labelQuestion.Name = "labelQuestion";
-            this.labelQuestion.Size = new System.Drawing.Size(624, 242);
+            this.labelQuestion.Size = new System.Drawing.Size(685, 169);
             this.labelQuestion.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 498);
+            this.ClientSize = new System.Drawing.Size(927, 668);
             this.Controls.Add(this.labelQuestion);
             this.Controls.Add(this.metroNextbtn);
             this.Controls.Add(this.metroAcceptbtn);
