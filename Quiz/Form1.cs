@@ -35,6 +35,7 @@ namespace Quiz
                     QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
                 }
                 labelQuestion.Text = QuestionList[CurrentIndex].Text;
+                labelQueue.Text = (CurrentIndex + 1).ToString();
                 int y = 0;
                 labelQueueQuestion.Text = "Question " + (CurrentIndex + 1) + " of " + QuestionList.Count;
                 for (int k = 0; k < QuestionList[CurrentIndex].Answers.Count; k++)
@@ -71,7 +72,7 @@ namespace Quiz
             if (CurrentIndex > 0)
             {
                 --CurrentIndex; int y = 0;
-
+                labelQueue.Text = (CurrentIndex + 1).ToString();
                 labelQueueQuestion.Text = "Question " + (CurrentIndex + 1) + " of " + QuestionList.Count;
                 foreach (var item in this.Controls)
                 {
@@ -97,9 +98,10 @@ namespace Quiz
         private void metroNextbtn_Click(object sender, EventArgs e)
         {
             metroAcceptbtn.Enabled = false;
-            if (CurrentIndex < QuestionList.Count) 
+            if (CurrentIndex < QuestionList.Count-1) 
             {
                 ++CurrentIndex; int y = 0;
+                labelQueue.Text = (CurrentIndex + 1).ToString();
                 labelQueueQuestion.Text = "Question " + (CurrentIndex + 1) + " of " + QuestionList.Count;
                 foreach (var item in this.Controls)
                 {

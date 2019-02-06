@@ -35,6 +35,7 @@
             this.labelQuestion = new System.Windows.Forms.Label();
             this.metroBtnSubmit = new MetroFramework.Controls.MetroButton();
             this.labelQueueQuestion = new System.Windows.Forms.Label();
+            this.labelQueue = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // metroButtonExit
@@ -111,11 +112,22 @@
             this.labelQueueQuestion.TabIndex = 3;
             this.labelQueueQuestion.Text = "label1";
             // 
+            // labelQueue
+            // 
+            this.labelQueue.AutoSize = true;
+            this.labelQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelQueue.Location = new System.Drawing.Point(12, 64);
+            this.labelQueue.Name = "labelQueue";
+            this.labelQueue.Size = new System.Drawing.Size(19, 20);
+            this.labelQueue.TabIndex = 4;
+            this.labelQueue.Text = "1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(927, 668);
+            this.Controls.Add(this.labelQueue);
             this.Controls.Add(this.labelQueueQuestion);
             this.Controls.Add(this.labelQuestion);
             this.Controls.Add(this.metroBtnSubmit);
@@ -128,6 +140,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -140,6 +153,7 @@
         private System.Windows.Forms.Label labelQuestion;
         private MetroFramework.Controls.MetroButton metroBtnSubmit;
         private System.Windows.Forms.Label labelQueueQuestion;
+        private System.Windows.Forms.Label labelQueue;
     }
 }
 
