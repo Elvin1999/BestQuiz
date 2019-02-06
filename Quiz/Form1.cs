@@ -26,48 +26,56 @@ namespace Quiz
         public List<QuestionBlock> QuestionBlock { get; set; }
         public List<QuestionControl> questionControls { get; set; }
         public int CurrentIndex { get; set; }
-        //QuestionControl questionControl1 = new QuestionControl();
         RadioButton radioButton = new RadioButton();
         private int y = 0;
         private void Form1_Load(object sender, EventArgs e)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
+            questionControls = new List<QuestionControl>();
             if (File.Exists("QuestionsXML.xml"))
             {
+
                 using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.Open))
                 {
                     QuestionBlock = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
                 }
-                labelQuestion.Text = QuestionBlock[CurrentIndex].Text;
-                for (int i = 0; i < QuestionBlock[CurrentIndex].Answers.Count; i++)
-                {
-                    radioButton = new RadioButton();
-                    radioButton.Location = new Point(60, 150+y);
-                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                    radioButton.Text = QuestionBlock[CurrentIndex].Answers[i].Text;
-                    radioButton.Size = new Size(250, 90);
-                    y += 90;
-                    this.Controls.Add(radioButton);
-                }
 
+                labelQuestion.Text = QuestionBlock[CurrentIndex].Text;
+                QuestionControl controls = new QuestionControl(QuestionBlock[CurrentIndex]);
+                questionControls.Add(controls);
+                this.Controls.AddRange(questionControls.ToArray());
             }
         }
-
         private void metroBackbtn_Click(object sender, EventArgs e)
         {
-
+            for (int k = 0; k < questionControls[CurrentIndex].ListRadiobutton.Count; k++)
+            {
+                questionControls[CurrentIndex].ListRadiobutton[k].Visible = false;
+            }
             --CurrentIndex;
             labelQuestion.Text = QuestionBlock[CurrentIndex].Text;
-            
-
+            QuestionControl controls = new QuestionControl(QuestionBlock[CurrentIndex]);
+            questionControls.Add(controls);
+            this.Controls.AddRange(questionControls.ToArray());
         }
 
         private void metroNextbtn_Click(object sender, EventArgs e)
         {
 
+            for (int k = 0; k < questionControls[CurrentIndex].ListRadiobutton.Count; k++)
+            {
+                questionControls[CurrentIndex].ListRadiobutton[k].Visible = false;
+            }
+
             ++CurrentIndex;
             labelQuestion.Text = QuestionBlock[CurrentIndex].Text;
+            QuestionControl controls = new QuestionControl(QuestionBlock[CurrentIndex]);
+            questionControls.Add(controls);
+            this.Controls.AddRange(questionControls.ToArray());
+        }
 
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
     }

@@ -86,7 +86,7 @@
             this.labelQuestion.ForeColor = System.Drawing.Color.Maroon;
             this.labelQuestion.Location = new System.Drawing.Point(52, 9);
             this.labelQuestion.Name = "labelQuestion";
-            this.labelQuestion.Size = new System.Drawing.Size(685, 169);
+            this.labelQuestion.Size = new System.Drawing.Size(730, 146);
             this.labelQuestion.TabIndex = 2;
             // 
             // Form1
