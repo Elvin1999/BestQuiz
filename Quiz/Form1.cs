@@ -15,9 +15,8 @@ namespace Quiz
     {
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
-
         private void metroButton1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -27,6 +26,7 @@ namespace Quiz
         RadioButton radioButton = new RadioButton();
         private void Form1_Load(object sender, EventArgs e)
         {
+            metroAcceptbtn.Enabled = false;
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             if (File.Exists("QuestionsXML.xml"))
             {
@@ -45,13 +45,29 @@ namespace Quiz
                     radioButton.Text = QuestionList[CurrentIndex].Answers[k].Text;
                     radioButton.Font = new Font("Century", 10, FontStyle.Italic);
                     y += 60;
+                    radioButton.Click += RadioButton_Click;
                     this.Controls.Add(radioButton);
                 }
                 int i = 0;
             }
         }
+
+        private void RadioButton_Click(object sender, EventArgs e)
+        {
+            RadioButton radioButton = sender as RadioButton;
+            if (radioButton.Checked)
+            {
+                metroAcceptbtn.Enabled = true;
+            }
+            else
+            {
+                metroAcceptbtn.Enabled = false;
+            }
+        }
+
         private void metroBackbtn_Click(object sender, EventArgs e)
         {
+            metroAcceptbtn.Enabled = false;
             if (CurrentIndex > 0)
             {
                 --CurrentIndex; int y = 0;
@@ -80,6 +96,7 @@ namespace Quiz
         }
         private void metroNextbtn_Click(object sender, EventArgs e)
         {
+            metroAcceptbtn.Enabled = false;
             if (CurrentIndex < QuestionList.Count)
             {
                 ++CurrentIndex; int y = 0;
@@ -107,12 +124,10 @@ namespace Quiz
         }
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-
         }
 
         private void metroAcceptbtn_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -33,7 +33,7 @@
             this.metroAcceptbtn = new MetroFramework.Controls.MetroButton();
             this.metroNextbtn = new MetroFramework.Controls.MetroButton();
             this.labelQuestion = new System.Windows.Forms.Label();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.metroBtnSubmit = new MetroFramework.Controls.MetroButton();
             this.labelQueueQuestion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -92,16 +92,16 @@
             this.labelQuestion.Size = new System.Drawing.Size(730, 146);
             this.labelQuestion.TabIndex = 2;
             // 
-            // metroButton1
+            // metroBtnSubmit
             // 
-            this.metroButton1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.metroButton1.Highlight = true;
-            this.metroButton1.Location = new System.Drawing.Point(794, 587);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(88, 30);
-            this.metroButton1.TabIndex = 1;
-            this.metroButton1.Text = "Submit";
-            this.metroButton1.UseSelectable = true;
+            this.metroBtnSubmit.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.metroBtnSubmit.Highlight = true;
+            this.metroBtnSubmit.Location = new System.Drawing.Point(794, 587);
+            this.metroBtnSubmit.Name = "metroBtnSubmit";
+            this.metroBtnSubmit.Size = new System.Drawing.Size(88, 30);
+            this.metroBtnSubmit.TabIndex = 1;
+            this.metroBtnSubmit.Text = "Submit";
+            this.metroBtnSubmit.UseSelectable = true;
             // 
             // labelQueueQuestion
             // 
@@ -118,7 +118,7 @@
             this.ClientSize = new System.Drawing.Size(927, 668);
             this.Controls.Add(this.labelQueueQuestion);
             this.Controls.Add(this.labelQuestion);
-            this.Controls.Add(this.metroButton1);
+            this.Controls.Add(this.metroBtnSubmit);
             this.Controls.Add(this.metroNextbtn);
             this.Controls.Add(this.metroAcceptbtn);
             this.Controls.Add(this.metroBackbtn);
@@ -138,7 +138,7 @@
         private MetroFramework.Controls.MetroButton metroAcceptbtn;
         private MetroFramework.Controls.MetroButton metroNextbtn;
         private System.Windows.Forms.Label labelQuestion;
-        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton metroBtnSubmit;
         private System.Windows.Forms.Label labelQueueQuestion;
     }
 }
