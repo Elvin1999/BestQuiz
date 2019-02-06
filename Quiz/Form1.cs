@@ -27,7 +27,7 @@ namespace Quiz
         public List<QuestionControl> questionControls { get; set; }
         public int CurrentIndex { get; set; }
         RadioButton radioButton = new RadioButton();
-        private int y = 0;
+        private int y = 0; 
         private void Form1_Load(object sender, EventArgs e)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
