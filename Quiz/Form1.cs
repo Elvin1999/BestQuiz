@@ -97,7 +97,7 @@ namespace Quiz
         private void metroNextbtn_Click(object sender, EventArgs e)
         {
             metroAcceptbtn.Enabled = false;
-            if (CurrentIndex < QuestionList.Count)
+            if (CurrentIndex < QuestionList.Count) 
             {
                 ++CurrentIndex; int y = 0;
                 labelQueueQuestion.Text = "Question " + (CurrentIndex + 1) + " of " + QuestionList.Count;
