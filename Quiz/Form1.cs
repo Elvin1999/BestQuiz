@@ -101,14 +101,22 @@ namespace Quiz
             QuestionListSecond.Add(item);
         }
         public bool IsClickedToSubmitButton { get; set; }
+        public int CorrectCount { get; set; }
+        public int UnCorrectCount { get; set; }
+        //List<QuestionBlock> questionBlocksTest { get; set; }
+
         private void metroBtnSubmit_Click(object sender, EventArgs e)
         {
-            IsClickedToSubmitButton = true;
-            CurrentIndex = 0;
+            
+            CorrectCount = 0;
+            UnCorrectCount = 0;
+
+
+            MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount}");
             QuestionList = QuestionListSecond;
             ShowTest(QuestionList, CurrentIndex);
         }
-        private void ShowTest(List<QuestionBlock> questionlist,int curindex)
+        private void ShowTest(List<QuestionBlock> questionlist, int curindex)
         {
             if (IsClickedToSubmitButton)
             {
@@ -131,7 +139,6 @@ namespace Quiz
                 this.Controls.Add(radioButton);
             }
         }
-
         private void labelQuestion_Click(object sender, EventArgs e)
         {
 
