@@ -46,6 +46,9 @@ namespace Quiz
             RadioButton radioButton = sender as RadioButton;
             if (radioButton.Checked)
             {
+
+                Answer = radioButton.Text;
+                MessageBox.Show(Answer);
                 metroAcceptbtn.Enabled = true;
             }
             else
@@ -90,9 +93,9 @@ namespace Quiz
         public List<string> AnswerList { get; set; }
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            RadioButton radioButton = sender as RadioButton;
-            Answer = radioButton.Text;
-
+            //RadioButton radioButton = sender as RadioButton;
+            //Answer = radioButton.Text;
+            //MessageBox.Show(Answer);
         }
         private void metroAcceptbtn_Click(object sender, EventArgs e)
         {
@@ -103,14 +106,25 @@ namespace Quiz
         public bool IsClickedToSubmitButton { get; set; }
         public int CorrectCount { get; set; }
         public int UnCorrectCount { get; set; }
-        //List<QuestionBlock> questionBlocksTest { get; set; }
-
         private void metroBtnSubmit_Click(object sender, EventArgs e)
         {
-            
+
             CorrectCount = 0;
             UnCorrectCount = 0;
 
+            for (int i = 0; i < QuestionListSecond.Count; i++)
+            {
+                var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                if (AnswerList[i] == correctanswer.Text)
+                {
+                    ++CorrectCount;
+                }
+                else
+                {
+                    ++UnCorrectCount;
+                }
+
+            }
 
             MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount}");
             QuestionList = QuestionListSecond;
