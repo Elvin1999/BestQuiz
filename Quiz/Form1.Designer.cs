@@ -92,6 +92,7 @@
             this.labelQuestion.Name = "labelQuestion";
             this.labelQuestion.Size = new System.Drawing.Size(730, 146);
             this.labelQuestion.TabIndex = 2;
+            this.labelQuestion.Click += new System.EventHandler(this.labelQuestion_Click);
             // 
             // metroBtnSubmit
             // 
@@ -111,7 +112,6 @@
             this.labelQueueQuestion.Name = "labelQueueQuestion";
             this.labelQueueQuestion.Size = new System.Drawing.Size(100, 23);
             this.labelQueueQuestion.TabIndex = 3;
-            this.labelQueueQuestion.Text = "label1";
             // 
             // labelQueue
             // 

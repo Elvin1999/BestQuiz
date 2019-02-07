@@ -85,7 +85,6 @@ namespace Quiz
                 }
                 ShowTest(QuestionList, CurrentIndex);
             }
-
         }
         public string Answer { get; set; }
         public List<string> AnswerList { get; set; }
@@ -95,19 +94,27 @@ namespace Quiz
             Answer = radioButton.Text;
 
         }
-
         private void metroAcceptbtn_Click(object sender, EventArgs e)
         {
             var item = QuestionList[CurrentIndex];
             AnswerList.Add(Answer);//I'll check this answer with SecondQuestionList's answers
             QuestionListSecond.Add(item);
         }
+        public bool IsClickedToSubmitButton { get; set; }
         private void metroBtnSubmit_Click(object sender, EventArgs e)
         {
-
+            IsClickedToSubmitButton = true;
+            CurrentIndex = 0;
+            QuestionList = QuestionListSecond;
+            ShowTest(QuestionList, CurrentIndex);
         }
         private void ShowTest(List<QuestionBlock> questionlist,int curindex)
         {
+            if (IsClickedToSubmitButton)
+            {
+                metroAcceptbtn.Enabled = false;
+                metroBtnSubmit.Enabled = false;
+            }
             int y = 0;
             labelQueue.Text = (curindex + 1).ToString();
             labelQueueQuestion.Text = "Question " + (curindex + 1) + " of " + questionlist.Count;
@@ -123,6 +130,11 @@ namespace Quiz
                 radioButton.Click += RadioButton_Click;
                 this.Controls.Add(radioButton);
             }
+        }
+
+        private void labelQuestion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
