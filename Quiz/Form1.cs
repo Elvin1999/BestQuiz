@@ -15,14 +15,17 @@ namespace Quiz
     {
         public Form1()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            AnswerList = new List<string>();
+            QuestionListSecond = new List<QuestionBlock>();
         }
         private void metroButton1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
         public List<QuestionBlock> QuestionList { get; set; }
-        public int CurrentIndex { get; set; }
+        public List<QuestionBlock> QuestionListSecond { get; set; }
+        public int CurrentIndex = 0;
         RadioButton radioButton = new RadioButton();
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -34,25 +37,10 @@ namespace Quiz
                 {
                     QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
                 }
-                labelQuestion.Text = QuestionList[CurrentIndex].Text;
-                labelQueue.Text = (CurrentIndex + 1).ToString();
-                int y = 0;
-                labelQueueQuestion.Text = "Question " + (CurrentIndex + 1) + " of " + QuestionList.Count;
-                for (int k = 0; k < QuestionList[CurrentIndex].Answers.Count; k++)
-                {
-                    RadioButton radioButton = new RadioButton();
-                    radioButton.Size = new Size(350, 60);
-                    radioButton.Location = new Point(56, 192 + y);
-                    radioButton.Text = QuestionList[CurrentIndex].Answers[k].Text;
-                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                    y += 60;
-                    radioButton.Click += RadioButton_Click;
-                    this.Controls.Add(radioButton);
-                }
-                int i = 0;
+                ShowTest(QuestionList, CurrentIndex);
+
             }
         }
-
         private void RadioButton_Click(object sender, EventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
@@ -71,9 +59,7 @@ namespace Quiz
             metroAcceptbtn.Enabled = false;
             if (CurrentIndex > 0)
             {
-                --CurrentIndex; int y = 0;
-                labelQueue.Text = (CurrentIndex + 1).ToString();
-                labelQueueQuestion.Text = "Question " + (CurrentIndex + 1) + " of " + QuestionList.Count;
+                --CurrentIndex;
                 foreach (var item in this.Controls)
                 {
                     if (item is RadioButton rb)
@@ -81,28 +67,15 @@ namespace Quiz
                         rb.Dispose();
                     }
                 }
-                labelQuestion.Text = QuestionList[CurrentIndex].Text;
-                for (int k = 0; k < QuestionList[CurrentIndex].Answers.Count; k++)
-                {
-                    RadioButton radioButton = new RadioButton();
-                    radioButton.Size = new Size(350, 60);
-                    radioButton.Location = new Point(56, 192 + y);
-                    radioButton.Text = QuestionList[CurrentIndex].Answers[k].Text;
-                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                    y += 60;
-                    this.Controls.Add(radioButton);
-                }
+                ShowTest(QuestionList, CurrentIndex);
             }
-
         }
         private void metroNextbtn_Click(object sender, EventArgs e)
         {
             metroAcceptbtn.Enabled = false;
-            if (CurrentIndex < QuestionList.Count-1) 
+            if (CurrentIndex < QuestionList.Count - 1)
             {
-                ++CurrentIndex; int y = 0;
-                labelQueue.Text = (CurrentIndex + 1).ToString();
-                labelQueueQuestion.Text = "Question " + (CurrentIndex + 1) + " of " + QuestionList.Count;
+                ++CurrentIndex;
                 foreach (var item in this.Controls)
                 {
                     if (item is RadioButton rb)
@@ -110,26 +83,46 @@ namespace Quiz
                         rb.Dispose();
                     }
                 }
-                labelQuestion.Text = QuestionList[CurrentIndex].Text;
-                for (int k = 0; k < QuestionList[CurrentIndex].Answers.Count; k++)
-                {
-                    RadioButton radioButton = new RadioButton();
-                    radioButton.Size = new Size(350, 60);
-                    radioButton.Location = new Point(56, 192 + y);
-                    radioButton.Text = QuestionList[CurrentIndex].Answers[k].Text;
-                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                    y += 60;
-                    this.Controls.Add(radioButton);
-                }
+                ShowTest(QuestionList, CurrentIndex);
             }
 
         }
+        public string Answer { get; set; }
+        public List<string> AnswerList { get; set; }
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
+            RadioButton radioButton = sender as RadioButton;
+            Answer = radioButton.Text;
+
         }
 
         private void metroAcceptbtn_Click(object sender, EventArgs e)
         {
+            var item = QuestionList[CurrentIndex];
+            AnswerList.Add(Answer);//I'll check this answer with SecondQuestionList's answers
+            QuestionListSecond.Add(item);
+        }
+        private void metroBtnSubmit_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void ShowTest(List<QuestionBlock> questionlist,int curindex)
+        {
+            int y = 0;
+            labelQueue.Text = (curindex + 1).ToString();
+            labelQueueQuestion.Text = "Question " + (curindex + 1) + " of " + questionlist.Count;
+            labelQuestion.Text = questionlist[curindex].Text;
+            for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
+            {
+                RadioButton radioButton = new RadioButton();
+                radioButton.Size = new Size(350, 60);
+                radioButton.Location = new Point(56, 192 + y);
+                radioButton.Text = questionlist[curindex].Answers[k].Text;
+                radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                y += 60;
+                radioButton.Click += RadioButton_Click;
+                this.Controls.Add(radioButton);
+            }
         }
     }
 }

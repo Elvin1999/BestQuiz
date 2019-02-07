@@ -103,6 +103,7 @@
             this.metroBtnSubmit.TabIndex = 1;
             this.metroBtnSubmit.Text = "Submit";
             this.metroBtnSubmit.UseSelectable = true;
+            this.metroBtnSubmit.Click += new System.EventHandler(this.metroBtnSubmit_Click);
             // 
             // labelQueueQuestion
             // 
