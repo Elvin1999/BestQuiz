@@ -290,7 +290,7 @@ namespace Quiz
 
             EmptyAnswerPercentLabel = new Label();
             EmptyAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
-            EmptyAnswerPercentLabel.Location = new Point(454, 98);
+            EmptyAnswerPercentLabel.Location = new Point(452, 98);
             EmptyAnswerPercentLabel.Size = new Size(50, 50);
             EmptyAnswerPercentLabel.Text = "";
             EmptyAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
@@ -346,11 +346,11 @@ namespace Quiz
                     UnCorrectBarButton.Size = new Size(50, 210 + 2 * uncorrect_percent);
                     UnCorrectBarButton.Location = new Point(402, 240 - 2 * uncorrect_percent);
                     CorrectAnswerPercentLabel.Text = correct_percent.ToString() + " %";
-                    CorrectAnswerPercentLabel.Location = new Point(350, 190 - 2 * correct_percent);
+                    CorrectAnswerPercentLabel.Location = new Point(352, 203 - 2 * correct_percent);
                     UnCorrectAnswerPercentLabel.Text = uncorrect_percent.ToString() + " %";
-                    UnCorrectAnswerPercentLabel.Location = new Point(402, 190 - 2 * uncorrect_percent);
+                    UnCorrectAnswerPercentLabel.Location = new Point(404, 203 - 2 * uncorrect_percent);
                     EmptyAnswerPercentLabel.Text = empty_answer_percent.ToString() + " %";
-                    EmptyAnswerPercentLabel.Location = new Point(454, 190 - 2 * empty_answer_percent);
+                    EmptyAnswerPercentLabel.Location = new Point(456, 203 - 2 * empty_answer_percent);
                 }
             }
         }
