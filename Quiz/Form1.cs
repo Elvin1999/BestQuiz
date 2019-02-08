@@ -220,7 +220,6 @@ namespace Quiz
                 metroAcceptbtn.Enabled = false;
             }
         }
-
         public string Answer { get; set; }
         public List<string> AnswerList { get; set; }
         public bool IsClickedToSubmitButton { get; set; }
@@ -302,14 +301,10 @@ namespace Quiz
                     radioButton.Text = questionlist[curindex].Answers[k].Text;
                     radioButton.Font = new Font("Century", 10, FontStyle.Italic);
                     y += 60;
-
                     radioButton.Click += RadioButton_Click;
                     this.Controls.Add(radioButton);
                 }
             }
-
-
-
         }
 
     }

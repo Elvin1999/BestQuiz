@@ -17,8 +17,48 @@ namespace Quiz
             Timer timer = new Timer();
             timer.Interval = 1000;
             timer.Tick += Timer_Tick; timer.Start();
+            Timer timer2 = new Timer();
+            timer2.Interval = 100;
+            timer2.Tick += Timer2_Tick;
+            timer2.Start();
             labelDateTime.Text = DateTime.Now.ToLongTimeString();
         }
+        int counter = 0;
+        private void Timer2_Tick(object sender, EventArgs e)
+        {
+            ++counter;
+            if (counter==1)
+            {
+
+                button1.BackColor = Color.FromName("MenuHighlight");
+                button2.BackColor = Color.FromName("Control");
+                button3.BackColor = Color.FromName("Control");
+                button4.BackColor = Color.FromName("Control");
+            }
+            else if (counter==2)
+            {
+                button1.BackColor = Color.FromName("Control");
+                button2.BackColor = Color.FromName("MenuHighlight");
+                button3.BackColor = Color.FromName("Control");
+                button4.BackColor = Color.FromName("Control");
+            }
+            else if (counter == 3)
+            {
+                button1.BackColor = Color.FromName("Control");
+                button2.BackColor = Color.FromName("Control");
+                button3.BackColor = Color.FromName("MenuHighlight");
+                button4.BackColor = Color.FromName("Control");
+            }
+            else if (counter == 4)
+            {
+                counter = 0;
+                button1.BackColor = Color.FromName("Control");
+                button2.BackColor = Color.FromName("Control");
+                button3.BackColor = Color.FromName("Control");
+                button4.BackColor = Color.FromName("MenuHighlight");
+            }
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             labelDateTime.Text = DateTime.Now.AddSeconds(1).ToLongTimeString();
@@ -42,6 +82,11 @@ namespace Quiz
             {
                 this.Show();
             }
+        }
+
+        private void ProgramIntro_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
