@@ -206,7 +206,7 @@ namespace Quiz
         private void LoadThirdWindowControls()
         {
             SaveAsPdfButton = new Button();
-            SaveAsPdfButton.Size = new Size(150,40);
+            SaveAsPdfButton.Size = new Size(150, 40);
             SaveAsPdfButton.Location = new Point(600, 410);
             SaveAsPdfButton.BackColor = Color.FromArgb(0, 96, 168);
             SaveAsPdfButton.Text = "Save as .pdf";
@@ -222,25 +222,25 @@ namespace Quiz
             this.BackColor = Color.FromArgb(0, 96, 168);
             BackButton.BackColor = Color.FromArgb(0, 96, 168);
             CorrectBarButton = new Button();
-            CorrectBarButton.Size = new Size(50, 200);
-            CorrectBarButton.Font = new Font("Century", 12, FontStyle.Italic);
-            CorrectBarButton.Location = new Point(350, 250);
+            CorrectBarButton.Size = new Size(50, 230);
+            CorrectBarButton.Font = new Font("Century", 10, FontStyle.Italic);
+            CorrectBarButton.Location = new Point(350, 220);
             CorrectBarButton.BackColor = Color.Green;
             CorrectBarButton.Text = "\nC\no\nr\nr\ne\nc\nt\n";
             this.Controls.Add(CorrectBarButton);
 
             UnCorrectBarButton = new Button();
-            UnCorrectBarButton.Size = new Size(50, 200);
-            UnCorrectBarButton.Font = new Font("Century", 12, FontStyle.Italic);
-            UnCorrectBarButton.Location = new Point(402, 250);
+            UnCorrectBarButton.Size = new Size(50, 230);
+            UnCorrectBarButton.Font = new Font("Century", 10, FontStyle.Italic);
+            UnCorrectBarButton.Location = new Point(402, 220);
             UnCorrectBarButton.BackColor = Color.Red;
             UnCorrectBarButton.Text = "\nW\nr\no\nn\ng";
             this.Controls.Add(UnCorrectBarButton);
 
             EmptyAnswerButton = new Button();
-            EmptyAnswerButton.Size = new Size(50, 200);
-            EmptyAnswerButton.Font = new Font("Century", 12, FontStyle.Italic);
-            EmptyAnswerButton.Location = new Point(454, 250);
+            EmptyAnswerButton.Size = new Size(50, 230);
+            EmptyAnswerButton.Font = new Font("Century", 10, FontStyle.Italic);
+            EmptyAnswerButton.Location = new Point(454, 220);
             EmptyAnswerButton.BackColor = Color.Orange;
             EmptyAnswerButton.Text = "\nE\nm\np\nt\ny";
             this.Controls.Add(EmptyAnswerButton);
@@ -253,13 +253,66 @@ namespace Quiz
             SuccessLabel.BackColor = Color.FromArgb(0, 96, 168);
             this.Controls.Add(SuccessLabel);
 
-            
+            CorrectBarButton.Location = new Point(350, 220);
+            CorrectBarButton.Size = new Size(50, 230);
+            EmptyAnswerButton.Size = new Size(50, 230);
+            EmptyAnswerButton.Location = new Point(454, 220);
+
+            EmptyAnswerButton.Location = new Point(454, 250);
+            EmptyAnswerButton.Size = new Size(50, 200);
             CorrectBarButton.Location = new Point(350, 150);
             CorrectBarButton.Size = new Size(50, 300);
             UnCorrectBarButton.Location = new Point(402, 300);
             UnCorrectBarButton.Size = new Size(50, 150);
-     
+            //timerdc = new Timer();
+            //timerdc.Interval = 5;
+            //timerdc.Tick += Timerdc_Tick;
+            //timerdc.Start();
+            //InceasingRate = 1;
         }
+        public Timer timerdc { get; set; }
+        public int InceasingRate { get; set; }
+        int counter = 0; int counterall = 0;
+        private void Timerdc_Tick(object sender, EventArgs e)
+        {
+            ++counter;
+            if (counterall == 0 || counterall == 2||counterall == 2)
+            {
+                EmptyAnswerButton.Location = new Point(454, EmptyAnswerButton.Location.Y - InceasingRate);
+                EmptyAnswerButton.Size = new Size(50, EmptyAnswerButton.Size.Height + InceasingRate);
+                CorrectBarButton.Location = new Point(350, CorrectBarButton.Location.Y + InceasingRate);
+                CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height - InceasingRate);
+                UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y - InceasingRate);
+                UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height + InceasingRate);
+            }
+            else
+            {
+                EmptyAnswerButton.Location = new Point(454, EmptyAnswerButton.Location.Y + InceasingRate);
+                EmptyAnswerButton.Size = new Size(50, EmptyAnswerButton.Size.Height - InceasingRate);
+                CorrectBarButton.Location = new Point(350, CorrectBarButton.Location.Y - InceasingRate);
+                CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height + InceasingRate);
+                UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y + InceasingRate);
+                UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height - InceasingRate);
+            }
+            if (counter == 50)
+            {
+                counter = 0;
+                ++counterall;
+                if (counterall == 5)
+                {
+                    timerdc.Stop();
+                    EmptyAnswerButton.Location = new Point(454, EmptyAnswerButton.Location.Y + InceasingRate);
+                    EmptyAnswerButton.Size = new Size(50, EmptyAnswerButton.Size.Height - InceasingRate);
+                    CorrectBarButton.Location = new Point(350, CorrectBarButton.Location.Y - InceasingRate);
+                    CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height + InceasingRate);
+                    UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y + InceasingRate);
+                    UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height - InceasingRate);
+                }
+            }
+
+
+        }
+
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
             metroBtnSubmit.Enabled = true;
