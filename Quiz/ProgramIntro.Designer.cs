@@ -31,12 +31,10 @@
             this.panelHeader = new System.Windows.Forms.Panel();
             this.labelDateTime = new System.Windows.Forms.Label();
             this.labelX = new System.Windows.Forms.Label();
-            this.panelMiddle = new System.Windows.Forms.Panel();
             this.buttonTakeExam = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
-            this.panelMiddle.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -72,23 +70,11 @@
             this.labelX.Text = "X";
             this.labelX.Click += new System.EventHandler(this.labelX_Click);
             // 
-            // panelMiddle
-            // 
-            this.panelMiddle.BackColor = System.Drawing.Color.DarkGray;
-            this.panelMiddle.Controls.Add(this.buttonTakeExam);
-            this.panelMiddle.Controls.Add(this.buttonCreate);
-            this.panelMiddle.Controls.Add(this.labelTitle);
-            this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMiddle.Location = new System.Drawing.Point(0, 65);
-            this.panelMiddle.Name = "panelMiddle";
-            this.panelMiddle.Size = new System.Drawing.Size(800, 385);
-            this.panelMiddle.TabIndex = 1;
-            // 
             // buttonTakeExam
             // 
-            this.buttonTakeExam.BackColor = System.Drawing.Color.DarkGray;
+            this.buttonTakeExam.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.buttonTakeExam.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTakeExam.Location = new System.Drawing.Point(410, 257);
+            this.buttonTakeExam.Location = new System.Drawing.Point(443, 312);
             this.buttonTakeExam.Name = "buttonTakeExam";
             this.buttonTakeExam.Size = new System.Drawing.Size(194, 66);
             this.buttonTakeExam.TabIndex = 1;
@@ -98,9 +84,9 @@
             // 
             // buttonCreate
             // 
-            this.buttonCreate.BackColor = System.Drawing.Color.DarkGray;
+            this.buttonCreate.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.buttonCreate.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCreate.Location = new System.Drawing.Point(140, 257);
+            this.buttonCreate.Location = new System.Drawing.Point(164, 312);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(173, 66);
             this.buttonCreate.TabIndex = 1;
@@ -111,7 +97,7 @@
             // labelTitle
             // 
             this.labelTitle.Font = new System.Drawing.Font("Cooper Black", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.Location = new System.Drawing.Point(3, 23);
+            this.labelTitle.Location = new System.Drawing.Point(63, 103);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(325, 94);
             this.labelTitle.TabIndex = 0;
@@ -121,8 +107,10 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panelMiddle);
+            this.Controls.Add(this.buttonCreate);
+            this.Controls.Add(this.buttonTakeExam);
             this.Controls.Add(this.panelHeader);
+            this.Controls.Add(this.labelTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProgramIntro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -130,7 +118,6 @@
             this.TransparencyKey = System.Drawing.Color.DarkGray;
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
-            this.panelMiddle.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -138,7 +125,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panelHeader;
-        private System.Windows.Forms.Panel panelMiddle;
         private System.Windows.Forms.Label labelX;
         private System.Windows.Forms.Label labelDateTime;
         private System.Windows.Forms.Label labelTitle;

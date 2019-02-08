@@ -18,6 +18,7 @@ namespace Quiz
             InitializeComponent();
             AnswerList = new List<string>();
             QuestionListSecond = new List<QuestionBlock>();
+
         }
         public List<QuestionBlock> QuestionList { get; set; }
         public List<QuestionBlock> QuestionListSecond { get; set; }
@@ -31,6 +32,10 @@ namespace Quiz
         public MetroFramework.Controls.MetroButton metroAcceptbtn { get; set; }
         public MetroFramework.Controls.MetroButton metroNextbtn { get; set; }
         public MetroFramework.Controls.MetroButton metroBtnSubmit { get; set; }
+        private void LoadFirstPageOfForm()
+        {
+
+        }
         private void LoadSecondPageOfForm()
         {
             metroBtnSubmit = new MetroFramework.Controls.MetroButton();
@@ -75,7 +80,6 @@ namespace Quiz
             BackButton.Location = new Point(893, 0);
             BackButton.Highlight = true;
             BackButton.Click += BackButton_Click;
-
             labelQueueQuestion = new Label();
             labelQueueQuestion.Size = new Size(120, 20);
             labelQueueQuestion.Location = new Point(12, 580);
@@ -93,13 +97,13 @@ namespace Quiz
             this.Controls.Add(labelQueueQuestion); this.Controls.Add(BackButton);
             this.Controls.Add(labelQueue1); this.Controls.Add(labelQuestion1);
         }
-
         private void MetroBtnSubmit_Click(object sender, EventArgs e)
         {
             CorrectCount = 0;
             UnCorrectCount = 0;
             metroAcceptbtn.Enabled = true;
             IsClickedToSubmitButton = true;
+            metroBtnSubmit.Enabled = false;
             for (int i = 0; i < QuestionListSecond.Count; i++)
             {
                 var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
@@ -111,74 +115,71 @@ namespace Quiz
                 {
                     ++UnCorrectCount;
                 }
-
             }
-
             MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount}");
-            //QuestionList2 = QuestionListSecond;
             CurrentIndex = 0;
             ShowTest(QuestionListSecond, CurrentIndex);
         }
-
-
-
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show((int.Parse(labelQueue1.Text) - 1).ToString());
-            var item = QuestionList[int.Parse(labelQueue1.Text) - 1];
-            //var resultradio = item.Answers.SingleOrDefault(x => x.Text == Answer);
+            metroBtnSubmit.Enabled = true;
 
-            //QuestionList2.Remove(item);
-            AnswerList.Add(Answer);//I'll check this answer with SecondQuestionList's answers
+            var item = QuestionList[int.Parse(labelQueue1.Text) - 1];
+            AnswerList.Add(Answer);
             QuestionListSecond.Add(item);
         }
         private void MetroNextbtn_Click(object sender, EventArgs e)
         {
+            metroBackbtn.Enabled = true;
             metroAcceptbtn.Enabled = false;
-            foreach (var item in this.Controls)
-            {
-                if (item is RadioButton rb)
-                {
-                    rb.Dispose();
-                }
-            }
             if (IsClickedToSubmitButton)
             {
                 if (CurrentIndex < QuestionListSecond.Count - 1)
                 {
+                    //foreach (var item in this.Controls)
+                    //{
+                    //    if (item is RadioButton rb)
+                    //    {
+                    //        rb.Dispose();
+                    //    }
+                    //}
                     ++CurrentIndex;
-
-                    ShowTest(QuestionListSecond, CurrentIndex);
                 }
+                ShowTest(QuestionListSecond, CurrentIndex);
             }
             else
             {
                 if (CurrentIndex < QuestionList.Count - 1)
                 {
+                    //foreach (var item in this.Controls)
+                    //{
+                    //    if (item is RadioButton rb)
+                    //    {
+                    //        rb.Dispose();
+
+                    //    }
+                    //}
                     ++CurrentIndex;
-
-                    ShowTest(QuestionList, CurrentIndex);
                 }
+                ShowTest(QuestionList, CurrentIndex);
             }
-
-
         }
         private void MetroBackbtn_Click(object sender, EventArgs e)
         {
             metroAcceptbtn.Enabled = false;
-            foreach (var item in this.Controls)
-            {
-                if (item is RadioButton rb)
-                {
-                    rb.Dispose();
-                }
-            }
             if (IsClickedToSubmitButton)
             {
-                if (CurrentIndex >0)
+                if (CurrentIndex > 0)
                 {
-                    --CurrentIndex;
+                    //foreach (var item in this.Controls)
+                    //{
+                    //    if (item is RadioButton rb)
+                    //    {
+                    //        rb.Dispose();
 
+                    //    }
+                    //}
+                    --CurrentIndex;
                     ShowTest(QuestionListSecond, CurrentIndex);
                 }
             }
@@ -186,28 +187,40 @@ namespace Quiz
             {
                 if (CurrentIndex > 0)
                 {
+                    //foreach (var item in this.Controls)
+                    //{
+                    //    if (item is RadioButton rb)
+                    //    {
+                    //        rb.Dispose();
+                    //    }
+                    //}
                     --CurrentIndex;
-
                     ShowTest(QuestionList, CurrentIndex);
                 }
             }
 
         }
-        public List<QuestionBlock> QuestionList2 { get; set; }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadSecondPageOfForm();
-
+            metroBtnSubmit.Enabled = false;
+            metroBackbtn.Enabled = false;
             metroAcceptbtn.Enabled = false;
-            QuestionList2 = new List<QuestionBlock>();
+
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             if (File.Exists("QuestionsXML.xml"))
             {
-                using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.Open))
+                using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.OpenOrCreate))
                 {
                     QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
-                    //QuestionList2 = QuestionList;
+
                 }
+                //using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.OpenOrCreate))
+                //{
+                //    //QuestionList2 = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+
+                //}
                 ShowTest(QuestionList, CurrentIndex);
             }
         }
@@ -234,19 +247,14 @@ namespace Quiz
 
         public string Answer { get; set; }
         public List<string> AnswerList { get; set; }
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         public bool IsClickedToSubmitButton { get; set; }
         public int CorrectCount { get; set; }
         public int UnCorrectCount { get; set; }
-
         public DialogResult ShowDialoq()
         {
             return base.ShowDialog();
         }
+
         private void ShowTest(List<QuestionBlock> questionlist, int curindex)
         {
 
@@ -256,8 +264,18 @@ namespace Quiz
             labelQuestion1.Text = questionlist[curindex].Text;
             if (IsClickedToSubmitButton)
                 metroAcceptbtn.Enabled = false;
-
-
+            int c = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                foreach (var item in this.Controls)
+                {
+                    if (item is RadioButton rb)
+                    {
+                        ++c;
+                        rb.Dispose();
+                    }
+                }
+            }
             for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
             {
                 RadioButton radioButton = new RadioButton();
