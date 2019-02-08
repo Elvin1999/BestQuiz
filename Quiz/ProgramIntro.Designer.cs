@@ -77,7 +77,7 @@
             // 
             this.buttonTakeExam.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.buttonTakeExam.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTakeExam.Location = new System.Drawing.Point(445, 290);
+            this.buttonTakeExam.Location = new System.Drawing.Point(445, 312);
             this.buttonTakeExam.Name = "buttonTakeExam";
             this.buttonTakeExam.Size = new System.Drawing.Size(194, 66);
             this.buttonTakeExam.TabIndex = 1;
@@ -89,7 +89,7 @@
             // 
             this.buttonCreate.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.buttonCreate.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCreate.Location = new System.Drawing.Point(166, 290);
+            this.buttonCreate.Location = new System.Drawing.Point(166, 312);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(173, 66);
             this.buttonCreate.TabIndex = 1;
@@ -100,7 +100,7 @@
             // labelTitle
             // 
             this.labelTitle.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelTitle.Location = new System.Drawing.Point(12, 88);
+            this.labelTitle.Location = new System.Drawing.Point(74, 68);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(368, 138);
             this.labelTitle.TabIndex = 0;

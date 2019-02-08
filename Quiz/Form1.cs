@@ -97,8 +97,8 @@ namespace Quiz
             labelQueue1.Size = new Size(30, 25);
             labelQueue1.Location = new Point(15, 40);
             labelQuestion1 = new Label();
-            labelQuestion1.Size = new Size(730, 145);
-            labelQuestion1.Location = new Point(52, 25);
+            labelQuestion1.Size = new Size(715, 145);
+            labelQuestion1.Location = new Point(45, 25);
             labelQuestion1.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             labelQuestion1.ForeColor = Color.FromName("MenuHighlight");
             ExamTimeLabel = new Label();
@@ -119,6 +119,27 @@ namespace Quiz
         }
         DateTime currenttime = new DateTime(1, 1, 1, 0, 0, 0);
         public int EmptyCount { get; set;}
+        public MetroFramework.Controls.MetroButton GetResultBtn { get; set; }
+        private void GetResultButton()
+        {
+            GetResultBtn = new MetroFramework.Controls.MetroButton();
+            GetResultBtn.BackColor = Color.FromName("MenuHighlight");
+            GetResultBtn.Size = new Size(100, 30);
+            GetResultBtn.UseCustomBackColor = true;
+            GetResultBtn.UseCustomForeColor = true;
+            GetResultBtn.Location = new Point(740, 50);
+            GetResultBtn.Highlight = true;
+            GetResultBtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
+            GetResultBtn.Text = "GetResult";
+            GetResultBtn.Click += GetResultBtn_Click;
+            this.Controls.Add(GetResultBtn);
+        }
+
+        private void GetResultBtn_Click(object sender, EventArgs e)
+        {
+            LoadThirdForm();
+        }
+
         private void MetroBtnSubmit_Click(object sender, EventArgs e)
         {
             CorrectCount = 0;
@@ -143,7 +164,9 @@ namespace Quiz
             MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount} Empty {EmptyCount}");
             CurrentIndex = 0;
             ShowTest(QuestionListSecond, CurrentIndex);
-            LoadThirdForm();
+            GetResultButton();
+
+
         }
         int d = 0;
         private void LoadThirdForm()
@@ -171,6 +194,19 @@ namespace Quiz
                 }
             }
             DrawReturnButton();
+            LoadThirdWindowControls();
+
+        }
+        public PictureBox PersonImagePb { get; set; }
+        private void LoadThirdWindowControls()
+        {
+            PersonImagePb = new PictureBox();
+            PersonImagePb.Size = new Size(180, 240);
+            PersonImagePb.Location = new Point(10, 30);
+            PersonImagePb.Image = Properties.Resources.thinkPerson;
+            PersonImagePb.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(PersonImagePb);
+
         }
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
