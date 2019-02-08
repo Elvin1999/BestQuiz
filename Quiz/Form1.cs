@@ -118,11 +118,12 @@ namespace Quiz
             this.Controls.Add(labelQueue1); this.Controls.Add(labelQuestion1);
         }
         DateTime currenttime = new DateTime(1, 1, 1, 0, 0, 0);
-
+        public int EmptyCount { get; set;}
         private void MetroBtnSubmit_Click(object sender, EventArgs e)
         {
             CorrectCount = 0;
             UnCorrectCount = 0;
+            EmptyCount = 0;
             metroAcceptbtn.Enabled = true;
             IsClickedToSubmitButton = true;
             metroBtnSubmit.Enabled = false;
@@ -138,11 +139,39 @@ namespace Quiz
                     ++UnCorrectCount;
                 }
             }
-            MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount}");
+            EmptyCount = QuestionList.Count - (CorrectCount + UnCorrectCount);
+            MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount} Empty {EmptyCount}");
             CurrentIndex = 0;
             ShowTest(QuestionListSecond, CurrentIndex);
+            LoadThirdForm();
         }
         int d = 0;
+        private void LoadThirdForm()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                foreach (var item in this.Controls)
+                {
+                    if (item is RadioButton rb)
+                    {
+                        rb.Dispose();
+                    }
+                    else if (item is Button bt)
+                    {
+                        bt.Dispose();
+                    }
+                    else if (item is Label lb)
+                    {
+                        lb.Dispose();
+                    }
+                    else if(item is PictureBox pb)
+                    {
+                        pb.Dispose();
+                    }
+                }
+            }
+            DrawReturnButton();
+        }
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
             metroBtnSubmit.Enabled = true;
@@ -296,8 +325,6 @@ namespace Quiz
                     }
                 }
             }
-            int putCorrectnotation = 0;
-            int putWrongnotation = 0;
             if (IsClickedToSubmitButton)
             {
                 for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
