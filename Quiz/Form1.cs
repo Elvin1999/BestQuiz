@@ -265,7 +265,7 @@ namespace Quiz
             if (IsClickedToSubmitButton)
                 metroAcceptbtn.Enabled = false;
             int c = 0;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < questionlist[curindex].Answers.Count / 2; i++)
             {
                 foreach (var item in this.Controls)
                 {
