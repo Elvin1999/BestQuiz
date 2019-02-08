@@ -271,11 +271,44 @@ namespace Quiz
             timerdc.Interval = 5;
             timerdc.Tick += Timerdc_Tick;
             timerdc.Start();
+
+            CorrectAnswerPercentLabel = new Label();
+            CorrectAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
+            CorrectAnswerPercentLabel.Size = new Size(50, 50);
+            CorrectAnswerPercentLabel.Location = new Point(352, 98);
+            CorrectAnswerPercentLabel.Text = "";
+            CorrectAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
+            this.Controls.Add(CorrectAnswerPercentLabel);
+
+            UnCorrectAnswerPercentLabel = new Label();
+            UnCorrectAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
+            UnCorrectAnswerPercentLabel.Location = new Point(402, 98);
+            UnCorrectAnswerPercentLabel.Size = new Size(50, 50);
+            UnCorrectAnswerPercentLabel.Text = "";
+            UnCorrectAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
+            this.Controls.Add(UnCorrectAnswerPercentLabel);
+
+            EmptyAnswerPercentLabel = new Label();
+            EmptyAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
+            EmptyAnswerPercentLabel.Location = new Point(454, 98);
+            EmptyAnswerPercentLabel.Size = new Size(50, 50);
+            EmptyAnswerPercentLabel.Text = "";
+            EmptyAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
+            this.Controls.Add(EmptyAnswerPercentLabel);
+            correct_percent = (100 * CorrectCount) / QuestionList.Count;
+            uncorrect_percent = (100 * UnCorrectCount) / QuestionList.Count;
+            empty_answer_percent = (100 * EmptyCount) / QuestionList.Count;
             InceasingRate = 1;
         }
+        public Label CorrectAnswerPercentLabel { get; set; }
+        public Label UnCorrectAnswerPercentLabel { get; set; }
+        public Label EmptyAnswerPercentLabel { get; set; }
         public Timer timerdc { get; set; }
         public int InceasingRate { get; set; }
-
+        public int correct_percent { get; set; }
+        public int uncorrect_percent { get; set; }
+        public int empty_answer_percent { get; set; }
+        
         int counter = 0; int counterall = 0;
         private void Timerdc_Tick(object sender, EventArgs e)
         {
@@ -305,19 +338,21 @@ namespace Quiz
                 if (counterall == 5)
                 {
                     timerdc.Stop();
-                    int correct_percent = (100 * CorrectCount) / QuestionList.Count;
-                    int uncorrect_percent = (100 * UnCorrectCount) / QuestionList.Count;
-                    int empty_answer_percent = (100 * EmptyCount) / QuestionList.Count;
-                    CorrectBarButton.Location = new Point(350, 240 - 2*correct_percent);
+
+                    CorrectBarButton.Location = new Point(350, 240 - 2 * correct_percent);
                     CorrectBarButton.Size = new Size(50, 210 + 2 * correct_percent);
                     EmptyAnswerButton.Size = new Size(50, 210 + 2 * empty_answer_percent);
                     EmptyAnswerButton.Location = new Point(454, 240 - 2 * empty_answer_percent);
                     UnCorrectBarButton.Size = new Size(50, 210 + 2 * uncorrect_percent);
                     UnCorrectBarButton.Location = new Point(402, 240 - 2 * uncorrect_percent);
+                    CorrectAnswerPercentLabel.Text = correct_percent.ToString() + " %";
+                    CorrectAnswerPercentLabel.Location = new Point(350, 190 - 2 * correct_percent);
+                    UnCorrectAnswerPercentLabel.Text = uncorrect_percent.ToString() + " %";
+                    UnCorrectAnswerPercentLabel.Location = new Point(402, 190 - 2 * uncorrect_percent);
+                    EmptyAnswerPercentLabel.Text = empty_answer_percent.ToString() + " %";
+                    EmptyAnswerPercentLabel.Location = new Point(454, 190 - 2 * empty_answer_percent);
                 }
             }
-
-
         }
 
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
