@@ -47,7 +47,7 @@
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(800, 71);
+            this.panelHeader.Size = new System.Drawing.Size(800, 65);
             this.panelHeader.TabIndex = 0;
             // 
             // labelDateTime
@@ -79,9 +79,9 @@
             this.panelMiddle.Controls.Add(this.buttonCreate);
             this.panelMiddle.Controls.Add(this.labelTitle);
             this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMiddle.Location = new System.Drawing.Point(0, 71);
+            this.panelMiddle.Location = new System.Drawing.Point(0, 65);
             this.panelMiddle.Name = "panelMiddle";
-            this.panelMiddle.Size = new System.Drawing.Size(800, 379);
+            this.panelMiddle.Size = new System.Drawing.Size(800, 385);
             this.panelMiddle.TabIndex = 1;
             // 
             // buttonTakeExam
@@ -113,7 +113,7 @@
             this.labelTitle.Font = new System.Drawing.Font("Cooper Black", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.Location = new System.Drawing.Point(3, 23);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(325, 125);
+            this.labelTitle.Size = new System.Drawing.Size(325, 94);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "EasyQuiz";
             // 
