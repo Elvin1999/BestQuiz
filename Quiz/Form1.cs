@@ -27,8 +27,15 @@ namespace Quiz
         public List<QuestionBlock> QuestionListSecond { get; set; }
         public int CurrentIndex = 0;
         RadioButton radioButton = new RadioButton();
+        public Label labelQueue { get; set; }
         private void Form1_Load(object sender, EventArgs e)
         {
+            labelQueue = new Label();
+            labelQueue.Text = "1";
+            labelQueue.Font = new Font("Century",12,FontStyle.Italic);
+            labelQueue.Size = new Size(20, 20);
+            labelQueue.Location = new Point(15, 40);
+            this.Controls.Add(labelQueue);
             metroAcceptbtn.Enabled = false;
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             if (File.Exists("QuestionsXML.xml"))
@@ -48,7 +55,6 @@ namespace Quiz
             {
 
                 Answer = radioButton.Text;
-                MessageBox.Show(Answer);
                 metroAcceptbtn.Enabled = true;
             }
             else
@@ -93,9 +99,7 @@ namespace Quiz
         public List<string> AnswerList { get; set; }
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            //RadioButton radioButton = sender as RadioButton;
-            //Answer = radioButton.Text;
-            //MessageBox.Show(Answer);
+          
         }
         private void metroAcceptbtn_Click(object sender, EventArgs e)
         {
@@ -157,5 +161,7 @@ namespace Quiz
         {
 
         }
+
+     
     }
 }
