@@ -142,29 +142,37 @@ namespace Quiz
 
         private void MetroBtnSubmit_Click(object sender, EventArgs e)
         {
-            CorrectCount = 0;
-            UnCorrectCount = 0;
-            EmptyCount = 0;
-            metroAcceptbtn.Enabled = true;
-            IsClickedToSubmitButton = true;
-            metroBtnSubmit.Enabled = false;
-            for (int i = 0; i < QuestionListSecond.Count; i++)
+            try
             {
-                var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
-                if (AnswerList[i] == correctanswer.Text)
+                CorrectCount = 0;
+                UnCorrectCount = 0;
+                EmptyCount = 0;
+                metroAcceptbtn.Enabled = true;
+                IsClickedToSubmitButton = true;
+                metroBtnSubmit.Enabled = false;
+                for (int i = 0; i < QuestionListSecond.Count; i++)
                 {
-                    ++CorrectCount;
+                    var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                    if (AnswerList[i] == correctanswer.Text)
+                    {
+                        ++CorrectCount;
+                    }
+                    else
+                    {
+                        ++UnCorrectCount;
+                    }
                 }
-                else
-                {
-                    ++UnCorrectCount;
-                }
+                EmptyCount = QuestionList.Count - (CorrectCount + UnCorrectCount);
+                MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount} Empty {EmptyCount}");
+                CurrentIndex = 0;
+                if(QuestionListSecond.Count!=0)
+                ShowTest(QuestionListSecond, CurrentIndex);
+                GetResultButton();
             }
-            EmptyCount = QuestionList.Count - (CorrectCount + UnCorrectCount);
-            MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount} Empty {EmptyCount}");
-            CurrentIndex = 0;
-            ShowTest(QuestionListSecond, CurrentIndex);
-            GetResultButton();
+            catch (Exception)
+            {        
+            }
+            
 
 
         }
@@ -300,12 +308,12 @@ namespace Quiz
                     int correct_percent = (100 * CorrectCount) / QuestionList.Count;
                     int uncorrect_percent = (100 * UnCorrectCount) / QuestionList.Count;
                     int empty_answer_percent = (100 * EmptyCount) / QuestionList.Count;
-                    CorrectBarButton.Location = new Point(350, 240 - correct_percent);
-                    CorrectBarButton.Size = new Size(50, 210 + correct_percent);
-                    EmptyAnswerButton.Size = new Size(50, 210 + empty_answer_percent);
-                    EmptyAnswerButton.Location = new Point(454, 240 - empty_answer_percent);
-                    UnCorrectBarButton.Size = new Size(50, 210 + uncorrect_percent);
-                    UnCorrectBarButton.Location = new Point(402, 240 - uncorrect_percent);
+                    CorrectBarButton.Location = new Point(350, 240 - 2*correct_percent);
+                    CorrectBarButton.Size = new Size(50, 210 + 2 * correct_percent);
+                    EmptyAnswerButton.Size = new Size(50, 210 + 2 * empty_answer_percent);
+                    EmptyAnswerButton.Location = new Point(454, 240 - 2 * empty_answer_percent);
+                    UnCorrectBarButton.Size = new Size(50, 210 + 2 * uncorrect_percent);
+                    UnCorrectBarButton.Location = new Point(402, 240 - 2 * uncorrect_percent);
                 }
             }
 
@@ -373,7 +381,7 @@ namespace Quiz
             timer.Interval = 1000; timer.Start();
             timer.Tick += Timer_Tick;
 
-            metroBtnSubmit.Enabled = false;
+            metroBtnSubmit.Enabled = true;
             metroBackbtn.Enabled = false;
             metroAcceptbtn.Enabled = false;
             QuestionList2 = new List<QuestionBlock>();
