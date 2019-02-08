@@ -90,7 +90,7 @@ namespace Quiz
             labelQueueQuestion = new Label();
             labelQueueQuestion.Size = new Size(120, 20);
             labelQueueQuestion.Location = new Point(12, 490);
-            labelQueueQuestion.Font = new Font("Monotype Corsiva",12, FontStyle.Italic);
+            labelQueueQuestion.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
             labelQueue1 = new Label();
             labelQueue1.Text = "1";
             labelQueue1.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
@@ -102,23 +102,23 @@ namespace Quiz
             labelQuestion1.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             labelQuestion1.ForeColor = Color.FromName("MenuHighlight");
             ExamTimeLabel = new Label();
-            ExamTimeLabel.Size= new Size(100, 40);
-            ExamTimeLabel.Location= new Point(650, 0);
+            ExamTimeLabel.Size = new Size(100, 40);
+            ExamTimeLabel.Location = new Point(650, 0);
             ExamTimeLabel.Text = "Exam time";
             ExamTimeLabel.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             ExamTimeLabel.ForeColor = Color.FromName("MenuHighlight");
             QuizTime = new Label();
-            QuizTime.Size = new Size(120,40);
-            QuizTime.Location = new Point(750,0);
-            QuizTime.Font= new Font("Monotype Corsiva", 16, FontStyle.Italic);
+            QuizTime.Size = new Size(120, 40);
+            QuizTime.Location = new Point(750, 0);
+            QuizTime.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             QuizTime.Text = currenttime.ToLongTimeString();
-            QuizTime.BackColor= Color.FromName("Control");
+            QuizTime.BackColor = Color.FromName("Control");
             this.Controls.Add(QuizTime); this.Controls.Add(ExamTimeLabel);
-            this.Controls.Add(labelQueueQuestion); 
+            this.Controls.Add(labelQueueQuestion);
             this.Controls.Add(labelQueue1); this.Controls.Add(labelQuestion1);
         }
         DateTime currenttime = new DateTime(1, 1, 1, 0, 0, 0);
-        public int EmptyCount { get; set;}
+        public int EmptyCount { get; set; }
         public MetroFramework.Controls.MetroButton GetResultBtn { get; set; }
         private void GetResultButton()
         {
@@ -187,7 +187,7 @@ namespace Quiz
                     {
                         lb.Dispose();
                     }
-                    else if(item is PictureBox pb)
+                    else if (item is PictureBox pb)
                     {
                         pb.Dispose();
                     }
@@ -198,16 +198,57 @@ namespace Quiz
 
         }
         public PictureBox PersonImagePb { get; set; }
+        public Button CorrectBarButton { get; set; }
+        public Button UnCorrectBarButton { get; set; }
+        public Button EmptyAnswerButton { get; set; }
+        public Label SuccessLabel { get; set; }
         private void LoadThirdWindowControls()
         {
             PersonImagePb = new PictureBox();
             PersonImagePb.Size = new Size(180, 240);
-            PersonImagePb.Location = new Point(10, 30);
+            PersonImagePb.Location = new Point(550, 30);
             PersonImagePb.Image = Properties.Resources.thinkPerson;
             PersonImagePb.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(PersonImagePb);
             this.BackColor = Color.FromArgb(0, 96, 168);
-            BackButton.BackColor= Color.FromArgb(0, 96, 168);
+            BackButton.BackColor = Color.FromArgb(0, 96, 168);
+            CorrectBarButton = new Button();
+            CorrectBarButton.Size = new Size(50, 200);
+            CorrectBarButton.Font = new Font("Century", 12, FontStyle.Italic);
+            CorrectBarButton.Location = new Point(350, 250);
+            CorrectBarButton.BackColor = Color.Green;
+            CorrectBarButton.Text = "\nC\no\nr\nr\ne\nc\nt\n";
+            this.Controls.Add(CorrectBarButton);
+
+            UnCorrectBarButton = new Button();
+            UnCorrectBarButton.Size = new Size(50, 200);
+            UnCorrectBarButton.Font = new Font("Century", 12, FontStyle.Italic);
+            UnCorrectBarButton.Location = new Point(402, 250);
+            UnCorrectBarButton.BackColor = Color.Red;
+            UnCorrectBarButton.Text = "\nW\nr\no\nn\ng";
+            this.Controls.Add(UnCorrectBarButton);
+
+            EmptyAnswerButton = new Button();
+            EmptyAnswerButton.Size = new Size(50, 200);
+            EmptyAnswerButton.Font = new Font("Century", 12, FontStyle.Italic);
+            EmptyAnswerButton.Location = new Point(454, 250);
+            EmptyAnswerButton.BackColor = Color.Orange;
+            EmptyAnswerButton.Text = "\nE\nm\np\nt\ny";
+            this.Controls.Add(EmptyAnswerButton);
+
+            SuccessLabel = new Label();
+            SuccessLabel.Font = new Font("Monotype Corsiva", 60, FontStyle.Italic);
+            SuccessLabel.Size = new Size(300, 400);
+            SuccessLabel.Location = new Point(0, 25);
+            SuccessLabel.Text = "Your Success .";
+            SuccessLabel.BackColor = Color.FromArgb(0, 96, 168);
+            this.Controls.Add(SuccessLabel);
+
+            CorrectBarButton.Location = new Point(350, 150);
+            CorrectBarButton.Size = new Size(50, 300);
+            UnCorrectBarButton.Location = new Point(402, 300);
+            UnCorrectBarButton.Size = new Size(50, 150);
+     
         }
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
@@ -216,8 +257,6 @@ namespace Quiz
             AnswerList.Add(Answer);
             QuestionList2.RemoveAt(CurrentIndex);
             QuestionListSecond.Add(item);
-
-
         }
         private void MetroNextbtn_Click(object sender, EventArgs e)
         {
@@ -269,9 +308,9 @@ namespace Quiz
         {
             LoadSecondPageOfForm();
             Timer timer = new Timer();
-            timer.Interval = 1000;timer.Start();
+            timer.Interval = 1000; timer.Start();
             timer.Tick += Timer_Tick;
-            
+
             metroBtnSubmit.Enabled = false;
             metroBackbtn.Enabled = false;
             metroAcceptbtn.Enabled = false;
