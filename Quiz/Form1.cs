@@ -206,7 +206,8 @@ namespace Quiz
             PersonImagePb.Image = Properties.Resources.thinkPerson;
             PersonImagePb.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(PersonImagePb);
-
+            this.BackColor = Color.FromArgb(0, 96, 168);
+            BackButton.BackColor= Color.FromArgb(0, 96, 168);
         }
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
