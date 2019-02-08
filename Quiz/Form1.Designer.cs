@@ -43,7 +43,7 @@
             this.metroButtonExit.Name = "metroButtonExit";
             this.metroButtonExit.Size = new System.Drawing.Size(34, 23);
             this.metroButtonExit.TabIndex = 0;
-            this.metroButtonExit.Text = "X";
+            this.metroButtonExit.Text = "Back";
             this.metroButtonExit.UseSelectable = true;
             this.metroButtonExit.Click += new System.EventHandler(this.metroButton1_Click);
             // 

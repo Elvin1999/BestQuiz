@@ -21,7 +21,7 @@ namespace Quiz
         }
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult = DialogResult.Cancel;
         }
         public List<QuestionBlock> QuestionList { get; set; }
         public List<QuestionBlock> QuestionListSecond { get; set; }
@@ -32,7 +32,7 @@ namespace Quiz
         {
             labelQueue = new Label();
             labelQueue.Text = "1";
-            labelQueue.Font = new Font("Century",12,FontStyle.Italic);
+            labelQueue.Font = new Font("Century", 12, FontStyle.Italic);
             labelQueue.Size = new Size(20, 20);
             labelQueue.Location = new Point(15, 40);
             this.Controls.Add(labelQueue);
@@ -99,7 +99,7 @@ namespace Quiz
         public List<string> AnswerList { get; set; }
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-          
+
         }
         private void metroAcceptbtn_Click(object sender, EventArgs e)
         {
@@ -134,6 +134,10 @@ namespace Quiz
             QuestionList = QuestionListSecond;
             ShowTest(QuestionList, CurrentIndex);
         }
+        public DialogResult ShowDialoq()
+        {
+            return base.ShowDialog();
+        }
         private void ShowTest(List<QuestionBlock> questionlist, int curindex)
         {
             if (IsClickedToSubmitButton)
@@ -162,6 +166,6 @@ namespace Quiz
 
         }
 
-     
+
     }
 }

@@ -32,9 +32,9 @@
             this.labelDateTime = new System.Windows.Forms.Label();
             this.labelX = new System.Windows.Forms.Label();
             this.panelMiddle = new System.Windows.Forms.Panel();
+            this.buttonTakeExam = new System.Windows.Forms.Button();
+            this.buttonCreate = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             this.panelMiddle.SuspendLayout();
             this.SuspendLayout();
@@ -75,14 +75,38 @@
             // panelMiddle
             // 
             this.panelMiddle.BackColor = System.Drawing.Color.DarkGray;
-            this.panelMiddle.Controls.Add(this.button2);
-            this.panelMiddle.Controls.Add(this.button1);
+            this.panelMiddle.Controls.Add(this.buttonTakeExam);
+            this.panelMiddle.Controls.Add(this.buttonCreate);
             this.panelMiddle.Controls.Add(this.labelTitle);
             this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMiddle.Location = new System.Drawing.Point(0, 71);
             this.panelMiddle.Name = "panelMiddle";
             this.panelMiddle.Size = new System.Drawing.Size(800, 379);
             this.panelMiddle.TabIndex = 1;
+            // 
+            // buttonTakeExam
+            // 
+            this.buttonTakeExam.BackColor = System.Drawing.Color.DarkGray;
+            this.buttonTakeExam.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTakeExam.Location = new System.Drawing.Point(410, 257);
+            this.buttonTakeExam.Name = "buttonTakeExam";
+            this.buttonTakeExam.Size = new System.Drawing.Size(194, 66);
+            this.buttonTakeExam.TabIndex = 1;
+            this.buttonTakeExam.Text = "Take an examination";
+            this.buttonTakeExam.UseVisualStyleBackColor = false;
+            this.buttonTakeExam.Click += new System.EventHandler(this.buttonTakeExam_Click);
+            // 
+            // buttonCreate
+            // 
+            this.buttonCreate.BackColor = System.Drawing.Color.DarkGray;
+            this.buttonCreate.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCreate.Location = new System.Drawing.Point(140, 257);
+            this.buttonCreate.Name = "buttonCreate";
+            this.buttonCreate.Size = new System.Drawing.Size(173, 66);
+            this.buttonCreate.TabIndex = 1;
+            this.buttonCreate.Text = "Create New Test";
+            this.buttonCreate.UseVisualStyleBackColor = false;
+            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
             // labelTitle
             // 
@@ -92,30 +116,6 @@
             this.labelTitle.Size = new System.Drawing.Size(325, 125);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "EasyQuiz";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.DarkGray;
-            this.button1.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(140, 257);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(173, 66);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Create New Test";
-            this.button1.UseVisualStyleBackColor = false;
-  
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.DarkGray;
-            this.button2.Font = new System.Drawing.Font("Cooper Black", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(410, 257);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(194, 66);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Take an examination";
-            this.button2.UseVisualStyleBackColor = false;
-      
             // 
             // ProgramIntro
             // 
@@ -142,7 +142,7 @@
         private System.Windows.Forms.Label labelX;
         private System.Windows.Forms.Label labelDateTime;
         private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonTakeExam;
+        private System.Windows.Forms.Button buttonCreate;
     }
 }

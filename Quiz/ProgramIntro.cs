@@ -31,6 +31,20 @@ namespace Quiz
             Application.Exit();
         }
 
-      
+        private void buttonCreate_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+            this.Hide();
+  
+            if (form.ShowDialog() == DialogResult.Cancel)
+            {                
+                this.Show();
+            }
+        }
+
+        private void buttonTakeExam_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
