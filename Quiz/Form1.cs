@@ -202,8 +202,17 @@ namespace Quiz
         public Button UnCorrectBarButton { get; set; }
         public Button EmptyAnswerButton { get; set; }
         public Label SuccessLabel { get; set; }
+        public Button SaveAsPdfButton { get; set; }
         private void LoadThirdWindowControls()
         {
+            SaveAsPdfButton = new Button();
+            SaveAsPdfButton.Size = new Size(150,40);
+            SaveAsPdfButton.Location = new Point(600, 410);
+            SaveAsPdfButton.BackColor = Color.FromArgb(0, 96, 168);
+            SaveAsPdfButton.Text = "Save as .pdf";
+            SaveAsPdfButton.Font = new Font("Century", 12, FontStyle.Italic);
+            this.Controls.Add(SaveAsPdfButton);
+
             PersonImagePb = new PictureBox();
             PersonImagePb.Size = new Size(180, 240);
             PersonImagePb.Location = new Point(550, 30);
@@ -244,6 +253,7 @@ namespace Quiz
             SuccessLabel.BackColor = Color.FromArgb(0, 96, 168);
             this.Controls.Add(SuccessLabel);
 
+            
             CorrectBarButton.Location = new Point(350, 150);
             CorrectBarButton.Size = new Size(50, 300);
             UnCorrectBarButton.Location = new Point(402, 300);
