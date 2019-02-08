@@ -27,15 +27,27 @@ namespace Quiz
         public List<QuestionBlock> QuestionListSecond { get; set; }
         public int CurrentIndex = 0;
         RadioButton radioButton = new RadioButton();
-        public Label labelQueue { get; set; }
+        public Label labelQueue1 { get; set; }
+        public Label labelQuestion1 { get; set; }
+        public Label labelQueueQuestion { get; set; }
         private void Form1_Load(object sender, EventArgs e)
         {
-            labelQueue = new Label();
-            labelQueue.Text = "1";
-            labelQueue.Font = new Font("Century", 12, FontStyle.Italic);
-            labelQueue.Size = new Size(20, 20);
-            labelQueue.Location = new Point(15, 40);
-            this.Controls.Add(labelQueue);
+            labelQueueQuestion = new Label();
+            labelQueueQuestion.Size = new Size(100, 20);
+            labelQueueQuestion.Location = new Point(12, 580);
+            labelQueueQuestion.Font = new Font("Century", 8, FontStyle.Italic);
+            this.Controls.Add(labelQueueQuestion);
+            labelQueue1 = new Label();
+            labelQueue1.Text = "1";
+            labelQueue1.Font = new Font("Century", 12, FontStyle.Italic);
+            labelQueue1.Size = new Size(30,25);
+            labelQueue1.Location = new Point(15, 40);
+            labelQuestion1 = new Label();
+            labelQuestion1.Size = new Size(730, 145);
+            labelQuestion1.Location = new Point(52, 10);
+            labelQuestion1.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            labelQuestion1.ForeColor = Color.Maroon;
+            this.Controls.Add(labelQueue1); this.Controls.Add(labelQuestion1);
             metroAcceptbtn.Enabled = false;
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             if (File.Exists("QuestionsXML.xml"))
@@ -146,9 +158,9 @@ namespace Quiz
                 metroBtnSubmit.Enabled = false;
             }
             int y = 0;
-            labelQueue.Text = (curindex + 1).ToString();
+            labelQueue1.Text = (curindex + 1).ToString();
             labelQueueQuestion.Text = "Question " + (curindex + 1) + " of " + questionlist.Count;
-            labelQuestion.Text = questionlist[curindex].Text;
+            labelQuestion1.Text = questionlist[curindex].Text;
             for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
             {
                 RadioButton radioButton = new RadioButton();
@@ -161,11 +173,6 @@ namespace Quiz
                 this.Controls.Add(radioButton);
             }
         }
-        private void labelQuestion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
+     
     }
 }

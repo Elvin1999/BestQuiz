@@ -17,7 +17,7 @@ namespace Quiz
             InitializeComponent();
             Timer timer = new Timer();
             timer.Interval = 1000;
-            timer.Tick += Timer_Tick;timer.Start();
+            timer.Tick += Timer_Tick; timer.Start();
             labelDateTime.Text = DateTime.Now.ToLongTimeString();
         }
 
@@ -33,18 +33,17 @@ namespace Quiz
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1();
-            this.Hide();
-  
-            if (form.ShowDialog() == DialogResult.Cancel)
-            {                
-                this.Show();
-            }
-        }
 
+        }
         private void buttonTakeExam_Click(object sender, EventArgs e)
         {
+            Form1 form = new Form1();
+            this.Hide();
 
+            if (form.ShowDialog() == DialogResult.Cancel)
+            {
+                this.Show();
+            }
         }
     }
 }
