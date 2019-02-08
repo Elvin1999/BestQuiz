@@ -253,30 +253,26 @@ namespace Quiz
             SuccessLabel.BackColor = Color.FromArgb(0, 96, 168);
             this.Controls.Add(SuccessLabel);
 
-            CorrectBarButton.Location = new Point(350, 220);
-            CorrectBarButton.Size = new Size(50, 230);
-            EmptyAnswerButton.Size = new Size(50, 230);
-            EmptyAnswerButton.Location = new Point(454, 220);
-
             EmptyAnswerButton.Location = new Point(454, 250);
             EmptyAnswerButton.Size = new Size(50, 200);
             CorrectBarButton.Location = new Point(350, 150);
             CorrectBarButton.Size = new Size(50, 300);
             UnCorrectBarButton.Location = new Point(402, 300);
             UnCorrectBarButton.Size = new Size(50, 150);
-            //timerdc = new Timer();
-            //timerdc.Interval = 5;
-            //timerdc.Tick += Timerdc_Tick;
-            //timerdc.Start();
-            //InceasingRate = 1;
+            timerdc = new Timer();
+            timerdc.Interval = 5;
+            timerdc.Tick += Timerdc_Tick;
+            timerdc.Start();
+            InceasingRate = 1;
         }
         public Timer timerdc { get; set; }
         public int InceasingRate { get; set; }
+
         int counter = 0; int counterall = 0;
         private void Timerdc_Tick(object sender, EventArgs e)
         {
             ++counter;
-            if (counterall == 0 || counterall == 2||counterall == 2)
+            if (counterall == 0 || counterall == 2 || counterall == 4)
             {
                 EmptyAnswerButton.Location = new Point(454, EmptyAnswerButton.Location.Y - InceasingRate);
                 EmptyAnswerButton.Size = new Size(50, EmptyAnswerButton.Size.Height + InceasingRate);
@@ -301,12 +297,15 @@ namespace Quiz
                 if (counterall == 5)
                 {
                     timerdc.Stop();
-                    EmptyAnswerButton.Location = new Point(454, EmptyAnswerButton.Location.Y + InceasingRate);
-                    EmptyAnswerButton.Size = new Size(50, EmptyAnswerButton.Size.Height - InceasingRate);
-                    CorrectBarButton.Location = new Point(350, CorrectBarButton.Location.Y - InceasingRate);
-                    CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height + InceasingRate);
-                    UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y + InceasingRate);
-                    UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height - InceasingRate);
+                    int correct_percent = (100 * CorrectCount) / QuestionList.Count;
+                    int uncorrect_percent = (100 * UnCorrectCount) / QuestionList.Count;
+                    int empty_answer_percent = (100 * EmptyCount) / QuestionList.Count;
+                    CorrectBarButton.Location = new Point(350, 240 - correct_percent);
+                    CorrectBarButton.Size = new Size(50, 210 + correct_percent);
+                    EmptyAnswerButton.Size = new Size(50, 210 + empty_answer_percent);
+                    EmptyAnswerButton.Location = new Point(454, 240 - empty_answer_percent);
+                    UnCorrectBarButton.Size = new Size(50, 210 + uncorrect_percent);
+                    UnCorrectBarButton.Location = new Point(402, 240 - uncorrect_percent);
                 }
             }
 
