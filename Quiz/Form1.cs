@@ -32,6 +32,8 @@ namespace Quiz
         public MetroFramework.Controls.MetroButton metroAcceptbtn { get; set; }
         public MetroFramework.Controls.MetroButton metroNextbtn { get; set; }
         public MetroFramework.Controls.MetroButton metroBtnSubmit { get; set; }
+        public Label QuizTime { get; set; }
+        public Label ExamTimeLabel { get; set; }
         private void LoadFirstPageOfForm()
         {
 
@@ -84,17 +86,7 @@ namespace Quiz
             metroAcceptbtn.Text = "Accept";
             metroAcceptbtn.Click += MetroAcceptbtn_Click;
             this.Controls.Add(metroAcceptbtn);
-
-            BackButton = new MetroFramework.Controls.MetroButton();
-            BackButton.Text = "<<<";
-            BackButton.UseCustomBackColor = true;
-            BackButton.UseCustomForeColor = true;
-            BackButton.BackColor = Color.FromName("MenuHighlight");
-            BackButton.Font = new Font("Century", 12, FontStyle.Bold);
-            BackButton.Size = new Size(34, 23);
-            BackButton.Location = new Point(0, 0);
-            BackButton.Highlight = true;
-            BackButton.Click += BackButton_Click;
+            DrawReturnButton();
             labelQueueQuestion = new Label();
             labelQueueQuestion.Size = new Size(120, 20);
             labelQueueQuestion.Location = new Point(12, 490);
@@ -106,13 +98,27 @@ namespace Quiz
             labelQueue1.Location = new Point(15, 40);
             labelQuestion1 = new Label();
             labelQuestion1.Size = new Size(730, 145);
-            labelQuestion1.Location = new Point(52, 10);
+            labelQuestion1.Location = new Point(52, 25);
             labelQuestion1.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             labelQuestion1.ForeColor = Color.FromName("MenuHighlight");
-
-            this.Controls.Add(labelQueueQuestion); this.Controls.Add(BackButton);
+            ExamTimeLabel = new Label();
+            ExamTimeLabel.Size= new Size(100, 40);
+            ExamTimeLabel.Location= new Point(650, 0);
+            ExamTimeLabel.Text = "Exam time";
+            ExamTimeLabel.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
+            ExamTimeLabel.ForeColor = Color.FromName("MenuHighlight");
+            QuizTime = new Label();
+            QuizTime.Size = new Size(120,40);
+            QuizTime.Location = new Point(750,0);
+            QuizTime.Font= new Font("Monotype Corsiva", 16, FontStyle.Italic);
+            QuizTime.Text = currenttime.ToLongTimeString();
+            QuizTime.BackColor= Color.FromName("Control");
+            this.Controls.Add(QuizTime); this.Controls.Add(ExamTimeLabel);
+            this.Controls.Add(labelQueueQuestion); 
             this.Controls.Add(labelQueue1); this.Controls.Add(labelQuestion1);
         }
+        DateTime currenttime = new DateTime(1, 1, 1, 0, 0, 0);
+
         private void MetroBtnSubmit_Click(object sender, EventArgs e)
         {
             CorrectCount = 0;
@@ -196,7 +202,10 @@ namespace Quiz
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadSecondPageOfForm();
-
+            Timer timer = new Timer();
+            timer.Interval = 1000;timer.Start();
+            timer.Tick += Timer_Tick;
+            
             metroBtnSubmit.Enabled = false;
             metroBackbtn.Enabled = false;
             metroAcceptbtn.Enabled = false;
@@ -215,6 +224,12 @@ namespace Quiz
                 ShowTest(QuestionList, CurrentIndex);
             }
         }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            QuizTime.Text = DateTime.Now.ToLongTimeString();
+        }
+
         private void BackButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -241,6 +256,20 @@ namespace Quiz
         public DialogResult ShowDialoq()
         {
             return base.ShowDialog();
+        }
+        private void DrawReturnButton()
+        {
+            BackButton = new MetroFramework.Controls.MetroButton();
+            BackButton.Text = "Return";
+            BackButton.UseCustomBackColor = true;
+            BackButton.UseCustomForeColor = true;
+            BackButton.BackColor = Color.FromName("MenuHighlight");
+            BackButton.Font = new Font("Century", 12, FontStyle.Italic);
+            BackButton.Size = new Size(50, 23);
+            BackButton.Location = new Point(0, 0);
+            BackButton.Highlight = true;
+            BackButton.Click += BackButton_Click;
+            this.Controls.Add(BackButton);
         }
         public PictureBox CorrectAnswerBox { get; set; }
         public PictureBox OwnAnswerBox { get; set; }
@@ -284,7 +313,7 @@ namespace Quiz
                     if (radioButton.Text == correctanswer.Text)
                     {
                         CorrectAnswerBox = new PictureBox();
-                        CorrectAnswerBox.Size = new Size(40, 30);
+                        CorrectAnswerBox.Size = new Size(40, 35);
                         CorrectAnswerBox.Location = new Point(radioButton.Location.X - 50, radioButton.Location.Y + 10);
                         CorrectAnswerBox.Image = Properties.Resources.correctanswer;
                         CorrectAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -293,9 +322,10 @@ namespace Quiz
                     if (AnswerList[curindex] == radioButton.Text)
                     {
                         OwnAnswerBox = new PictureBox();
-                        OwnAnswerBox.Size = new Size(40, 30);
-                        OwnAnswerBox.Location = new Point(radioButton.Location.X - 100, radioButton.Location.Y + 10);
+                        OwnAnswerBox.Size = new Size(40, 35);
+                        OwnAnswerBox.Location = new Point(radioButton.Location.X - 90, radioButton.Location.Y + 10);
                         OwnAnswerBox.Image = Properties.Resources.bluecorrect;
+                        radioButton.Checked = true;
                         OwnAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
                         this.Controls.Add(OwnAnswerBox);//dispose picture box
                     }
