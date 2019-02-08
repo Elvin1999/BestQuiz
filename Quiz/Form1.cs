@@ -98,7 +98,8 @@ namespace Quiz
         {
             CorrectCount = 0;
             UnCorrectCount = 0;
-
+            metroAcceptbtn.Enabled = true;
+            IsClickedToSubmitButton = true;
             for (int i = 0; i < QuestionListSecond.Count; i++)
             {
                 var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
@@ -116,9 +117,9 @@ namespace Quiz
             MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount}");
             QuestionList2 = QuestionListSecond;
             CurrentIndex = 0;
-            ShowTest(QuestionList2, CurrentIndex);
+            ShowTest(QuestionListSecond, CurrentIndex);
         }
- 
+
         private void MetroNextbtn_Click(object sender, EventArgs e)
         {
             metroAcceptbtn.Enabled = false;
@@ -138,7 +139,10 @@ namespace Quiz
 
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
-            var item = QuestionList[CurrentIndex];
+
+            var item = QuestionList[int.Parse(labelQueue1.Text)-1];
+            //var resultradio = item.Answers.SingleOrDefault(x => x.Text == Answer);
+
             QuestionList2.Remove(item);
             AnswerList.Add(Answer);//I'll check this answer with SecondQuestionList's answers
             QuestionListSecond.Add(item);
@@ -216,26 +220,28 @@ namespace Quiz
         }
         private void ShowTest(List<QuestionBlock> questionlist, int curindex)
         {
-            if (IsClickedToSubmitButton)
-            {
-                metroAcceptbtn.Enabled = false;
-                metroBtnSubmit.Enabled = false;
-            }
+
             int y = 0;
             labelQueue1.Text = (curindex + 1).ToString();
             labelQueueQuestion.Text = "Question " + (curindex + 1) + " of " + questionlist.Count;
             labelQuestion1.Text = questionlist[curindex].Text;
-            for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
-            {
-                RadioButton radioButton = new RadioButton();
-                radioButton.Size = new Size(350, 60);
-                radioButton.Location = new Point(56, 192 + y);
-                radioButton.Text = questionlist[curindex].Answers[k].Text;
-                radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                y += 60;
-                radioButton.Click += RadioButton_Click;
-                this.Controls.Add(radioButton);
-            }
+            if(IsClickedToSubmitButton)
+                metroAcceptbtn.Enabled = false;
+              
+                
+                    for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
+                    {
+                        RadioButton radioButton = new RadioButton();
+                        radioButton.Size = new Size(350, 60);
+                        radioButton.Location = new Point(56, 192 + y);
+                        radioButton.Text = questionlist[curindex].Answers[k].Text;
+                        radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                        y += 60;
+                        radioButton.Click += RadioButton_Click;
+                        this.Controls.Add(radioButton);
+                    }
+                
+
         }
 
     }
