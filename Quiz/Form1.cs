@@ -40,60 +40,76 @@ namespace Quiz
         {
             metroBtnSubmit = new MetroFramework.Controls.MetroButton();
             metroBtnSubmit.Size = new Size(90, 30);
-            metroBtnSubmit.Location = new Point(794, 587);
+            metroBtnSubmit.Location = new Point(750, 490);
             metroBtnSubmit.Highlight = true;
+            metroBtnSubmit.BackColor = Color.FromName("MenuHighlight");
             metroBtnSubmit.Text = "Submit";
-            metroBtnSubmit.Font = new Font("Century", 10, FontStyle.Italic);
+            metroBtnSubmit.UseCustomBackColor = true;
+            metroBtnSubmit.UseCustomForeColor = true;
+            metroBtnSubmit.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroBtnSubmit.Click += MetroBtnSubmit_Click;
             this.Controls.Add(metroBtnSubmit);
 
             metroNextbtn = new MetroFramework.Controls.MetroButton();
             metroNextbtn.Size = new Size(90, 30);
-            metroNextbtn.Location = new Point(519, 587);
+            metroNextbtn.Location = new Point(519, 490);
             metroNextbtn.Highlight = true;
+            metroNextbtn.UseCustomBackColor = true;
+            metroNextbtn.UseCustomForeColor = true;
+            metroNextbtn.BackColor = Color.FromName("MenuHighlight");
             metroNextbtn.Text = "Next";
-            metroNextbtn.Font = new Font("Century", 10, FontStyle.Italic);
+            metroNextbtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroNextbtn.Click += MetroNextbtn_Click;
             this.Controls.Add(metroNextbtn);
 
             metroBackbtn = new MetroFramework.Controls.MetroButton();
             metroBackbtn.Size = new Size(90, 30);
-            metroBackbtn.Location = new Point(144, 587);
+            metroBackbtn.BackColor = Color.FromName("MenuHighlight");
+            metroBackbtn.Location = new Point(144, 490);
             metroBackbtn.Highlight = true;
+            metroBackbtn.UseCustomBackColor = true;
+            metroBackbtn.UseCustomForeColor = true;
             metroBackbtn.Text = "Back";
-            metroBackbtn.Font = new Font("Century", 10, FontStyle.Italic);
+            metroBackbtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroBackbtn.Click += MetroBackbtn_Click;
             this.Controls.Add(metroBackbtn);
             metroAcceptbtn = new MetroFramework.Controls.MetroButton();
+            metroAcceptbtn.BackColor = Color.FromName("MenuHighlight");
             metroAcceptbtn.Size = new Size(90, 30);
-            metroAcceptbtn.Location = new Point(326, 587);
+            metroAcceptbtn.UseCustomBackColor = true;
+            metroAcceptbtn.UseCustomForeColor = true;
+            metroAcceptbtn.Location = new Point(326, 490);
             metroAcceptbtn.Highlight = true;
-            metroAcceptbtn.Font = new Font("Century", 10, FontStyle.Italic);
+            metroAcceptbtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroAcceptbtn.Text = "Accept";
             metroAcceptbtn.Click += MetroAcceptbtn_Click;
             this.Controls.Add(metroAcceptbtn);
 
             BackButton = new MetroFramework.Controls.MetroButton();
-            BackButton.Text = "Back";
-            BackButton.Font = new Font("Century", 8, FontStyle.Italic);
+            BackButton.Text = "<<<";
+            BackButton.UseCustomBackColor = true;
+            BackButton.UseCustomForeColor = true;
+            BackButton.BackColor = Color.FromName("MenuHighlight");
+            BackButton.Font = new Font("Century", 12, FontStyle.Bold);
             BackButton.Size = new Size(34, 23);
-            BackButton.Location = new Point(893, 0);
+            BackButton.Location = new Point(0, 0);
             BackButton.Highlight = true;
             BackButton.Click += BackButton_Click;
             labelQueueQuestion = new Label();
             labelQueueQuestion.Size = new Size(120, 20);
-            labelQueueQuestion.Location = new Point(12, 580);
-            labelQueueQuestion.Font = new Font("Century", 8, FontStyle.Italic);
+            labelQueueQuestion.Location = new Point(12, 490);
+            labelQueueQuestion.Font = new Font("Monotype Corsiva",12, FontStyle.Italic);
             labelQueue1 = new Label();
             labelQueue1.Text = "1";
-            labelQueue1.Font = new Font("Century", 12, FontStyle.Italic);
+            labelQueue1.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
             labelQueue1.Size = new Size(30, 25);
             labelQueue1.Location = new Point(15, 40);
             labelQuestion1 = new Label();
             labelQuestion1.Size = new Size(730, 145);
             labelQuestion1.Location = new Point(52, 10);
             labelQuestion1.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
-            labelQuestion1.ForeColor = Color.Maroon;
+            labelQuestion1.ForeColor = Color.FromName("MenuHighlight");
+
             this.Controls.Add(labelQueueQuestion); this.Controls.Add(BackButton);
             this.Controls.Add(labelQueue1); this.Controls.Add(labelQuestion1);
         }
@@ -129,10 +145,6 @@ namespace Quiz
             QuestionList2.RemoveAt(CurrentIndex);
             QuestionListSecond.Add(item);
 
-            //    var correctindex = QuestionListSecond[CurrentIndex].Answers.FindIndex(x => x.IsCorrect == "Yes");
-            //    var myownindex = QuestionListSecond[CurrentIndex].Answers.FindIndex(x => x.Text == AnswerList[d]);
-            //    MessageBox.Show($"Correct {correctindex} Own {myownindex}");
-            //++d;
 
         }
         private void MetroNextbtn_Click(object sender, EventArgs e)
@@ -184,6 +196,7 @@ namespace Quiz
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadSecondPageOfForm();
+
             metroBtnSubmit.Enabled = false;
             metroBackbtn.Enabled = false;
             metroAcceptbtn.Enabled = false;
