@@ -271,7 +271,6 @@ namespace Quiz
                     var correctanswer = QuestionListSecond[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
                     if (radioButton.Text == correctanswer.Text)
                     {
-                        radioButton.BackColor = Color.Green;
                         CorrectAnswerBox = new PictureBox();
                         CorrectAnswerBox.Size = new Size(40, 30);
                         CorrectAnswerBox.Location = new Point(radioButton.Location.X - 50, radioButton.Location.Y + 10);
@@ -281,21 +280,13 @@ namespace Quiz
                     }
                     if (AnswerList[curindex] == radioButton.Text)
                     {
-                        radioButton.BackColor = Color.Blue;
                         OwnAnswerBox = new PictureBox();
                         OwnAnswerBox.Size = new Size(40, 30);
                         OwnAnswerBox.Location = new Point(radioButton.Location.X - 100, radioButton.Location.Y + 10);
-                        OwnAnswerBox.Image = Properties.Resources.ownanswer;
+                        OwnAnswerBox.Image = Properties.Resources.bluecorrect;
                         OwnAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
                         this.Controls.Add(OwnAnswerBox);//dispose picture box
                     }
-                    //if(AnswerList[curindex]== correctanswer.Text)
-                    //{
-                    //    OwnAnswerBox.Image = Properties.Resources.correctanswer;
-                    //    OwnAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                    //    CorrectAnswerBox.Image = Properties.Resources.correctanswer;
-                    //    CorrectAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                    //}
                     radioButton.Click += RadioButton_Click;
                     this.Controls.Add(radioButton);
                 }

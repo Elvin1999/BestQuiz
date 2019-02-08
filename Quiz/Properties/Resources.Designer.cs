@@ -63,6 +63,16 @@ namespace Quiz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bluecorrect {
+            get {
+                object obj = ResourceManager.GetObject("bluecorrect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap correctanswer {
             get {
                 object obj = ResourceManager.GetObject("correctanswer", resourceCulture);
