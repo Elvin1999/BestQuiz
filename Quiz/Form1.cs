@@ -187,7 +187,6 @@ namespace Quiz
                 using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.OpenOrCreate))
                 {
                     QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
-
                 }
                 using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.OpenOrCreate))
                 {
@@ -196,12 +195,10 @@ namespace Quiz
                 ShowTest(QuestionList, CurrentIndex);
             }
         }
-
         private void BackButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }
-
         private void RadioButton_Click(object sender, EventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
@@ -229,7 +226,6 @@ namespace Quiz
 
         private void ShowTest(List<QuestionBlock> questionlist, int curindex)
         {
-
             int y = 0;
             labelQueue1.Text = (curindex + 1).ToString();
             labelQueueQuestion.Text = "Question " + (curindex + 1) + " of " + questionlist.Count;
@@ -237,7 +233,7 @@ namespace Quiz
             if (IsClickedToSubmitButton)
                 metroAcceptbtn.Enabled = false;
             int c = 0;
-            for (int i = 0; i < 2*questionlist[curindex].Answers.Count; i++)
+            for (int i = 0; i < 2 * questionlist[curindex].Answers.Count; i++)
             {
                 foreach (var item in this.Controls)
                 {
@@ -248,8 +244,16 @@ namespace Quiz
                     }
                 }
             }
+            int putCorrectnotation = 0;
+            int putWrongnotation = 0;
+            
+                //var correctindex = QuestionListSecond[curindex].Answers.FindIndex(x => x.IsCorrect == "Yes");
+                //var myownindex= QuestionListSecond[curindex].Answers.FindIndex(x => x.Text == AnswerList[i]);
+                //MessageBox.Show($"Correct {correctindex} Own {myownindex}");
+            
             for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
             {
+                questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
                 RadioButton radioButton = new RadioButton();
                 radioButton.Size = new Size(350, 60);
                 radioButton.Location = new Point(56, 192 + y);
