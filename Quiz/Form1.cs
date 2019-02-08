@@ -123,9 +123,9 @@ namespace Quiz
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
             metroBtnSubmit.Enabled = true;
-
             var item = QuestionList[int.Parse(labelQueue1.Text) - 1];
             AnswerList.Add(Answer);
+            QuestionList2.RemoveAt(CurrentIndex);
             QuestionListSecond.Add(item);
         }
         private void MetroNextbtn_Click(object sender, EventArgs e)
@@ -136,13 +136,7 @@ namespace Quiz
             {
                 if (CurrentIndex < QuestionListSecond.Count - 1)
                 {
-                    //foreach (var item in this.Controls)
-                    //{
-                    //    if (item is RadioButton rb)
-                    //    {
-                    //        rb.Dispose();
-                    //    }
-                    //}
+
                     ++CurrentIndex;
                 }
                 ShowTest(QuestionListSecond, CurrentIndex);
@@ -151,17 +145,10 @@ namespace Quiz
             {
                 if (CurrentIndex < QuestionList.Count - 1)
                 {
-                    //foreach (var item in this.Controls)
-                    //{
-                    //    if (item is RadioButton rb)
-                    //    {
-                    //        rb.Dispose();
 
-                    //    }
-                    //}
                     ++CurrentIndex;
                 }
-                ShowTest(QuestionList, CurrentIndex);
+                ShowTest(QuestionList2, CurrentIndex);
             }
         }
         private void MetroBackbtn_Click(object sender, EventArgs e)
@@ -171,14 +158,7 @@ namespace Quiz
             {
                 if (CurrentIndex > 0)
                 {
-                    //foreach (var item in this.Controls)
-                    //{
-                    //    if (item is RadioButton rb)
-                    //    {
-                    //        rb.Dispose();
 
-                    //    }
-                    //}
                     --CurrentIndex;
                     ShowTest(QuestionListSecond, CurrentIndex);
                 }
@@ -187,27 +167,20 @@ namespace Quiz
             {
                 if (CurrentIndex > 0)
                 {
-                    //foreach (var item in this.Controls)
-                    //{
-                    //    if (item is RadioButton rb)
-                    //    {
-                    //        rb.Dispose();
-                    //    }
-                    //}
+
                     --CurrentIndex;
-                    ShowTest(QuestionList, CurrentIndex);
+                    ShowTest(QuestionList2, CurrentIndex);
                 }
             }
-
         }
-
+        public List<QuestionBlock> QuestionList2 { get; set; }
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadSecondPageOfForm();
             metroBtnSubmit.Enabled = false;
             metroBackbtn.Enabled = false;
             metroAcceptbtn.Enabled = false;
-
+            QuestionList2 = new List<QuestionBlock>();
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             if (File.Exists("QuestionsXML.xml"))
             {
@@ -216,11 +189,10 @@ namespace Quiz
                     QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
 
                 }
-                //using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.OpenOrCreate))
-                //{
-                //    //QuestionList2 = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
-
-                //}
+                using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.OpenOrCreate))
+                {
+                    QuestionList2 = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+                }
                 ShowTest(QuestionList, CurrentIndex);
             }
         }
@@ -265,7 +237,7 @@ namespace Quiz
             if (IsClickedToSubmitButton)
                 metroAcceptbtn.Enabled = false;
             int c = 0;
-            for (int i = 0; i < questionlist[curindex].Answers.Count / 2; i++)
+            for (int i = 0; i < 2*questionlist[curindex].Answers.Count; i++)
             {
                 foreach (var item in this.Controls)
                 {
