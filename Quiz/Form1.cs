@@ -80,7 +80,6 @@ namespace Quiz
             labelQueueQuestion.Size = new Size(120, 20);
             labelQueueQuestion.Location = new Point(12, 580);
             labelQueueQuestion.Font = new Font("Century", 8, FontStyle.Italic);
-
             labelQueue1 = new Label();
             labelQueue1.Text = "1";
             labelQueue1.Font = new Font("Century", 12, FontStyle.Italic);
@@ -115,15 +114,15 @@ namespace Quiz
             }
 
             MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount}");
-            QuestionList = QuestionListSecond;
+            QuestionList2 = QuestionListSecond;
             CurrentIndex = 0;
-            ShowTest(QuestionList, CurrentIndex);
+            ShowTest(QuestionList2, CurrentIndex);
         }
  
         private void MetroNextbtn_Click(object sender, EventArgs e)
         {
             metroAcceptbtn.Enabled = false;
-            if (CurrentIndex < QuestionList.Count - 1)
+            if (CurrentIndex < QuestionList2.Count - 1)
             {
                 ++CurrentIndex;
                 foreach (var item in this.Controls)
@@ -133,13 +132,14 @@ namespace Quiz
                         rb.Dispose();
                     }
                 }
-                ShowTest(QuestionList, CurrentIndex);
+                ShowTest(QuestionList2, CurrentIndex);
             }
         }
 
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
             var item = QuestionList[CurrentIndex];
+            QuestionList2.Remove(item);
             AnswerList.Add(Answer);//I'll check this answer with SecondQuestionList's answers
             QuestionListSecond.Add(item);
         }
@@ -157,24 +157,25 @@ namespace Quiz
                         rb.Dispose();
                     }
                 }
-                ShowTest(QuestionList, CurrentIndex);
+                ShowTest(QuestionList2, CurrentIndex);
             }
         }
-
+        public List<QuestionBlock> QuestionList2 { get; set; }
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadSecondPageOfForm();
 
             metroAcceptbtn.Enabled = false;
-
+            QuestionList2 = new List<QuestionBlock>();
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             if (File.Exists("QuestionsXML.xml"))
             {
                 using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.Open))
                 {
                     QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+                    QuestionList2 = QuestionList;
                 }
-                ShowTest(QuestionList, CurrentIndex);
+                ShowTest(QuestionList2, CurrentIndex);
             }
         }
 
