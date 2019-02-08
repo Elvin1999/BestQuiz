@@ -120,13 +120,20 @@ namespace Quiz
             CurrentIndex = 0;
             ShowTest(QuestionListSecond, CurrentIndex);
         }
+        int d = 0;
         private void MetroAcceptbtn_Click(object sender, EventArgs e)
         {
             metroBtnSubmit.Enabled = true;
-            var item = QuestionList[int.Parse(labelQueue1.Text) - 1];
+            var item = QuestionList2[int.Parse(labelQueue1.Text) - 1];
             AnswerList.Add(Answer);
             QuestionList2.RemoveAt(CurrentIndex);
             QuestionListSecond.Add(item);
+
+            //    var correctindex = QuestionListSecond[CurrentIndex].Answers.FindIndex(x => x.IsCorrect == "Yes");
+            //    var myownindex = QuestionListSecond[CurrentIndex].Answers.FindIndex(x => x.Text == AnswerList[d]);
+            //    MessageBox.Show($"Correct {correctindex} Own {myownindex}");
+            //++d;
+
         }
         private void MetroNextbtn_Click(object sender, EventArgs e)
         {
@@ -223,7 +230,6 @@ namespace Quiz
         {
             return base.ShowDialog();
         }
-
         private void ShowTest(List<QuestionBlock> questionlist, int curindex)
         {
             int y = 0;
@@ -246,23 +252,48 @@ namespace Quiz
             }
             int putCorrectnotation = 0;
             int putWrongnotation = 0;
-            
-                //var correctindex = QuestionListSecond[curindex].Answers.FindIndex(x => x.IsCorrect == "Yes");
-                //var myownindex= QuestionListSecond[curindex].Answers.FindIndex(x => x.Text == AnswerList[i]);
-                //MessageBox.Show($"Correct {correctindex} Own {myownindex}");
-            
-            for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
+            if (IsClickedToSubmitButton)
             {
-                questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
-                RadioButton radioButton = new RadioButton();
-                radioButton.Size = new Size(350, 60);
-                radioButton.Location = new Point(56, 192 + y);
-                radioButton.Text = questionlist[curindex].Answers[k].Text;
-                radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                y += 60;
-                radioButton.Click += RadioButton_Click;
-                this.Controls.Add(radioButton);
+                for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
+                {
+                    questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                    RadioButton radioButton = new RadioButton();
+                    radioButton.Size = new Size(350, 60);
+                    radioButton.Location = new Point(56, 192 + y);
+                    radioButton.Text = questionlist[curindex].Answers[k].Text;
+                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                    y += 60;
+                    var correctanswer = QuestionListSecond[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                    if (radioButton.Text == correctanswer.Text)
+                    {
+                        radioButton.BackColor = Color.Green;
+                    }
+                    if (AnswerList[curindex] == radioButton.Text)
+                    {
+                      
+                        radioButton.BackColor = Color.Blue;
+                    }
+                    radioButton.Click += RadioButton_Click;
+                    this.Controls.Add(radioButton);
+                }
             }
+            else
+            {
+                for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
+                {
+                    questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                    RadioButton radioButton = new RadioButton();
+                    radioButton.Size = new Size(350, 60);
+                    radioButton.Location = new Point(56, 192 + y);
+                    radioButton.Text = questionlist[curindex].Answers[k].Text;
+                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                    y += 60;
+                   
+                    radioButton.Click += RadioButton_Click;
+                    this.Controls.Add(radioButton);
+                }
+            }
+
 
 
         }
