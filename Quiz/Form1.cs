@@ -246,10 +246,10 @@ namespace Quiz
                 {
                     if (item is RadioButton rb)
                     {
-               
+
                         rb.Dispose();
                     }
-                    if(item is PictureBox pb)
+                    if (item is PictureBox pb)
                     {
                         pb.Dispose();
                     }
@@ -264,7 +264,7 @@ namespace Quiz
                     questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
                     RadioButton radioButton = new RadioButton();
                     radioButton.Size = new Size(350, 60);
-                    radioButton.Location = new Point(80, 192 + y);
+                    radioButton.Location = new Point(110, 192 + y);
                     radioButton.Text = questionlist[curindex].Answers[k].Text;
                     radioButton.Font = new Font("Century", 10, FontStyle.Italic);
                     y += 60;
@@ -274,17 +274,17 @@ namespace Quiz
                         radioButton.BackColor = Color.Green;
                         CorrectAnswerBox = new PictureBox();
                         CorrectAnswerBox.Size = new Size(40, 30);
-                        CorrectAnswerBox.Location = new Point(radioButton.Location.X - 50, radioButton.Location.Y+10);
+                        CorrectAnswerBox.Location = new Point(radioButton.Location.X - 50, radioButton.Location.Y + 10);
                         CorrectAnswerBox.Image = Properties.Resources.correctanswer;
                         CorrectAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
                         this.Controls.Add(CorrectAnswerBox);
                     }
                     if (AnswerList[curindex] == radioButton.Text)
-                    {             
+                    {
                         radioButton.BackColor = Color.Blue;
                         OwnAnswerBox = new PictureBox();
                         OwnAnswerBox.Size = new Size(40, 30);
-                        OwnAnswerBox.Location = new Point(radioButton.Location.X - 80, radioButton.Location.Y+10);
+                        OwnAnswerBox.Location = new Point(radioButton.Location.X - 100, radioButton.Location.Y + 10);
                         OwnAnswerBox.Image = Properties.Resources.ownanswer;
                         OwnAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
                         this.Controls.Add(OwnAnswerBox);//dispose picture box
@@ -311,7 +311,7 @@ namespace Quiz
                     radioButton.Text = questionlist[curindex].Answers[k].Text;
                     radioButton.Font = new Font("Century", 10, FontStyle.Italic);
                     y += 60;
-                   
+
                     radioButton.Click += RadioButton_Click;
                     this.Controls.Add(radioButton);
                 }
