@@ -165,14 +165,14 @@ namespace Quiz
                 EmptyCount = QuestionList.Count - (CorrectCount + UnCorrectCount);
                 MessageBox.Show($"Correct {CorrectCount} UnCorrect {UnCorrectCount} Empty {EmptyCount}");
                 CurrentIndex = 0;
-                if(QuestionListSecond.Count!=0)
-                ShowTest(QuestionListSecond, CurrentIndex);
+                if (QuestionListSecond.Count != 0)
+                    ShowTest(QuestionListSecond, CurrentIndex);
                 GetResultButton();
             }
             catch (Exception)
-            {        
+            {
             }
-            
+
 
 
         }
@@ -221,7 +221,7 @@ namespace Quiz
             CirclePicture.Location = new Point(30, 210);
             CirclePicture.Image = Properties.Resources.percentcircle;
             CirclePicture.SizeMode = PictureBoxSizeMode.StretchImage;
-            
+
             PercentPicture = new PictureBox();
             PercentPicture.Size = new Size(84, 64);
             PercentPicture.Location = new Point(229, 301);
@@ -233,7 +233,7 @@ namespace Quiz
             ResultPercentLabel.Location = new Point(94, 280);
             ResultPercentLabel.Text = "29";
             ResultPercentLabel.Font = new Font("Copper", 30, FontStyle.Italic);
-            this.Controls.Add(ResultPercentLabel);this.Controls.Add(CirclePicture);
+            this.Controls.Add(ResultPercentLabel); this.Controls.Add(CirclePicture);
             SaveAsPdfButton = new Button();
             SaveAsPdfButton.Size = new Size(150, 40);
             SaveAsPdfButton.Location = new Point(600, 410);
@@ -329,9 +329,9 @@ namespace Quiz
         public int correct_percent { get; set; }
         public int uncorrect_percent { get; set; }
         public int empty_answer_percent { get; set; }
-        
+
         int counter = 0; int counterall = 0;
-        int empty_answer_rate = 0;int correct_answer_rate = 50;
+        int empty_answer_rate = 0; int correct_answer_rate = 50;
         int uncorrect_answer_rate = 0;
         private void Timerdc_Tick(object sender, EventArgs e)
         {
@@ -339,18 +339,18 @@ namespace Quiz
             if (counterall == 0 || counterall == 2 || counterall == 4)
             {
                 EmptyAnswerButton.Location = new Point(454, EmptyAnswerButton.Location.Y - InceasingRate);
-                EmptyAnswerPercentLabel.Location= new Point(458, EmptyAnswerButton.Location.Y - InceasingRate-50);
+                EmptyAnswerPercentLabel.Location = new Point(458, EmptyAnswerButton.Location.Y - InceasingRate - 50);
                 empty_answer_rate += InceasingRate;
                 EmptyAnswerPercentLabel.Text = empty_answer_rate.ToString() + " %";
                 EmptyAnswerButton.Size = new Size(50, EmptyAnswerButton.Size.Height + InceasingRate);
                 CorrectBarButton.Location = new Point(350, CorrectBarButton.Location.Y + InceasingRate);
-                CorrectAnswerPercentLabel.Location= new Point(354, CorrectBarButton.Location.Y + InceasingRate-50);
+                CorrectAnswerPercentLabel.Location = new Point(354, CorrectBarButton.Location.Y + InceasingRate - 50);
                 correct_answer_rate -= InceasingRate;
                 CorrectAnswerPercentLabel.Text = correct_answer_rate.ToString() + " %";
-                ResultPercentLabel.Text = correct_answer_rate.ToString()+" %";
+                ResultPercentLabel.Text = correct_answer_rate.ToString() + " %";
                 CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height - InceasingRate);
                 UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y - InceasingRate);
-                UnCorrectAnswerPercentLabel.Location= new Point(406, UnCorrectBarButton.Location.Y - InceasingRate-50);
+                UnCorrectAnswerPercentLabel.Location = new Point(406, UnCorrectBarButton.Location.Y - InceasingRate - 50);
                 UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height + InceasingRate);
                 uncorrect_answer_rate += InceasingRate;
                 UnCorrectAnswerPercentLabel.Text = uncorrect_answer_rate.ToString() + " %";
@@ -368,7 +368,7 @@ namespace Quiz
                 CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height + InceasingRate);
                 correct_answer_rate += InceasingRate;
                 CorrectAnswerPercentLabel.Text = correct_answer_rate.ToString() + " %";
-                ResultPercentLabel.Text = correct_answer_rate.ToString()+" %";
+                ResultPercentLabel.Text = correct_answer_rate.ToString() + " %";
                 UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y + InceasingRate);
                 UnCorrectAnswerPercentLabel.Location = new Point(406, UnCorrectBarButton.Location.Y + InceasingRate - 50);
                 UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height - InceasingRate);
@@ -390,7 +390,7 @@ namespace Quiz
                     UnCorrectBarButton.Size = new Size(50, 210 + 2 * uncorrect_percent);
                     UnCorrectBarButton.Location = new Point(402, 240 - 2 * uncorrect_percent);
                     CorrectAnswerPercentLabel.Text = correct_percent.ToString() + " %";
-                    ResultPercentLabel.Text = correct_percent.ToString()+" %";
+                    ResultPercentLabel.Text = correct_percent.ToString() + " %";
                     CorrectAnswerPercentLabel.Location = new Point(354, 203 - 2 * correct_percent);
                     UnCorrectAnswerPercentLabel.Text = uncorrect_percent.ToString() + " %";
                     UnCorrectAnswerPercentLabel.Location = new Point(406, 203 - 2 * uncorrect_percent);
@@ -419,16 +419,16 @@ namespace Quiz
 
                     ++CurrentIndex;
                 }
-                ShowTest(QuestionListSecond, CurrentIndex);
+                    ShowTest(QuestionListSecond, CurrentIndex);
             }
             else
             {
-                if (CurrentIndex < QuestionList.Count - 1)
+                if (CurrentIndex < QuestionList2.Count - 1)
                 {
 
                     ++CurrentIndex;
+                    ShowTest(QuestionList2, CurrentIndex);
                 }
-                ShowTest(QuestionList2, CurrentIndex);
             }
         }
         private void MetroBackbtn_Click(object sender, EventArgs e)
@@ -484,8 +484,8 @@ namespace Quiz
         {
 
             DateTime date = DateTime.Now;
-          
-            
+
+
             QuizTime.Text = date.ToLongTimeString();
 
 
@@ -536,77 +536,90 @@ namespace Quiz
         public PictureBox OwnAnswerBox { get; set; }
         private void ShowTest(List<QuestionBlock> questionlist, int curindex)
         {
-            int y = 0;
-            labelQueue1.Text = (curindex + 1).ToString();
-            labelQueueQuestion.Text = "Question " + (curindex + 1) + " of " + questionlist.Count;
-            labelQuestion1.Text = questionlist[curindex].Text;
-            if (IsClickedToSubmitButton)
-                metroAcceptbtn.Enabled = false;
-            for (int i = 0; i < 2 * questionlist[curindex].Answers.Count; i++)
+          
+            try
             {
-                foreach (var item in this.Controls)
+                int y = 0;
+                labelQueue1.Text = (curindex + 1).ToString();
+                labelQueueQuestion.Text = "Question " + (curindex + 1) + " of " + questionlist.Count;
+                if (curindex < questionlist.Count - 1)
+                    labelQuestion1.Text = questionlist[curindex].Text;
+                if (IsClickedToSubmitButton)
+                    metroAcceptbtn.Enabled = false;
+                for (int i = 0; i < 2 * questionlist[curindex].Answers.Count; i++)
                 {
-                    if (item is RadioButton rb)
+                    foreach (var item in this.Controls)
                     {
+                        if (item is RadioButton rb)
+                        {
 
-                        rb.Dispose();
-                    }
-                    if (item is PictureBox pb)
-                    {
-                        pb.Dispose();
+                            rb.Dispose();
+                        }
+                        if (item is PictureBox pb)
+                        {
+                            pb.Dispose();
+                        }
                     }
                 }
-            }
-            if (IsClickedToSubmitButton)
-            {
-                for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
+                if (IsClickedToSubmitButton)
                 {
-                    questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
-                    RadioButton radioButton = new RadioButton();
-                    radioButton.Size = new Size(350, 60);
-                    radioButton.Location = new Point(110, 192 + y);
-                    radioButton.Text = questionlist[curindex].Answers[k].Text;
-                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                    y += 60;
-                    var correctanswer = QuestionListSecond[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
-                    if (radioButton.Text == correctanswer.Text)
+                    for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
                     {
-                        CorrectAnswerBox = new PictureBox();
-                        CorrectAnswerBox.Size = new Size(40, 35);
-                        CorrectAnswerBox.Location = new Point(radioButton.Location.X - 50, radioButton.Location.Y + 10);
-                        CorrectAnswerBox.Image = Properties.Resources.correctanswer;
-                        CorrectAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                        this.Controls.Add(CorrectAnswerBox);
+                        questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                        RadioButton radioButton = new RadioButton();
+                        radioButton.Size = new Size(350, 60);
+                        radioButton.Location = new Point(110, 192 + y);
+                        radioButton.Text = questionlist[curindex].Answers[k].Text;
+                        radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                        y += 60;
+                        var correctanswer = QuestionListSecond[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                        if (radioButton.Text == correctanswer.Text)
+                        {
+                            CorrectAnswerBox = new PictureBox();
+                            CorrectAnswerBox.Size = new Size(40, 35);
+                            CorrectAnswerBox.Location = new Point(radioButton.Location.X - 50, radioButton.Location.Y + 10);
+                            CorrectAnswerBox.Image = Properties.Resources.correctanswer;
+                            CorrectAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                            this.Controls.Add(CorrectAnswerBox);
+                        }
+                        if (AnswerList[curindex] == radioButton.Text)
+                        {
+                            OwnAnswerBox = new PictureBox();
+                            OwnAnswerBox.Size = new Size(40, 35);
+                            OwnAnswerBox.Location = new Point(radioButton.Location.X - 90, radioButton.Location.Y + 10);
+                            OwnAnswerBox.Image = Properties.Resources.bluecorrect;
+                            radioButton.Checked = true;
+                            OwnAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                            this.Controls.Add(OwnAnswerBox);//dispose picture box
+                        }
+                        radioButton.Click += RadioButton_Click;
+                        this.Controls.Add(radioButton);
                     }
-                    if (AnswerList[curindex] == radioButton.Text)
-                    {
-                        OwnAnswerBox = new PictureBox();
-                        OwnAnswerBox.Size = new Size(40, 35);
-                        OwnAnswerBox.Location = new Point(radioButton.Location.X - 90, radioButton.Location.Y + 10);
-                        OwnAnswerBox.Image = Properties.Resources.bluecorrect;
-                        radioButton.Checked = true;
-                        OwnAnswerBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                        this.Controls.Add(OwnAnswerBox);//dispose picture box
-                    }
-                    radioButton.Click += RadioButton_Click;
-                    this.Controls.Add(radioButton);
                 }
-            }
-            else
-            {
-                for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
+                else
                 {
-                    questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
-                    RadioButton radioButton = new RadioButton();
-                    radioButton.Size = new Size(350, 60);
-                    radioButton.Location = new Point(56, 192 + y);
-                    radioButton.Text = questionlist[curindex].Answers[k].Text;
-                    radioButton.Font = new Font("Century", 10, FontStyle.Italic);
-                    y += 60;
-                    radioButton.Click += RadioButton_Click;
-                    this.Controls.Add(radioButton);
+                    for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
+                    {
+                        questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                        RadioButton radioButton = new RadioButton();
+                        radioButton.Size = new Size(350, 60);
+                        radioButton.Location = new Point(56, 192 + y);
+                        radioButton.Text = questionlist[curindex].Answers[k].Text;
+                        radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                        y += 60;
+                        radioButton.Click += RadioButton_Click;
+                        this.Controls.Add(radioButton);
+                    }
                 }
+
             }
+            catch (Exception)
+            {
+
+              
+            }
+           
+            /////////
         }
 
     }
