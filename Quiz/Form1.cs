@@ -276,7 +276,7 @@ namespace Quiz
             CorrectAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
             CorrectAnswerPercentLabel.Size = new Size(50, 50);
             CorrectAnswerPercentLabel.Location = new Point(352, 98);
-            CorrectAnswerPercentLabel.Text = "";
+            CorrectAnswerPercentLabel.Text = "1";
             CorrectAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
             this.Controls.Add(CorrectAnswerPercentLabel);
 
@@ -284,7 +284,7 @@ namespace Quiz
             UnCorrectAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
             UnCorrectAnswerPercentLabel.Location = new Point(402, 98);
             UnCorrectAnswerPercentLabel.Size = new Size(50, 50);
-            UnCorrectAnswerPercentLabel.Text = "";
+            UnCorrectAnswerPercentLabel.Text = "1";
             UnCorrectAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
             this.Controls.Add(UnCorrectAnswerPercentLabel);
 
@@ -292,7 +292,7 @@ namespace Quiz
             EmptyAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
             EmptyAnswerPercentLabel.Location = new Point(452, 98);
             EmptyAnswerPercentLabel.Size = new Size(50, 50);
-            EmptyAnswerPercentLabel.Text = "";
+            EmptyAnswerPercentLabel.Text = "1";
             EmptyAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
             this.Controls.Add(EmptyAnswerPercentLabel);
             correct_percent = (100 * CorrectCount) / QuestionList.Count;
@@ -316,19 +316,26 @@ namespace Quiz
             if (counterall == 0 || counterall == 2 || counterall == 4)
             {
                 EmptyAnswerButton.Location = new Point(454, EmptyAnswerButton.Location.Y - InceasingRate);
+                EmptyAnswerPercentLabel.Location= new Point(458, EmptyAnswerButton.Location.Y - InceasingRate-50);
                 EmptyAnswerButton.Size = new Size(50, EmptyAnswerButton.Size.Height + InceasingRate);
                 CorrectBarButton.Location = new Point(350, CorrectBarButton.Location.Y + InceasingRate);
+                CorrectAnswerPercentLabel.Location= new Point(354, CorrectBarButton.Location.Y + InceasingRate-50);
                 CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height - InceasingRate);
                 UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y - InceasingRate);
+                UnCorrectAnswerPercentLabel.Location= new Point(406, UnCorrectBarButton.Location.Y - InceasingRate-50);
                 UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height + InceasingRate);
             }
             else
             {
                 EmptyAnswerButton.Location = new Point(454, EmptyAnswerButton.Location.Y + InceasingRate);
+                EmptyAnswerPercentLabel.Location = new Point(458, EmptyAnswerButton.Location.Y + InceasingRate - 50);
+
                 EmptyAnswerButton.Size = new Size(50, EmptyAnswerButton.Size.Height - InceasingRate);
                 CorrectBarButton.Location = new Point(350, CorrectBarButton.Location.Y - InceasingRate);
+                CorrectAnswerPercentLabel.Location = new Point(354, CorrectBarButton.Location.Y - InceasingRate - 50);
                 CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height + InceasingRate);
                 UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y + InceasingRate);
+                UnCorrectAnswerPercentLabel.Location = new Point(406, UnCorrectBarButton.Location.Y + InceasingRate - 50);
                 UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height - InceasingRate);
             }
             if (counter == 50)
@@ -346,11 +353,11 @@ namespace Quiz
                     UnCorrectBarButton.Size = new Size(50, 210 + 2 * uncorrect_percent);
                     UnCorrectBarButton.Location = new Point(402, 240 - 2 * uncorrect_percent);
                     CorrectAnswerPercentLabel.Text = correct_percent.ToString() + " %";
-                    CorrectAnswerPercentLabel.Location = new Point(352, 203 - 2 * correct_percent);
+                    CorrectAnswerPercentLabel.Location = new Point(354, 203 - 2 * correct_percent);
                     UnCorrectAnswerPercentLabel.Text = uncorrect_percent.ToString() + " %";
-                    UnCorrectAnswerPercentLabel.Location = new Point(404, 203 - 2 * uncorrect_percent);
+                    UnCorrectAnswerPercentLabel.Location = new Point(406, 203 - 2 * uncorrect_percent);
                     EmptyAnswerPercentLabel.Text = empty_answer_percent.ToString() + " %";
-                    EmptyAnswerPercentLabel.Location = new Point(456, 203 - 2 * empty_answer_percent);
+                    EmptyAnswerPercentLabel.Location = new Point(458, 203 - 2 * empty_answer_percent);
                 }
             }
         }
