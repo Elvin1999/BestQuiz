@@ -71,7 +71,9 @@
             this.textBoxSearch.Size = new System.Drawing.Size(172, 25);
             this.textBoxSearch.TabIndex = 3;
             this.textBoxSearch.Text = "Search";
+            this.textBoxSearch.Enter += new System.EventHandler(this.textBoxSearch_Enter);
             this.textBoxSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSearch_KeyPress);
+            this.textBoxSearch.Leave += new System.EventHandler(this.textBoxSearch_Leave);
             // 
             // maskedTextBox1
             // 

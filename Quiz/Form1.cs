@@ -495,7 +495,7 @@ namespace Quiz
                 GeneralXmlFiles = XmlFiles;
 
             }
-            
+
             foreach (var item in GeneralXmlFiles)
             {
                 FileInfo file = new FileInfo(item);
@@ -503,7 +503,7 @@ namespace Quiz
                 Button testbtn = new Button();
                 testbtn.Size = new Size(40, 150);
                 testbtn.Location = new Point(30 + x, 100);
-                testbtn.Font = new Font("Century", 10, FontStyle.Italic);                
+                testbtn.Font = new Font("Century", 10, FontStyle.Italic);
                 testbtn.BackColor = Color.ForestGreen;
                 rnd = new Random();
                 testbtn.Click += Testbtn_Click;
@@ -694,16 +694,21 @@ namespace Quiz
                 }
                 if (IsClickedToContinueButton)
                 {
-                    TestQuestionCount = int.Parse(maskedTextBox1.Text);
-                    if (TestQuestionCount >= QuestionList.Count)
+                    if (maskedTextBox1.Text != String.Empty)
                     {
-                        MessageBox.Show("Count must be less than test's questions count !");
+                        TestQuestionCount = int.Parse(maskedTextBox1.Text);
+
+                        if (TestQuestionCount > QuestionList.Count)
+                        {
+                            MessageBox.Show("Count must be less than test's questions count !");
+                        }
+                        else
+                        {
+                            QuestionList.RemoveRange(TestQuestionCount, QuestionList.Count - TestQuestionCount);
+                            QuestionList2.RemoveRange(TestQuestionCount, QuestionList2.Count - TestQuestionCount);
+                        }
                     }
-                    else
-                    {
-                        QuestionList.RemoveRange(TestQuestionCount, QuestionList.Count - TestQuestionCount);
-                        QuestionList2.RemoveRange(TestQuestionCount, QuestionList2.Count - TestQuestionCount);
-                    }
+
                 }
                 ShowTest(QuestionList, CurrentIndex);
             }
@@ -769,6 +774,22 @@ namespace Quiz
         private void pictureBoxReturn_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void textBoxSearch_Enter(object sender, EventArgs e)
+        {
+            if (textBoxSearch.Text == "Search")
+            {
+                textBoxSearch.Text = String.Empty;
+            }
+        }
+
+        private void textBoxSearch_Leave(object sender, EventArgs e)
+        {
+            if (textBoxSearch.Text == String.Empty)
+            {
+                textBoxSearch.Text = "Search";
+            }
         }
     }
 }
