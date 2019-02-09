@@ -480,7 +480,7 @@ namespace Quiz
             if (IsClickedToSearchKeyPress)
             {
                 IsClickedToSearchKeyPress = false;
-                   var list = XmlFiles.Where(y => y.Contains(textBoxSearch.Text)).ToList();
+                var list = XmlFiles.Where(y => y.Contains(textBoxSearch.Text)).ToList();
                 GeneralXmlFiles = list;
             }
             else
@@ -494,16 +494,17 @@ namespace Quiz
                 FileName = file.Name;
                 Button testbtn = new Button();
                 testbtn.Size = new Size(40, 150);
-                testbtn.Location = new Point(20 + x, 60);
+                testbtn.Location = new Point(20 + x, 70);
                 testbtn.Font = new Font("Century", 10, FontStyle.Italic);
-                testbtn.BackColor = Color.FromArgb(rnd.Next(0,150), rnd.Next(50,220), rnd.Next(10,80));
+                //testbtn.BackColor = Color.FromArgb(rnd.Next(0,150), rnd.Next(50,220), rnd.Next(10,80));
+                testbtn.BackColor = Color.ForestGreen;
                 rnd = new Random();
                 testbtn.Click += Testbtn_Click;
                 testbtn.Text = FileName;
                 x += 43;
                 this.Controls.Add(testbtn);
             }
-        
+
         }
 
         private void Testbtn_Click(object sender, EventArgs e)
@@ -665,7 +666,9 @@ namespace Quiz
         }
         private void IncludeToTestByName(string filename)
         {
+
             QuestionList2 = new List<QuestionBlock>();
+
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             if (File.Exists(filename))
             {
@@ -677,11 +680,29 @@ namespace Quiz
                 {
                     QuestionList2 = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
                 }
+                if (IsClickedToContinueButton)
+                {
+                    TestQuestionCount = int.Parse(maskedTextBox1.Text);
+                    if (TestQuestionCount >= QuestionList.Count)
+                    {
+                        MessageBox.Show("Count must be less than test's questions count !");                        
+                    }
+                    else
+                    {
+                        QuestionList.RemoveRange(TestQuestionCount, QuestionList.Count-TestQuestionCount);
+                        QuestionList2.RemoveRange(TestQuestionCount, QuestionList2.Count - TestQuestionCount);
+                    }
+                }
                 ShowTest(QuestionList, CurrentIndex);
             }
         }
+        public int TestQuestionCount { get; set; }
+        public bool IsClickedToContinueButton { get; set; }
         private void buttonContinue_Click(object sender, EventArgs e)
         {
+
+
+            IsClickedToContinueButton = true;
             ///////////////////////2
             for (int i = 0; i < this.Controls.Count * 5; i++)
             {
@@ -695,11 +716,11 @@ namespace Quiz
                     {
                         button.Dispose();
                     }
-                    else if(item is TextBox tb)
+                    else if (item is TextBox tb)
                     {
                         tb.Dispose();
                     }
-                    else if(item is MaskedTextBox mtb)
+                    else if (item is MaskedTextBox mtb)
                     {
                         mtb.Dispose();
                     }
@@ -715,7 +736,10 @@ namespace Quiz
             metroAcceptbtn.Enabled = false;
 
             IncludeToTestByName(FileName);
-            //////////////
+
+
+
+
         }
 
         private void buttonRefresh_Click(object sender, EventArgs e)
