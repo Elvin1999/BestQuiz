@@ -627,6 +627,7 @@ namespace Quiz
                         RadioButton radioButton = new RadioButton();
                         radioButton.Size = new Size(350, 60);
                         radioButton.Location = new Point(110, 192 + y);
+                
                         radioButton.Text = questionlist[curindex].Answers[k].Text;
                         radioButton.Font = new Font("Century", 10, FontStyle.Italic);
                         y += 60;
@@ -676,6 +677,7 @@ namespace Quiz
             }
             /////////
         }
+   
         private void IncludeToTestByName(string filename)
         {
 
@@ -708,7 +710,6 @@ namespace Quiz
                             QuestionList2.RemoveRange(TestQuestionCount, QuestionList2.Count - TestQuestionCount);
                         }
                     }
-
                 }
                 ShowTest(QuestionList, CurrentIndex);
             }
