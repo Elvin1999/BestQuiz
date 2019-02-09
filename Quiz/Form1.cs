@@ -478,6 +478,14 @@ namespace Quiz
             GeneralXmlFiles = new List<string>();
             if (IsClickedToSearchKeyPress)
             {
+                for (int i = 0; i < this.Controls.Count * 3; i++)
+                    foreach (var item in this.Controls)
+                    {
+                        if (item is Button bt && bt.Text.Contains(".xml"))
+                        {
+                            bt.Dispose();
+                        }
+                    }
                 IsClickedToSearchKeyPress = false;
                 var list = XmlFiles.Where(y => y.Contains(textBoxSearch.Text)).ToList();
                 GeneralXmlFiles = list;
@@ -488,23 +496,22 @@ namespace Quiz
 
             }
             
-                foreach (var item in GeneralXmlFiles)
-                {
-                    FileInfo file = new FileInfo(item);
-                    FileName = file.Name;
-                    Button testbtn = new Button();
-                    testbtn.Size = new Size(40, 150);
-                    testbtn.Location = new Point(30 + x, 100);
-                    testbtn.Font = new Font("Century", 10, FontStyle.Italic);
-                    //testbtn.BackColor = Color.FromArgb(rnd.Next(0,150), rnd.Next(50,220), rnd.Next(10,80));
-                    testbtn.BackColor = Color.ForestGreen;
-                    rnd = new Random();
-                    testbtn.Click += Testbtn_Click;
-                    testbtn.Text = FileName;
-                    x += 43;
-                    this.Controls.Add(testbtn);
-                }
-            
+            foreach (var item in GeneralXmlFiles)
+            {
+                FileInfo file = new FileInfo(item);
+                FileName = file.Name;
+                Button testbtn = new Button();
+                testbtn.Size = new Size(40, 150);
+                testbtn.Location = new Point(30 + x, 100);
+                testbtn.Font = new Font("Century", 10, FontStyle.Italic);                
+                testbtn.BackColor = Color.ForestGreen;
+                rnd = new Random();
+                testbtn.Click += Testbtn_Click;
+                testbtn.Text = FileName;
+                x += 43;
+                this.Controls.Add(testbtn);
+            }
+
 
         }
 
@@ -540,7 +547,11 @@ namespace Quiz
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            DialogResult dialogResult = MessageBox.Show("Are you sure to return ?", "Notificiaation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.OK)
+            {
+                DialogResult = DialogResult.Cancel;
+            }
         }
         private void RadioButton_Click(object sender, EventArgs e)
         {
