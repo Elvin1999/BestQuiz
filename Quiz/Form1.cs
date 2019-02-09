@@ -211,8 +211,29 @@ namespace Quiz
         public Button EmptyAnswerButton { get; set; }
         public Label SuccessLabel { get; set; }
         public Button SaveAsPdfButton { get; set; }
+        public PictureBox CirclePicture { get; set; }
+        public PictureBox PercentPicture { get; set; }
+        public Label ResultPercentLabel { get; set; }
         private void LoadThirdWindowControls()
         {
+            CirclePicture = new PictureBox();
+            CirclePicture.Size = new Size(193, 174);
+            CirclePicture.Location = new Point(30, 210);
+            CirclePicture.Image = Properties.Resources.percentcircle;
+            CirclePicture.SizeMode = PictureBoxSizeMode.StretchImage;
+            
+            PercentPicture = new PictureBox();
+            PercentPicture.Size = new Size(84, 64);
+            PercentPicture.Location = new Point(229, 301);
+            PercentPicture.Image = Properties.Resources.PercentImage;
+            PercentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(PercentPicture);
+            ResultPercentLabel = new Label();
+            ResultPercentLabel.Size = new Size(74, 40);
+            ResultPercentLabel.Location = new Point(94, 280);
+            ResultPercentLabel.Text = "29";
+            ResultPercentLabel.Font = new Font("Copper", 30, FontStyle.Italic);
+            this.Controls.Add(ResultPercentLabel);this.Controls.Add(CirclePicture);
             SaveAsPdfButton = new Button();
             SaveAsPdfButton.Size = new Size(150, 40);
             SaveAsPdfButton.Location = new Point(600, 410);
@@ -326,6 +347,7 @@ namespace Quiz
                 CorrectAnswerPercentLabel.Location= new Point(354, CorrectBarButton.Location.Y + InceasingRate-50);
                 correct_answer_rate -= InceasingRate;
                 CorrectAnswerPercentLabel.Text = correct_answer_rate.ToString() + " %";
+                ResultPercentLabel.Text = correct_answer_rate.ToString()+" %";
                 CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height - InceasingRate);
                 UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y - InceasingRate);
                 UnCorrectAnswerPercentLabel.Location= new Point(406, UnCorrectBarButton.Location.Y - InceasingRate-50);
@@ -346,6 +368,7 @@ namespace Quiz
                 CorrectBarButton.Size = new Size(50, CorrectBarButton.Size.Height + InceasingRate);
                 correct_answer_rate += InceasingRate;
                 CorrectAnswerPercentLabel.Text = correct_answer_rate.ToString() + " %";
+                ResultPercentLabel.Text = correct_answer_rate.ToString()+" %";
                 UnCorrectBarButton.Location = new Point(402, UnCorrectBarButton.Location.Y + InceasingRate);
                 UnCorrectAnswerPercentLabel.Location = new Point(406, UnCorrectBarButton.Location.Y + InceasingRate - 50);
                 UnCorrectBarButton.Size = new Size(50, UnCorrectBarButton.Size.Height - InceasingRate);
@@ -367,6 +390,7 @@ namespace Quiz
                     UnCorrectBarButton.Size = new Size(50, 210 + 2 * uncorrect_percent);
                     UnCorrectBarButton.Location = new Point(402, 240 - 2 * uncorrect_percent);
                     CorrectAnswerPercentLabel.Text = correct_percent.ToString() + " %";
+                    ResultPercentLabel.Text = correct_percent.ToString()+" %";
                     CorrectAnswerPercentLabel.Location = new Point(354, 203 - 2 * correct_percent);
                     UnCorrectAnswerPercentLabel.Text = uncorrect_percent.ToString() + " %";
                     UnCorrectAnswerPercentLabel.Location = new Point(406, 203 - 2 * uncorrect_percent);

@@ -116,5 +116,11 @@
   <ItemGroup>
     <None Include="Resources\thinkPerson.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PercentImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\percentcircle.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
