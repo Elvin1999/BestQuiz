@@ -247,6 +247,7 @@ namespace Quiz
             this.Controls.Add(PersonImagePb);
             this.BackColor = Color.FromArgb(0, 96, 168);
             BackButton.BackColor = Color.FromArgb(0, 96, 168);
+            //BackButton.BackColor = Color.FromName("SpringGreen");
             CorrectBarButton = new Button();
             CorrectBarButton.Size = new Size(50, 230);
             CorrectBarButton.Font = new Font("Century", 10, FontStyle.Italic);
@@ -568,7 +569,7 @@ namespace Quiz
             BackButton.Text = "Return";
             BackButton.UseCustomBackColor = true;
             BackButton.UseCustomForeColor = true;
-            BackButton.BackColor = Color.FromName("MenuHighlight");
+            BackButton.BackColor = Color.FromName("SpringGreen");
             BackButton.Font = new Font("Century", 12, FontStyle.Italic);
             BackButton.Size = new Size(50, 23);
             BackButton.Location = new Point(0, 0);

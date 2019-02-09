@@ -47,7 +47,7 @@
             // 
             // buttonContinue
             // 
-            this.buttonContinue.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonContinue.BackColor = System.Drawing.Color.MediumSpringGreen;
             this.buttonContinue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonContinue.FlatAppearance.BorderColor = System.Drawing.Color.Maroon;
             this.buttonContinue.FlatAppearance.BorderSize = 5;
@@ -63,7 +63,7 @@
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonRefresh.BackColor = System.Drawing.Color.MediumSpringGreen;
             this.buttonRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.buttonRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
@@ -78,6 +78,7 @@
             // 
             // textBoxSearch
             // 
+            this.textBoxSearch.BackColor = System.Drawing.Color.MediumSpringGreen;
             this.textBoxSearch.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxSearch.Location = new System.Drawing.Point(537, 22);
             this.textBoxSearch.Name = "textBoxSearch";
@@ -88,6 +89,7 @@
             // 
             // maskedTextBox1
             // 
+            this.maskedTextBox1.BackColor = System.Drawing.Color.MediumSpringGreen;
             this.maskedTextBox1.Location = new System.Drawing.Point(240, 457);
             this.maskedTextBox1.Mask = "00000";
             this.maskedTextBox1.Name = "maskedTextBox1";
