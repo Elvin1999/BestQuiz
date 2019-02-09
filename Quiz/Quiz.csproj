@@ -122,5 +122,8 @@
   <ItemGroup>
     <None Include="Resources\percentcircle.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\returnpcbox.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

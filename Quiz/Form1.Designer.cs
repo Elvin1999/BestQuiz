@@ -33,12 +33,14 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBoxReturn = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReturn)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Monotype Corsiva", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(65, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(235, 59);
             this.label1.TabIndex = 1;
@@ -90,12 +92,24 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Number of question";
             // 
+            // pictureBoxReturn
+            // 
+            this.pictureBoxReturn.Image = global::Quiz.Properties.Resources.returnpcbox;
+            this.pictureBoxReturn.Location = new System.Drawing.Point(1, 1);
+            this.pictureBoxReturn.Name = "pictureBoxReturn";
+            this.pictureBoxReturn.Size = new System.Drawing.Size(46, 34);
+            this.pictureBoxReturn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxReturn.TabIndex = 5;
+            this.pictureBoxReturn.TabStop = false;
+            this.pictureBoxReturn.Click += new System.EventHandler(this.pictureBoxReturn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SpringGreen;
             this.ClientSize = new System.Drawing.Size(847, 524);
+            this.Controls.Add(this.pictureBoxReturn);
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.buttonContinue);
@@ -106,6 +120,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReturn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,6 +132,7 @@
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBoxReturn;
     }
 }
 
