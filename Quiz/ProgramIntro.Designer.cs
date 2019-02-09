@@ -44,7 +44,7 @@
             // 
             // panelHeader
             // 
-            this.panelHeader.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.panelHeader.BackColor = System.Drawing.Color.SpringGreen;
             this.panelHeader.Controls.Add(this.labelDateTime);
             this.panelHeader.Controls.Add(this.labelX);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -75,7 +75,7 @@
             // 
             // buttonTakeExam
             // 
-            this.buttonTakeExam.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.buttonTakeExam.BackColor = System.Drawing.Color.SpringGreen;
             this.buttonTakeExam.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonTakeExam.Location = new System.Drawing.Point(445, 312);
             this.buttonTakeExam.Name = "buttonTakeExam";
@@ -87,7 +87,7 @@
             // 
             // buttonCreate
             // 
-            this.buttonCreate.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.buttonCreate.BackColor = System.Drawing.Color.SpringGreen;
             this.buttonCreate.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCreate.Location = new System.Drawing.Point(166, 312);
             this.buttonCreate.Name = "buttonCreate";
@@ -108,7 +108,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.panel1.BackColor = System.Drawing.Color.SpringGreen;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 384);
             this.panel1.Name = "panel1";

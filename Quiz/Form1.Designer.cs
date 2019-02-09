@@ -31,11 +31,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Monotype Corsiva", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Monotype Corsiva", 24F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(211, 45);
@@ -44,35 +47,75 @@
             // 
             // buttonContinue
             // 
+            this.buttonContinue.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonContinue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonContinue.FlatAppearance.BorderColor = System.Drawing.Color.Maroon;
+            this.buttonContinue.FlatAppearance.BorderSize = 5;
             this.buttonContinue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
             this.buttonContinue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan;
-            this.buttonContinue.Location = new System.Drawing.Point(707, 474);
+            this.buttonContinue.Location = new System.Drawing.Point(682, 446);
             this.buttonContinue.Name = "buttonContinue";
-            this.buttonContinue.Size = new System.Drawing.Size(93, 38);
+            this.buttonContinue.Size = new System.Drawing.Size(106, 44);
             this.buttonContinue.TabIndex = 2;
             this.buttonContinue.Text = "Continue";
-            this.buttonContinue.UseVisualStyleBackColor = true;
+            this.buttonContinue.UseVisualStyleBackColor = false;
             this.buttonContinue.Click += new System.EventHandler(this.buttonContinue_Click);
             // 
             // buttonRefresh
             // 
+            this.buttonRefresh.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.buttonRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.buttonRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
             this.buttonRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan;
-            this.buttonRefresh.Location = new System.Drawing.Point(608, 474);
+            this.buttonRefresh.Location = new System.Drawing.Point(537, 446);
             this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(93, 38);
+            this.buttonRefresh.Size = new System.Drawing.Size(106, 44);
             this.buttonRefresh.TabIndex = 2;
             this.buttonRefresh.Text = "Refresh";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.UseVisualStyleBackColor = false;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSearch.Location = new System.Drawing.Point(537, 22);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(172, 25);
+            this.textBoxSearch.TabIndex = 3;
+            this.textBoxSearch.Text = "Search";
+            this.textBoxSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSearch_KeyPress);
+            // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Location = new System.Drawing.Point(240, 457);
+            this.maskedTextBox1.Mask = "00000";
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(107, 20);
+            this.maskedTextBox1.TabIndex = 4;
+            this.maskedTextBox1.ValidatingType = typeof(int);
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Monotype Corsiva", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(71, 457);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(152, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Number of question";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.SpringGreen;
             this.ClientSize = new System.Drawing.Size(847, 524);
+            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonContinue);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
@@ -80,6 +123,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -87,6 +131,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonContinue;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

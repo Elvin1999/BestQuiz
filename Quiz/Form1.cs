@@ -41,7 +41,7 @@ namespace Quiz
             metroBtnSubmit.Size = new Size(90, 30);
             metroBtnSubmit.Location = new Point(750, 490);
             metroBtnSubmit.Highlight = true;
-            metroBtnSubmit.BackColor = Color.FromName("MenuHighlight");
+            metroBtnSubmit.BackColor = Color.FromName("SpringGreen");
             metroBtnSubmit.Text = "Submit";
             metroBtnSubmit.UseCustomBackColor = true;
             metroBtnSubmit.UseCustomForeColor = true;
@@ -55,7 +55,7 @@ namespace Quiz
             metroNextbtn.Highlight = true;
             metroNextbtn.UseCustomBackColor = true;
             metroNextbtn.UseCustomForeColor = true;
-            metroNextbtn.BackColor = Color.FromName("MenuHighlight");
+            metroNextbtn.BackColor = Color.FromName("SpringGreen");
             metroNextbtn.Text = "Next";
             metroNextbtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroNextbtn.Click += MetroNextbtn_Click;
@@ -63,7 +63,7 @@ namespace Quiz
 
             metroBackbtn = new MetroFramework.Controls.MetroButton();
             metroBackbtn.Size = new Size(90, 30);
-            metroBackbtn.BackColor = Color.FromName("MenuHighlight");
+            metroBackbtn.BackColor = Color.FromName("SpringGreen");
             metroBackbtn.Location = new Point(144, 490);
             metroBackbtn.Highlight = true;
             metroBackbtn.UseCustomBackColor = true;
@@ -73,7 +73,7 @@ namespace Quiz
             metroBackbtn.Click += MetroBackbtn_Click;
             this.Controls.Add(metroBackbtn);
             metroAcceptbtn = new MetroFramework.Controls.MetroButton();
-            metroAcceptbtn.BackColor = Color.FromName("MenuHighlight");
+            metroAcceptbtn.BackColor = Color.FromName("SpringGreen");
             metroAcceptbtn.Size = new Size(90, 30);
             metroAcceptbtn.UseCustomBackColor = true;
             metroAcceptbtn.UseCustomForeColor = true;
@@ -97,19 +97,19 @@ namespace Quiz
             labelQuestion1.Size = new Size(715, 145);
             labelQuestion1.Location = new Point(45, 25);
             labelQuestion1.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
-            labelQuestion1.ForeColor = Color.FromName("MenuHighlight");
+            labelQuestion1.ForeColor = Color.FromName("Black");
             ExamTimeLabel = new Label();
             ExamTimeLabel.Size = new Size(100, 40);
             ExamTimeLabel.Location = new Point(650, 0);
             ExamTimeLabel.Text = "Exam time";
             ExamTimeLabel.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
-            ExamTimeLabel.ForeColor = Color.FromName("MenuHighlight");
+            ExamTimeLabel.ForeColor = Color.FromName("Black");
             QuizTime = new Label();
             QuizTime.Size = new Size(120, 40);
             QuizTime.Location = new Point(750, 0);
             QuizTime.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             QuizTime.Text = currenttime.ToLongTimeString();
-            QuizTime.BackColor = Color.FromName("Control");
+            QuizTime.BackColor = Color.FromName("SpringGreen");
             this.Controls.Add(QuizTime); this.Controls.Add(ExamTimeLabel);
             this.Controls.Add(labelQueueQuestion);
             this.Controls.Add(labelQueue1); this.Controls.Add(labelQuestion1);
@@ -120,7 +120,7 @@ namespace Quiz
         private void GetResultButton()
         {
             GetResultBtn = new MetroFramework.Controls.MetroButton();
-            GetResultBtn.BackColor = Color.FromName("MenuHighlight");
+            GetResultBtn.BackColor = Color.FromName("SpringGreen");
             GetResultBtn.Size = new Size(100, 30);
             GetResultBtn.UseCustomBackColor = true;
             GetResultBtn.UseCustomForeColor = true;
@@ -456,8 +456,11 @@ namespace Quiz
         public string[] Files { get; set; }
         List<string> XmlFiles { get; set; }
         // public Button TestBookButton { get; set; }
+        public List<string> GeneralXmlFiles { get; set; }
+        public List<string> XmlFilesBySearch { get; set; }
         private void FillAllXmlFileToListView()
         {
+            XmlFilesBySearch = new List<string>();
             XmlFiles = new List<string>();
             DirectoryName = Directory.GetCurrentDirectory();
             Files = Directory.GetFiles(DirectoryName);
@@ -471,23 +474,35 @@ namespace Quiz
                 }
             }
             int x = 0;
-  
-            foreach (var item in XmlFiles)
+            Random rnd = new Random();
+            GeneralXmlFiles = new List<string>();
+            if (IsClickedToSearchKeyPress)
+            {
+                IsClickedToSearchKeyPress = false;
+                   var list = XmlFiles.Where(y => y.Contains(textBoxSearch.Text)).ToList();
+                GeneralXmlFiles = list;
+            }
+            else
+            {
+                GeneralXmlFiles = XmlFiles;
+
+            }
+            foreach (var item in GeneralXmlFiles)
             {
                 FileInfo file = new FileInfo(item);
                 FileName = file.Name;
                 Button testbtn = new Button();
                 testbtn.Size = new Size(40, 150);
                 testbtn.Location = new Point(20 + x, 60);
-
-                testbtn.BackColor = Color.Pink;
-                
-             
+                testbtn.Font = new Font("Century", 10, FontStyle.Italic);
+                testbtn.BackColor = Color.FromArgb(rnd.Next(0,150), rnd.Next(50,220), rnd.Next(10,80));
+                rnd = new Random();
                 testbtn.Click += Testbtn_Click;
                 testbtn.Text = FileName;
-                x += 45;
+                x += 43;
                 this.Controls.Add(testbtn);
             }
+        
         }
 
         private void Testbtn_Click(object sender, EventArgs e)
@@ -679,6 +694,14 @@ namespace Quiz
                     {
                         button.Dispose();
                     }
+                    else if(item is TextBox tb)
+                    {
+                        tb.Dispose();
+                    }
+                    else if(item is MaskedTextBox mtb)
+                    {
+                        mtb.Dispose();
+                    }
                 }
             }
             LoadSecondPageOfForm();
@@ -696,6 +719,12 @@ namespace Quiz
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
+            FillAllXmlFileToListView();
+        }
+        public bool IsClickedToSearchKeyPress { get; set; }
+        private void textBoxSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            IsClickedToSearchKeyPress = true;
             FillAllXmlFileToListView();
         }
     }

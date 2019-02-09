@@ -30,7 +30,7 @@ namespace Quiz
             if (counter==1)
             {
 
-                button1.BackColor = Color.FromName("MenuHighlight");
+                button1.BackColor = Color.FromName("SpringGreen");
                 button2.BackColor = Color.FromName("Control");
                 button3.BackColor = Color.FromName("Control");
                 button4.BackColor = Color.FromName("Control");
@@ -38,7 +38,7 @@ namespace Quiz
             else if (counter==2)
             {
                 button1.BackColor = Color.FromName("Control");
-                button2.BackColor = Color.FromName("MenuHighlight");
+                button2.BackColor = Color.FromName("SpringGreen");
                 button3.BackColor = Color.FromName("Control");
                 button4.BackColor = Color.FromName("Control");
             }
@@ -46,7 +46,7 @@ namespace Quiz
             {
                 button1.BackColor = Color.FromName("Control");
                 button2.BackColor = Color.FromName("Control");
-                button3.BackColor = Color.FromName("MenuHighlight");
+                button3.BackColor = Color.FromName("SpringGreen");
                 button4.BackColor = Color.FromName("Control");
             }
             else if (counter == 4)
@@ -55,7 +55,7 @@ namespace Quiz
                 button1.BackColor = Color.FromName("Control");
                 button2.BackColor = Color.FromName("Control");
                 button3.BackColor = Color.FromName("Control");
-                button4.BackColor = Color.FromName("MenuHighlight");
+                button4.BackColor = Color.FromName("SpringGreen");
             }
         }
 
