@@ -488,22 +488,24 @@ namespace Quiz
                 GeneralXmlFiles = XmlFiles;
 
             }
-            foreach (var item in GeneralXmlFiles)
-            {
-                FileInfo file = new FileInfo(item);
-                FileName = file.Name;
-                Button testbtn = new Button();
-                testbtn.Size = new Size(40, 150);
-                testbtn.Location = new Point(20 + x, 70);
-                testbtn.Font = new Font("Century", 10, FontStyle.Italic);
-                //testbtn.BackColor = Color.FromArgb(rnd.Next(0,150), rnd.Next(50,220), rnd.Next(10,80));
-                testbtn.BackColor = Color.ForestGreen;
-                rnd = new Random();
-                testbtn.Click += Testbtn_Click;
-                testbtn.Text = FileName;
-                x += 43;
-                this.Controls.Add(testbtn);
-            }
+            
+                foreach (var item in GeneralXmlFiles)
+                {
+                    FileInfo file = new FileInfo(item);
+                    FileName = file.Name;
+                    Button testbtn = new Button();
+                    testbtn.Size = new Size(40, 150);
+                    testbtn.Location = new Point(30 + x, 70);
+                    testbtn.Font = new Font("Century", 10, FontStyle.Italic);
+                    //testbtn.BackColor = Color.FromArgb(rnd.Next(0,150), rnd.Next(50,220), rnd.Next(10,80));
+                    testbtn.BackColor = Color.ForestGreen;
+                    rnd = new Random();
+                    testbtn.Click += Testbtn_Click;
+                    testbtn.Text = FileName;
+                    x += 43;
+                    this.Controls.Add(testbtn);
+                }
+            
 
         }
 
@@ -685,11 +687,11 @@ namespace Quiz
                     TestQuestionCount = int.Parse(maskedTextBox1.Text);
                     if (TestQuestionCount >= QuestionList.Count)
                     {
-                        MessageBox.Show("Count must be less than test's questions count !");                        
+                        MessageBox.Show("Count must be less than test's questions count !");
                     }
                     else
                     {
-                        QuestionList.RemoveRange(TestQuestionCount, QuestionList.Count-TestQuestionCount);
+                        QuestionList.RemoveRange(TestQuestionCount, QuestionList.Count - TestQuestionCount);
                         QuestionList2.RemoveRange(TestQuestionCount, QuestionList2.Count - TestQuestionCount);
                     }
                 }

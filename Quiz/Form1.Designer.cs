@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.buttonContinue = new System.Windows.Forms.Button();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,21 +59,6 @@
             this.buttonContinue.Text = "Continue";
             this.buttonContinue.UseVisualStyleBackColor = false;
             this.buttonContinue.Click += new System.EventHandler(this.buttonContinue_Click);
-            // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.BackColor = System.Drawing.Color.MediumSpringGreen;
-            this.buttonRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonRefresh.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.buttonRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Blue;
-            this.buttonRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan;
-            this.buttonRefresh.Location = new System.Drawing.Point(537, 446);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(106, 44);
-            this.buttonRefresh.TabIndex = 2;
-            this.buttonRefresh.Text = "Refresh";
-            this.buttonRefresh.UseVisualStyleBackColor = false;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // textBoxSearch
             // 
@@ -110,12 +94,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.SpringGreen;
             this.ClientSize = new System.Drawing.Size(847, 524);
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.textBoxSearch);
-            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -132,7 +114,6 @@
         #endregion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonContinue;
-        private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Label label2;
