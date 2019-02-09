@@ -34,10 +34,7 @@ namespace Quiz
         public MetroFramework.Controls.MetroButton metroBtnSubmit { get; set; }
         public Label QuizTime { get; set; }
         public Label ExamTimeLabel { get; set; }
-        private void LoadFirstPageOfForm()
-        {
 
-        }
         private void LoadSecondPageOfForm()
         {
             metroBtnSubmit = new MetroFramework.Controls.MetroButton();
@@ -176,7 +173,7 @@ namespace Quiz
 
 
         }
-        int d = 0;
+
         private void LoadThirdForm()
         {
             for (int i = 0; i < 5; i++)
@@ -419,7 +416,7 @@ namespace Quiz
 
                     ++CurrentIndex;
                 }
-                    ShowTest(QuestionListSecond, CurrentIndex);
+                ShowTest(QuestionListSecond, CurrentIndex);
             }
             else
             {
@@ -454,30 +451,62 @@ namespace Quiz
             }
         }
         public List<QuestionBlock> QuestionList2 { get; set; }
+        public string FileName { get; set; }
+        public string DirectoryName { get; set; }
+        public string[] Files { get; set; }
+        List<string> XmlFiles { get; set; }
+        // public Button TestBookButton { get; set; }
+        private void FillAllXmlFileToListView()
+        {
+            XmlFiles = new List<string>();
+            DirectoryName = Directory.GetCurrentDirectory();
+            Files = Directory.GetFiles(DirectoryName);
+            foreach (var item in Files)
+            {
+
+                if (item.Contains(".xml"))
+                {
+
+                    XmlFiles.Add(item);
+                }
+            }
+            int x = 0;
+  
+            foreach (var item in XmlFiles)
+            {
+                FileInfo file = new FileInfo(item);
+                FileName = file.Name;
+                Button testbtn = new Button();
+                testbtn.Size = new Size(40, 150);
+                testbtn.Location = new Point(20 + x, 60);
+
+                testbtn.BackColor = Color.Pink;
+                
+             
+                testbtn.Click += Testbtn_Click;
+                testbtn.Text = FileName;
+                x += 45;
+                this.Controls.Add(testbtn);
+            }
+        }
+
+        private void Testbtn_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            FileName = btn.Text;
+
+        }
+
+        private void LoadFirstPageOfForm()
+        {
+            FillAllXmlFileToListView();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadSecondPageOfForm();
-            Timer timer = new Timer();
-            timer.Interval = 1000; timer.Start();
-            timer.Tick += Timer_Tick;
+            //first page 
+            LoadFirstPageOfForm();
 
-            metroBtnSubmit.Enabled = true;
-            metroBackbtn.Enabled = false;
-            metroAcceptbtn.Enabled = false;
-            QuestionList2 = new List<QuestionBlock>();
-            XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
-            if (File.Exists("QuestionsXML.xml"))
-            {
-                using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.OpenOrCreate))
-                {
-                    QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
-                }
-                using (FileStream f = new FileStream("QuestionsXML.xml", FileMode.OpenOrCreate))
-                {
-                    QuestionList2 = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
-                }
-                ShowTest(QuestionList, CurrentIndex);
-            }
+
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -536,7 +565,7 @@ namespace Quiz
         public PictureBox OwnAnswerBox { get; set; }
         private void ShowTest(List<QuestionBlock> questionlist, int curindex)
         {
-          
+
             try
             {
                 int y = 0;
@@ -615,12 +644,59 @@ namespace Quiz
             }
             catch (Exception)
             {
-
-              
             }
-           
             /////////
         }
+        private void IncludeToTestByName(string filename)
+        {
+            QuestionList2 = new List<QuestionBlock>();
+            XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
+            if (File.Exists(filename))
+            {
+                using (FileStream f = new FileStream(filename, FileMode.OpenOrCreate))
+                {
+                    QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+                }
+                using (FileStream f = new FileStream(filename, FileMode.OpenOrCreate))
+                {
+                    QuestionList2 = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+                }
+                ShowTest(QuestionList, CurrentIndex);
+            }
+        }
+        private void buttonContinue_Click(object sender, EventArgs e)
+        {
+            ///////////////////////2
+            for (int i = 0; i < this.Controls.Count * 5; i++)
+            {
+                foreach (var item in this.Controls)
+                {
+                    if (item is Label lb)
+                    {
+                        lb.Dispose();
+                    }
+                    else if (item is Button button)
+                    {
+                        button.Dispose();
+                    }
+                }
+            }
+            LoadSecondPageOfForm();
+            Timer timer = new Timer();
+            timer.Interval = 1000; timer.Start();
+            timer.Tick += Timer_Tick;
 
+            metroBtnSubmit.Enabled = true;
+            metroBackbtn.Enabled = false;
+            metroAcceptbtn.Enabled = false;
+
+            IncludeToTestByName(FileName);
+            //////////////
+        }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            FillAllXmlFileToListView();
+        }
     }
 }
