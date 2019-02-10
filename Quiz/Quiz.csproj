@@ -125,5 +125,26 @@
   <ItemGroup>
     <None Include="Resources\returnpcbox.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thinkPerson1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\percentcircle1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PercentImage1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thinkPerson2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\greenhuman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PercentImage11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pppercent.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -93,6 +93,16 @@ namespace Quiz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap greenhuman {
+            get {
+                object obj = ResourceManager.GetObject("greenhuman", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ownanswer {
             get {
                 object obj = ResourceManager.GetObject("ownanswer", resourceCulture);
@@ -113,9 +123,49 @@ namespace Quiz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap percentcircle1 {
+            get {
+                object obj = ResourceManager.GetObject("percentcircle1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PercentImage {
             get {
                 object obj = ResourceManager.GetObject("PercentImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PercentImage1 {
+            get {
+                object obj = ResourceManager.GetObject("PercentImage1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PercentImage11 {
+            get {
+                object obj = ResourceManager.GetObject("PercentImage11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pppercent {
+            get {
+                object obj = ResourceManager.GetObject("pppercent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +186,26 @@ namespace Quiz.Properties {
         internal static System.Drawing.Bitmap thinkPerson {
             get {
                 object obj = ResourceManager.GetObject("thinkPerson", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thinkPerson1 {
+            get {
+                object obj = ResourceManager.GetObject("thinkPerson1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thinkPerson2 {
+            get {
+                object obj = ResourceManager.GetObject("thinkPerson2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

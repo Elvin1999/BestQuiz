@@ -118,14 +118,29 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="thinkPerson" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\thinkPerson.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BackImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BackImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="returnpcbox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\returnpcbox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="greenhuman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\greenhuman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PercentImage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PercentImage1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="correctanswer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\correctanswer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="percentcircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\percentcircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="thinkPerson1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thinkPerson1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thinkPerson2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thinkPerson2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thinkPerson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thinkPerson.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bluecorrect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bluecorrect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,13 +148,19 @@
   <data name="ownanswer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ownanswer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BackImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BackImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="percentcircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\percentcircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PercentImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PercentImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="returnpcbox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\returnpcbox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="percentcircle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\percentcircle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PercentImage11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PercentImage11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pppercent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pppercent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

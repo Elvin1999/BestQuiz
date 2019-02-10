@@ -215,25 +215,26 @@ namespace Quiz
             CirclePicture = new PictureBox();
             CirclePicture.Size = new Size(193, 174);
             CirclePicture.Location = new Point(30, 210);
-            CirclePicture.Image = Properties.Resources.percentcircle;
+            CirclePicture.Image = Properties.Resources.percentcircle1;
             CirclePicture.SizeMode = PictureBoxSizeMode.StretchImage;
 
             PercentPicture = new PictureBox();
             PercentPicture.Size = new Size(84, 64);
             PercentPicture.Location = new Point(229, 301);
-            PercentPicture.Image = Properties.Resources.PercentImage;
+            PercentPicture.Image = Properties.Resources.pppercent;
             PercentPicture.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(PercentPicture);
             ResultPercentLabel = new Label();
             ResultPercentLabel.Size = new Size(74, 40);
             ResultPercentLabel.Location = new Point(94, 280);
             ResultPercentLabel.Text = "29";
+            ResultPercentLabel.BackColor = Color.FromName("SpringGreen");
             ResultPercentLabel.Font = new Font("Copper", 26, FontStyle.Italic);
             this.Controls.Add(ResultPercentLabel); this.Controls.Add(CirclePicture);
             SaveAsPdfButton = new Button();
             SaveAsPdfButton.Size = new Size(150, 40);
             SaveAsPdfButton.Location = new Point(600, 410);
-            SaveAsPdfButton.BackColor = Color.FromArgb(0, 96, 168);
+            SaveAsPdfButton.BackColor = Color.FromName("SpringGreen");
             SaveAsPdfButton.Text = "Save as .pdf";
             SaveAsPdfButton.Font = new Font("Century", 12, FontStyle.Italic);
             this.Controls.Add(SaveAsPdfButton);
@@ -241,11 +242,11 @@ namespace Quiz
             PersonImagePb = new PictureBox();
             PersonImagePb.Size = new Size(180, 240);
             PersonImagePb.Location = new Point(550, 30);
-            PersonImagePb.Image = Properties.Resources.thinkPerson;
+            PersonImagePb.Image = Properties.Resources.greenhuman;
             PersonImagePb.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(PersonImagePb);
-            this.BackColor = Color.FromArgb(0, 96, 168);
-           // BackButton.BackColor = Color.FromArgb(0, 96, 168);
+            this.BackColor = Color.FromName("SpringGreen");
+
             BackButton.BackColor = Color.FromName("SpringGreen");
             CorrectBarButton = new Button();
             CorrectBarButton.Size = new Size(50, 230);
@@ -276,7 +277,7 @@ namespace Quiz
             SuccessLabel.Size = new Size(300, 400);
             SuccessLabel.Location = new Point(0, 25);
             SuccessLabel.Text = "Your Success .";
-            SuccessLabel.BackColor = Color.FromArgb(0, 96, 168);
+            SuccessLabel.BackColor = Color.FromName("SpringGreen");
             this.Controls.Add(SuccessLabel);
 
             EmptyAnswerButton.Location = new Point(454, 250);
@@ -295,7 +296,7 @@ namespace Quiz
             CorrectAnswerPercentLabel.Size = new Size(50, 50);
             CorrectAnswerPercentLabel.Location = new Point(352, 98);
             CorrectAnswerPercentLabel.Text = "45";
-            CorrectAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
+            CorrectAnswerPercentLabel.BackColor = Color.FromName("SpringGreen");
             this.Controls.Add(CorrectAnswerPercentLabel);
 
             UnCorrectAnswerPercentLabel = new Label();
@@ -303,7 +304,7 @@ namespace Quiz
             UnCorrectAnswerPercentLabel.Location = new Point(402, 98);
             UnCorrectAnswerPercentLabel.Size = new Size(50, 50);
             UnCorrectAnswerPercentLabel.Text = "15";
-            UnCorrectAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
+            UnCorrectAnswerPercentLabel.BackColor = Color.FromName("SpringGreen");
             this.Controls.Add(UnCorrectAnswerPercentLabel);
 
             EmptyAnswerPercentLabel = new Label();
@@ -311,7 +312,7 @@ namespace Quiz
             EmptyAnswerPercentLabel.Location = new Point(452, 98);
             EmptyAnswerPercentLabel.Size = new Size(50, 50);
             EmptyAnswerPercentLabel.Text = "40";
-            EmptyAnswerPercentLabel.BackColor = Color.FromArgb(0, 96, 168);
+            EmptyAnswerPercentLabel.BackColor = Color.FromName("SpringGreen");
             this.Controls.Add(EmptyAnswerPercentLabel);
             correct_percent = (100 * CorrectCount) / QuestionList.Count;
             uncorrect_percent = (100 * UnCorrectCount) / QuestionList.Count;
