@@ -544,7 +544,7 @@ namespace Quiz
                     {
                         tb.Dispose();
                     }
-                    else if(item is Label lb)
+                    else if (item is Label lb)
                     {
                         lb.Dispose();
                     }
@@ -649,16 +649,47 @@ namespace Quiz
         public Button EditByDrag { get; set; }
         public Button GoToTestButton { get; set; }
         public Label LineOfQuestion { get; set; }
+        public TextBox QuestionContent { get; set; }
         private void CreateNewQuestionAndOptions(Point point)
         {
             LineOfQuestion = new Label();
             LineOfQuestion.Size = new Size(44, 33);
             LineOfQuestion.Location = new Point(10, point.Y);
             LineOfQuestion.Text = "1";
+            LineOfQuestion.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             LineOfQuestion.BackColor = Color.FromName("SpringGreen");
-
             this.Controls.Add(LineOfQuestion);
+
+            QuestionContent = new TextBox();
+            QuestionContent.Size = new Size(450, 100);
+            
+            QuestionContent.BackColor = Color.FromName("SpringGreen");
+            QuestionContent.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            QuestionContent.ForeColor = Color.FromName("Black");
+            QuestionContent.Multiline = true;
+            QuestionContent.Location = new Point(60, point.Y);
+            QuestionContent.Text = "Question's content";
+            QuestionContent.Enter += QuestionContext_Enter;
+            QuestionContent.Leave += QuestionContext_Leave;
+            this.Controls.Add(QuestionContent);
         }
+
+        private void QuestionContext_Leave(object sender, EventArgs e)
+        {
+            if (QuestionContent.Text == String.Empty)
+            {
+                QuestionContent.Text = "Question's content";
+            }
+        }
+
+        private void QuestionContext_Enter(object sender, EventArgs e)
+        {
+            if (QuestionContent.Text == "Question's content")
+            {
+                QuestionContent.Text = String.Empty;
+            }
+        }
+
         /// <summary>
         /// CREATE CREATE CREATE
         /// </summary>
@@ -740,10 +771,11 @@ namespace Quiz
         int y = 0;
         private void CreateNewOneButton_Click(object sender, EventArgs e)
         {
+            EditByDrag.Enabled = false;
             //Create new question and one options
-           Point Point = new Point(10, y + 50);
+            Point Point = new Point(10, y + 50);
             CreateNewQuestionAndOptions(Point);
-            y += 50;
+            y += 120;
         }
 
         private void Form1_Load(object sender, EventArgs e)
