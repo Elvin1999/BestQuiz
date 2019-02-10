@@ -650,19 +650,23 @@ namespace Quiz
         public Button GoToTestButton { get; set; }
         public Label LineOfQuestion { get; set; }
         public TextBox QuestionContent { get; set; }
+        public TextBox Option { get; set; }
+        public PictureBox AddOptionBox { get; set; }
+        private int count_calling = 0;
         private void CreateNewQuestionAndOptions(Point point)
         {
+            optioncount = 1;
+            ++count_calling;
             LineOfQuestion = new Label();
             LineOfQuestion.Size = new Size(44, 33);
             LineOfQuestion.Location = new Point(10, point.Y);
-            LineOfQuestion.Text = "1";
+            LineOfQuestion.Text = count_calling.ToString();
             LineOfQuestion.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             LineOfQuestion.BackColor = Color.FromName("SpringGreen");
             this.Controls.Add(LineOfQuestion);
 
             QuestionContent = new TextBox();
-            QuestionContent.Size = new Size(450, 100);
-            
+            QuestionContent.Size = new Size(450, 100);            
             QuestionContent.BackColor = Color.FromName("SpringGreen");
             QuestionContent.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
             QuestionContent.ForeColor = Color.FromName("Black");
@@ -672,6 +676,39 @@ namespace Quiz
             QuestionContent.Enter += QuestionContext_Enter;
             QuestionContent.Leave += QuestionContext_Leave;
             this.Controls.Add(QuestionContent);
+            
+
+            Option = new TextBox();
+            Option.Location = new Point(60, point.Y + 115);
+            Option.Size = new Size(200, 30);
+            Option.BackColor = Color.FromName("SpringGreen");
+            Option.ForeColor = Color.FromName("Black");
+            Option.Text = $"Option 1";
+            Option.Font= new Font("Monotype Corsiva", 12, FontStyle.Italic);
+
+            this.Controls.Add(Option);
+
+            AddOptionBox = new PictureBox();
+            AddOptionBox.Location = new Point(300, point.Y + 110+1);
+            AddOptionBox.Size = new Size(40, 30);
+            AddOptionBox.Image = Properties.Resources.add;
+            AddOptionBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            AddOptionBox.Click += AddOptionBox_Click;
+            this.Controls.Add(AddOptionBox);
+
+        }
+        int optioncount = 1;
+        private void AddOptionBox_Click(object sender, EventArgs e)
+        {
+            ++optioncount;
+            Option = new TextBox();
+            Option.Location = new Point(60,Point.Y + 80+ optioncount*35);
+            Option.Size = new Size(200, 30);
+            Option.BackColor = Color.FromName("SpringGreen");
+            Option.ForeColor = Color.FromName("Black");
+            Option.Text = $"Option {optioncount}";
+            Option.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            this.Controls.Add(Option);
         }
 
         private void QuestionContext_Leave(object sender, EventArgs e)
@@ -719,6 +756,10 @@ namespace Quiz
                     {
                         lb.Dispose();
                     }
+                    else if(item is RadioButton rb)
+                    {
+                        rb.Dispose();
+                    }
                 }
             }
             pictureBoxReturn = new PictureBox();
@@ -758,7 +799,12 @@ namespace Quiz
             EditByDrag.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
             this.Controls.Add(EditByDrag);
         }
-
+        public QuestionBlock question { get; set; }
+        public List<QuestionBlock> CustomQuestionBlock { get; set; }
+        void MakeNewQuestionBlock()
+        {
+            
+        }
         private void GoToTestButton_Click(object sender, EventArgs e)
         {
             //go to the tests's section
@@ -769,13 +815,16 @@ namespace Quiz
             //drag xml file to list view or something to edit
         }
         int y = 0;
+        public Point Point { get; set; }
         private void CreateNewOneButton_Click(object sender, EventArgs e)
         {
+            CustomQuestionBlock = new List<QuestionBlock>();
+            CreateNewOneButton.Enabled = false;
+            Point = new Point(10, y + 50);
             EditByDrag.Enabled = false;
             //Create new question and one options
-            Point Point = new Point(10, y + 50);
             CreateNewQuestionAndOptions(Point);
-            y += 120;
+            y += 150;//it will dynamic 
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -73,6 +73,7 @@ namespace Quiz
         public bool ExamClick { get; set; }
         private void buttonCreate_Click(object sender, EventArgs e)
         {
+            form.AutoScroll = true;
             form._IsClickedToCreate = true;
             form._IsClickedToExam = false;
             this.Hide();
