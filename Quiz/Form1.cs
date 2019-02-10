@@ -228,7 +228,7 @@ namespace Quiz
             ResultPercentLabel.Size = new Size(74, 40);
             ResultPercentLabel.Location = new Point(94, 280);
             ResultPercentLabel.Text = "29";
-            ResultPercentLabel.Font = new Font("Copper", 30, FontStyle.Italic);
+            ResultPercentLabel.Font = new Font("Copper", 26, FontStyle.Italic);
             this.Controls.Add(ResultPercentLabel); this.Controls.Add(CirclePicture);
             SaveAsPdfButton = new Button();
             SaveAsPdfButton.Size = new Size(150, 40);
@@ -245,8 +245,8 @@ namespace Quiz
             PersonImagePb.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(PersonImagePb);
             this.BackColor = Color.FromArgb(0, 96, 168);
-            BackButton.BackColor = Color.FromArgb(0, 96, 168);
-            //BackButton.BackColor = Color.FromName("SpringGreen");
+           // BackButton.BackColor = Color.FromArgb(0, 96, 168);
+            BackButton.BackColor = Color.FromName("SpringGreen");
             CorrectBarButton = new Button();
             CorrectBarButton.Size = new Size(50, 230);
             CorrectBarButton.Font = new Font("Century", 10, FontStyle.Italic);
@@ -582,8 +582,7 @@ namespace Quiz
         }
 
         private void ButtonContinue_Click(object sender, EventArgs e)
-        {
-            
+        {           
             IsClickedToContinueButton = true;
             ///////////////////////2
             for (int i = 0; i < this.Controls.Count * 5; i++)
@@ -851,24 +850,5 @@ namespace Quiz
             }
         }
 
-        private void textBoxSearch_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
-        private void textBoxSearch_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBoxReturn_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
