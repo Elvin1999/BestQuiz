@@ -521,11 +521,112 @@ namespace Quiz
             FileName = btn.Text;
 
         }
-
+        public PictureBox pictureBoxReturn { get; set; }
+        public Label QuestionLabelFirstW { get; set; }
+        public TextBox textBoxSearch { get; set; }
+        public Label CountOfQuest { get; set; }
+        public MaskedTextBox maskedTxtCount { get; set; }
+        public Button buttonContinue { get; set; }
         private void LoadFirstPageOfForm()
         {
+            buttonContinue = new Button();
+            buttonContinue.Size = new Size(106, 44);
+            buttonContinue.Location = new Point(682,446);
+            buttonContinue.BackColor = Color.FromName("SpringGreen");
+            buttonContinue.Text = "Continue";
+            buttonContinue.Font= new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            buttonContinue.Click += ButtonContinue_Click;
+            this.Controls.Add(buttonContinue);
+            maskedTxtCount = new MaskedTextBox();
+            maskedTxtCount.Size = new Size(100, 20);
+            maskedTxtCount.Location = new Point(240, 457);
+            maskedTxtCount.BackColor = Color.FromName("SpringGreen");           
+            maskedTxtCount.Mask = "00000";
+            this.Controls.Add(maskedTxtCount);
+
+            CountOfQuest = new Label();
+            CountOfQuest.BackColor = Color.FromName("SpringGreen");
+            CountOfQuest.Text = "Count of question";
+            CountOfQuest.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            CountOfQuest.Size = new Size(150, 30);
+            CountOfQuest.Location = new Point(100, 457);
+            this.Controls.Add(CountOfQuest);
+            pictureBoxReturn = new PictureBox();
+            pictureBoxReturn.Location = new Point(1, 1);
+            pictureBoxReturn.Size = new Size(46, 34);
+            pictureBoxReturn.Image = Properties.Resources.returnpcbox;
+            pictureBoxReturn.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxReturn.Click += PictureBoxReturn_Click;
+            this.Controls.Add(pictureBoxReturn);
+
+            QuestionLabelFirstW = new Label();
+            QuestionLabelFirstW.Size = new Size(235, 59);
+            QuestionLabelFirstW.Location = new Point(65, 22);
+            QuestionLabelFirstW.Font = new Font("Monotype Corsiva", 36, FontStyle.Italic);
+            QuestionLabelFirstW.BackColor = Color.FromName("SpringGreen");
+            QuestionLabelFirstW.Text = "Quiz list";
+            this.Controls.Add(QuestionLabelFirstW);
+
+            textBoxSearch = new TextBox();
+            textBoxSearch.Size = new Size(172, 25);
+            textBoxSearch.Location = new Point(537, 22);
+            textBoxSearch.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            textBoxSearch.BackColor = Color.FromName("SpringGreen");
+            textBoxSearch.Text = "Search";
+            textBoxSearch.KeyPress += TextBoxSearch_KeyPress;
+            textBoxSearch.Enter += TextBoxSearch_Enter;
+            textBoxSearch.Leave += TextBoxSearch_Leave;
+            this.Controls.Add(textBoxSearch);
+
             FillAllXmlFileToListView();
         }
+
+        private void ButtonContinue_Click(object sender, EventArgs e)
+        {
+            
+            IsClickedToContinueButton = true;
+            ///////////////////////2
+            for (int i = 0; i < this.Controls.Count * 5; i++)
+            {
+                foreach (var item in this.Controls)
+                {
+                    if (item is Label lb)
+                    {
+                        lb.Dispose();
+                    }
+                    else if (item is Button button)
+                    {
+                        button.Dispose();
+                    }
+                    else if (item is TextBox tb)
+                    {
+                        tb.Dispose();
+                    }
+                    else if (item is MaskedTextBox mtb)
+                    {
+                        mtb.Dispose();
+                    }
+                }
+            }
+            LoadSecondPageOfForm();
+            Timer timer = new Timer();
+            timer.Interval = 1000; timer.Start();
+            timer.Tick += Timer_Tick;
+
+            metroBtnSubmit.Enabled = true;
+            metroBackbtn.Enabled = false;
+            metroAcceptbtn.Enabled = false;
+
+            IncludeToTestByName(FileName);
+
+
+        }
+
+        private void PictureBoxReturn_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //first page 
@@ -627,7 +728,7 @@ namespace Quiz
                         RadioButton radioButton = new RadioButton();
                         radioButton.Size = new Size(350, 60);
                         radioButton.Location = new Point(110, 192 + y);
-                
+
                         radioButton.Text = questionlist[curindex].Answers[k].Text;
                         radioButton.Font = new Font("Century", 10, FontStyle.Italic);
                         y += 60;
@@ -677,7 +778,6 @@ namespace Quiz
             }
             /////////
         }
-   
         private void IncludeToTestByName(string filename)
         {
 
@@ -696,9 +796,9 @@ namespace Quiz
                 }
                 if (IsClickedToContinueButton)
                 {
-                    if (maskedTextBox1.Text != String.Empty)
+                    if (maskedTxtCount.Text != String.Empty)
                     {
-                        TestQuestionCount = int.Parse(maskedTextBox1.Text);
+                        TestQuestionCount = int.Parse(maskedTxtCount.Text);
 
                         if (TestQuestionCount > QuestionList.Count)
                         {
@@ -716,68 +816,26 @@ namespace Quiz
         }
         public int TestQuestionCount { get; set; }
         public bool IsClickedToContinueButton { get; set; }
-        private void buttonContinue_Click(object sender, EventArgs e)
-        {
-
-
-            IsClickedToContinueButton = true;
-            ///////////////////////2
-            for (int i = 0; i < this.Controls.Count * 5; i++)
-            {
-                foreach (var item in this.Controls)
-                {
-                    if (item is Label lb)
-                    {
-                        lb.Dispose();
-                    }
-                    else if (item is Button button)
-                    {
-                        button.Dispose();
-                    }
-                    else if (item is TextBox tb)
-                    {
-                        tb.Dispose();
-                    }
-                    else if (item is MaskedTextBox mtb)
-                    {
-                        mtb.Dispose();
-                    }
-                }
-            }
-            LoadSecondPageOfForm();
-            Timer timer = new Timer();
-            timer.Interval = 1000; timer.Start();
-            timer.Tick += Timer_Tick;
-
-            metroBtnSubmit.Enabled = true;
-            metroBackbtn.Enabled = false;
-            metroAcceptbtn.Enabled = false;
-
-            IncludeToTestByName(FileName);
-
-
-
-
-        }
+    
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             FillAllXmlFileToListView();
         }
         public bool IsClickedToSearchKeyPress { get; set; }
-        private void textBoxSearch_KeyPress(object sender, KeyPressEventArgs e)
+
+
+        private void TextBoxSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             IsClickedToSearchKeyPress = true;
             FillAllXmlFileToListView();
         }
+        //private void pictureBoxReturn_Click(object sender, EventArgs e)
+        //{
+        //    DialogResult = DialogResult.Cancel;
+        //}
 
-
-        private void pictureBoxReturn_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-        }
-
-        private void textBoxSearch_Enter(object sender, EventArgs e)
+        private void TextBoxSearch_Enter(object sender, EventArgs e)
         {
             if (textBoxSearch.Text == "Search")
             {
@@ -785,12 +843,32 @@ namespace Quiz
             }
         }
 
-        private void textBoxSearch_Leave(object sender, EventArgs e)
+        private void TextBoxSearch_Leave(object sender, EventArgs e)
         {
             if (textBoxSearch.Text == String.Empty)
             {
                 textBoxSearch.Text = "Search";
             }
+        }
+
+        private void textBoxSearch_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void textBoxSearch_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxReturn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
