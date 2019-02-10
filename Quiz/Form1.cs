@@ -20,6 +20,8 @@ namespace Quiz
             QuestionListSecond = new List<QuestionBlock>();
 
         }
+        public bool _IsClickedToCreate { get; set; }
+        public bool _IsClickedToExam { get; set; }
         public List<QuestionBlock> QuestionList { get; set; }
         public List<QuestionBlock> QuestionListSecond { get; set; }
         public int CurrentIndex = 0;
@@ -530,18 +532,32 @@ namespace Quiz
         public Button buttonContinue { get; set; }
         private void LoadFirstPageOfForm()
         {
+            for (int i = 0; i < 4; i++)
+            {
+                foreach (var item in this.Controls)
+                {
+                    if(item is Button bt)
+                    {
+                        bt.Dispose();
+                    }
+                    else if(item is TextBox tb)
+                    {
+                        tb.Dispose();
+                    }
+                }
+            }
             buttonContinue = new Button();
             buttonContinue.Size = new Size(106, 44);
-            buttonContinue.Location = new Point(682,446);
+            buttonContinue.Location = new Point(682, 446);
             buttonContinue.BackColor = Color.FromName("SpringGreen");
             buttonContinue.Text = "Continue";
-            buttonContinue.Font= new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            buttonContinue.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
             buttonContinue.Click += ButtonContinue_Click;
             this.Controls.Add(buttonContinue);
             maskedTxtCount = new MaskedTextBox();
             maskedTxtCount.Size = new Size(100, 20);
             maskedTxtCount.Location = new Point(240, 457);
-            maskedTxtCount.BackColor = Color.FromName("SpringGreen");           
+            maskedTxtCount.BackColor = Color.FromName("SpringGreen");
             maskedTxtCount.Mask = "00000";
             this.Controls.Add(maskedTxtCount);
 
@@ -583,7 +599,7 @@ namespace Quiz
         }
 
         private void ButtonContinue_Click(object sender, EventArgs e)
-        {           
+        {
             IsClickedToContinueButton = true;
             ///////////////////////2
             for (int i = 0; i < this.Controls.Count * 5; i++)
@@ -619,19 +635,109 @@ namespace Quiz
 
             IncludeToTestByName(FileName);
 
-
         }
 
         private void PictureBoxReturn_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }
+        public Button CreateNewOneButton { get; set; }
+        public Button EditByDrag { get; set; }
+        public Button GoToTestButton { get; set; }
+        /// <summary>
+        /// CREATE CREATE CREATE
+        /// </summary>
+        private void LoadCreateOrDragTest()///////////CREATE////////////////////
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                foreach (var item in this.Controls)
+                {
+                    if(item is MaskedTextBox maskedText)
+                    {
+                        maskedText.Dispose();
+                    }
+                    else if(item is Button bt)
+                    {
+                        bt.Dispose();
+                    }
+                    else if(item is TextBox tb)
+                    {
+                        tb.Dispose();
+                    }
+                    else if(item is PictureBox pb)
+                    {
+                        pb.Dispose();
+                    }
+                    else if (item is Label lb)
+                    {
+                        lb.Dispose();
+                    }
+                }
+            }
+            pictureBoxReturn = new PictureBox();
+            pictureBoxReturn.Location = new Point(1, 1);
+            pictureBoxReturn.Size = new Size(46, 34);
+            pictureBoxReturn.Image = Properties.Resources.returnpcbox;
+            pictureBoxReturn.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxReturn.Click += PictureBoxReturn_Click;
+            this.Controls.Add(pictureBoxReturn);
+
+            CreateNewOneButton = new Button();
+            CreateNewOneButton.Location = new Point(100, 1);
+            CreateNewOneButton.Size = new Size(150, 32);
+            CreateNewOneButton.BackColor = Color.FromName("SpringGreen");
+            CreateNewOneButton.Click += CreateNewOneButton_Click;
+            CreateNewOneButton.Text = "Create new one";
+            CreateNewOneButton.Font= new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            this.Controls.Add(CreateNewOneButton);
+            
+            GoToTestButton = new Button();
+            GoToTestButton.Location = new Point(650, 1);
+            GoToTestButton.Size = new Size(150, 32);
+            GoToTestButton.BackColor = Color.FromName("SpringGreen");
+            GoToTestButton.Click += GoToTestButton_Click;
+            GoToTestButton.Text = "Go to tests";
+            GoToTestButton.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            this.Controls.Add(GoToTestButton);
+
+            EditByDrag = new Button();
+            EditByDrag.Location = new Point(400, 1);
+            EditByDrag.Size = new Size(150, 32);
+            EditByDrag.BackColor = Color.FromName("SpringGreen");
+            EditByDrag.Click += EditByDrag_Click;
+            EditByDrag.Text = "Edit by draging";
+            EditByDrag.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            this.Controls.Add(EditByDrag);
+        }
+
+        private void GoToTestButton_Click(object sender, EventArgs e)
+        {
+            //go to the tests's section
+        }
+
+        private void EditByDrag_Click(object sender, EventArgs e)
+        {
+            //drag xml file to list view or something to edit
+        }
+
+        private void CreateNewOneButton_Click(object sender, EventArgs e)
+        {
+            //Create new question and one options
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //first page 
-            LoadFirstPageOfForm();
+            //first page z
+            if (_IsClickedToExam)
+            {
 
+                LoadFirstPageOfForm();
+            }
+            else
+            {
+                LoadCreateOrDragTest();
+            }
 
         }
 
@@ -816,7 +922,7 @@ namespace Quiz
         }
         public int TestQuestionCount { get; set; }
         public bool IsClickedToContinueButton { get; set; }
-    
+
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
@@ -830,11 +936,6 @@ namespace Quiz
             IsClickedToSearchKeyPress = true;
             FillAllXmlFileToListView();
         }
-        //private void pictureBoxReturn_Click(object sender, EventArgs e)
-        //{
-        //    DialogResult = DialogResult.Cancel;
-        //}
-
         private void TextBoxSearch_Enter(object sender, EventArgs e)
         {
             if (textBoxSearch.Text == "Search")

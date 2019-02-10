@@ -14,6 +14,7 @@ namespace Quiz
         public ProgramIntro()
         {
             InitializeComponent();
+            form = new Form1();
             Timer timer = new Timer();
             timer.Interval = 1000;
             timer.Tick += Timer_Tick; timer.Start();
@@ -27,7 +28,7 @@ namespace Quiz
         private void Timer2_Tick(object sender, EventArgs e)
         {
             ++counter;
-            if (counter==1)
+            if (counter == 1)
             {
 
                 button1.BackColor = Color.FromName("SpringGreen");
@@ -35,7 +36,7 @@ namespace Quiz
                 button3.BackColor = Color.FromName("Control");
                 button4.BackColor = Color.FromName("Control");
             }
-            else if (counter==2)
+            else if (counter == 2)
             {
                 button1.BackColor = Color.FromName("Control");
                 button2.BackColor = Color.FromName("SpringGreen");
@@ -68,14 +69,26 @@ namespace Quiz
         {
             Application.Exit();
         }
-
+        public bool CreateClick { get; set; }
+        public bool ExamClick { get; set; }
         private void buttonCreate_Click(object sender, EventArgs e)
         {
+            form._IsClickedToCreate = true;
+            form._IsClickedToExam = false;
+            this.Hide();
 
+            if (form.ShowDialog() == DialogResult.Cancel)
+            {
+                this.Show();
+            }
         }
+        
+        public Form1 form { get; set; }
         private void buttonTakeExam_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1();
+            form._IsClickedToCreate = false;
+            form._IsClickedToExam = true;
+
             this.Hide();
 
             if (form.ShowDialog() == DialogResult.Cancel)
