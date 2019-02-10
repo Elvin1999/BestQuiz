@@ -536,13 +536,17 @@ namespace Quiz
             {
                 foreach (var item in this.Controls)
                 {
-                    if(item is Button bt)
+                    if (item is Button bt)
                     {
                         bt.Dispose();
                     }
-                    else if(item is TextBox tb)
+                    else if (item is TextBox tb)
                     {
                         tb.Dispose();
+                    }
+                    else if(item is Label lb)
+                    {
+                        lb.Dispose();
                     }
                 }
             }
@@ -644,6 +648,17 @@ namespace Quiz
         public Button CreateNewOneButton { get; set; }
         public Button EditByDrag { get; set; }
         public Button GoToTestButton { get; set; }
+        public Label LineOfQuestion { get; set; }
+        private void CreateNewQuestionAndOptions(Point point)
+        {
+            LineOfQuestion = new Label();
+            LineOfQuestion.Size = new Size(44, 33);
+            LineOfQuestion.Location = new Point(10, point.Y);
+            LineOfQuestion.Text = "1";
+            LineOfQuestion.BackColor = Color.FromName("SpringGreen");
+
+            this.Controls.Add(LineOfQuestion);
+        }
         /// <summary>
         /// CREATE CREATE CREATE
         /// </summary>
@@ -653,19 +668,19 @@ namespace Quiz
             {
                 foreach (var item in this.Controls)
                 {
-                    if(item is MaskedTextBox maskedText)
+                    if (item is MaskedTextBox maskedText)
                     {
                         maskedText.Dispose();
                     }
-                    else if(item is Button bt)
+                    else if (item is Button bt)
                     {
                         bt.Dispose();
                     }
-                    else if(item is TextBox tb)
+                    else if (item is TextBox tb)
                     {
                         tb.Dispose();
                     }
-                    else if(item is PictureBox pb)
+                    else if (item is PictureBox pb)
                     {
                         pb.Dispose();
                     }
@@ -689,20 +704,22 @@ namespace Quiz
             CreateNewOneButton.BackColor = Color.FromName("SpringGreen");
             CreateNewOneButton.Click += CreateNewOneButton_Click;
             CreateNewOneButton.Text = "Create new one";
-            CreateNewOneButton.Font= new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            CreateNewOneButton.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
             this.Controls.Add(CreateNewOneButton);
-            
+
             GoToTestButton = new Button();
-            GoToTestButton.Location = new Point(650, 1);
-            GoToTestButton.Size = new Size(150, 32);
+            GoToTestButton.Location = new Point(500, 1);
+            GoToTestButton.Size = new Size(220, 32);
             GoToTestButton.BackColor = Color.FromName("SpringGreen");
             GoToTestButton.Click += GoToTestButton_Click;
-            GoToTestButton.Text = "Go to tests";
+            GoToTestButton.Text = "Save and Go to tests";
             GoToTestButton.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            GoToTestButton.Enabled = false;
+            //if you clicked to save button This button will enabled true
             this.Controls.Add(GoToTestButton);
 
             EditByDrag = new Button();
-            EditByDrag.Location = new Point(400, 1);
+            EditByDrag.Location = new Point(300, 1);
             EditByDrag.Size = new Size(150, 32);
             EditByDrag.BackColor = Color.FromName("SpringGreen");
             EditByDrag.Click += EditByDrag_Click;
@@ -720,10 +737,13 @@ namespace Quiz
         {
             //drag xml file to list view or something to edit
         }
-
+        int y = 0;
         private void CreateNewOneButton_Click(object sender, EventArgs e)
         {
             //Create new question and one options
+           Point Point = new Point(10, y + 50);
+            CreateNewQuestionAndOptions(Point);
+            y += 50;
         }
 
         private void Form1_Load(object sender, EventArgs e)
