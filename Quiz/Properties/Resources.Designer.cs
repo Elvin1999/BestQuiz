@@ -103,6 +103,16 @@ namespace Quiz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap deleteBox {
+            get {
+                object obj = ResourceManager.GetObject("deleteBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap greenhuman {
             get {
                 object obj = ResourceManager.GetObject("greenhuman", resourceCulture);
@@ -216,6 +226,16 @@ namespace Quiz.Properties {
         internal static System.Drawing.Bitmap thinkPerson2 {
             get {
                 object obj = ResourceManager.GetObject("thinkPerson2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trashbox {
+            get {
+                object obj = ResourceManager.GetObject("trashbox", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

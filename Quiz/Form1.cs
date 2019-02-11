@@ -410,48 +410,65 @@ namespace Quiz
         }
         private void MetroNextbtn_Click(object sender, EventArgs e)
         {
-            metroBackbtn.Enabled = true;
-            metroAcceptbtn.Enabled = false;
-            if (IsClickedToSubmitButton)
+            try
             {
-                if (CurrentIndex < QuestionListSecond.Count - 1)
+                metroBackbtn.Enabled = true;
+                metroAcceptbtn.Enabled = false;
+                if (IsClickedToSubmitButton)
                 {
+                    if (CurrentIndex < QuestionListSecond.Count - 1)
+                    {
 
-                    ++CurrentIndex;
+                        ++CurrentIndex;
+                    }
+                    ShowTest(QuestionListSecond, CurrentIndex);
                 }
-                ShowTest(QuestionListSecond, CurrentIndex);
+                else
+                {
+                    if (CurrentIndex < QuestionList2.Count - 1)
+                    {
+
+                        ++CurrentIndex;
+                        ShowTest(QuestionList2, CurrentIndex);
+                    }
+                }
             }
-            else
+            catch (Exception)
             {
-                if (CurrentIndex < QuestionList2.Count - 1)
-                {
 
-                    ++CurrentIndex;
-                    ShowTest(QuestionList2, CurrentIndex);
-                }
+
             }
+
+
         }
         private void MetroBackbtn_Click(object sender, EventArgs e)
         {
-            metroAcceptbtn.Enabled = false;
-            if (IsClickedToSubmitButton)
+            try
             {
-                if (CurrentIndex > 0)
+                metroAcceptbtn.Enabled = false;
+                if (IsClickedToSubmitButton)
                 {
+                    if (CurrentIndex > 0)
+                    {
 
-                    --CurrentIndex;
-                    ShowTest(QuestionListSecond, CurrentIndex);
+                        --CurrentIndex;
+                        ShowTest(QuestionListSecond, CurrentIndex);
+                    }
+                }
+                else
+                {
+                    if (CurrentIndex > 0)
+                    {
+
+                        --CurrentIndex;
+                        ShowTest(QuestionList2, CurrentIndex);
+                    }
                 }
             }
-            else
+            catch (Exception)
             {
-                if (CurrentIndex > 0)
-                {
-
-                    --CurrentIndex;
-                    ShowTest(QuestionList2, CurrentIndex);
-                }
             }
+
         }
         public List<QuestionBlock> QuestionList2 { get; set; }
         public string FileName { get; set; }
@@ -514,8 +531,6 @@ namespace Quiz
                 x += 43;
                 this.Controls.Add(testbtn);
             }
-
-
         }
 
         private void Testbtn_Click(object sender, EventArgs e)
@@ -530,6 +545,7 @@ namespace Quiz
         public Label CountOfQuest { get; set; }
         public MaskedTextBox maskedTxtCount { get; set; }
         public Button buttonContinue { get; set; }
+        public Button Refresh { get; set; }
         private void LoadFirstPageOfForm()
         {
             for (int i = 0; i < 4; i++)
@@ -540,11 +556,11 @@ namespace Quiz
                     {
                         bt.Dispose();
                     }
-                    else if(item is PictureBox pb)
+                    else if (item is PictureBox pb)
                     {
                         pb.Dispose();
                     }
-                    else if(item is RadioButton rb)
+                    else if (item is RadioButton rb)
                     {
                         rb.Dispose();
                     }
@@ -566,6 +582,16 @@ namespace Quiz
             buttonContinue.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
             buttonContinue.Click += ButtonContinue_Click;
             this.Controls.Add(buttonContinue);
+
+            Refresh = new Button();
+            Refresh.Size = new Size(106, 44);
+            Refresh.Location = new Point(550, 446);
+            Refresh.BackColor = Color.FromName("SpringGreen");
+            Refresh.Text = "Refresh";
+            Refresh.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            Refresh.Click += Refresh_Click;
+            this.Controls.Add(Refresh);
+
             maskedTxtCount = new MaskedTextBox();
             maskedTxtCount.Size = new Size(100, 20);
             maskedTxtCount.Location = new Point(240, 457);
@@ -607,6 +633,11 @@ namespace Quiz
             textBoxSearch.Leave += TextBoxSearch_Leave;
             this.Controls.Add(textBoxSearch);
 
+            FillAllXmlFileToListView();
+        }
+
+        private void Refresh_Click(object sender, EventArgs e)
+        {
             FillAllXmlFileToListView();
         }
 
@@ -674,7 +705,7 @@ namespace Quiz
             this.Controls.Add(LineOfQuestion);
 
             QuestionContent = new TextBox();
-            QuestionContent.Size = new Size(450, 100);            
+            QuestionContent.Size = new Size(450, 100);
             QuestionContent.BackColor = Color.FromName("SpringGreen");
             QuestionContent.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
             QuestionContent.ForeColor = Color.FromName("Black");
@@ -684,7 +715,7 @@ namespace Quiz
             QuestionContent.Enter += QuestionContext_Enter;
             QuestionContent.Leave += QuestionContext_Leave;
             this.Controls.Add(QuestionContent);
-            
+
 
             Option = new TextBox();
             Option.Location = new Point(60, point.Y + 115);
@@ -692,12 +723,20 @@ namespace Quiz
             Option.BackColor = Color.FromName("SpringGreen");
             Option.ForeColor = Color.FromName("Black");
             Option.Text = $"Option 1";
-            Option.Font= new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            Option.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
 
             this.Controls.Add(Option);
+            DeleteOptionFromEnd = new PictureBox();
+            DeleteOptionFromEnd = new PictureBox();
+            DeleteOptionFromEnd.Location = new Point(345, point.Y + 108);
+            DeleteOptionFromEnd.Size = new Size(45, 40);
+            DeleteOptionFromEnd.Image = Properties.Resources.trashbox;
+            DeleteOptionFromEnd.SizeMode = PictureBoxSizeMode.StretchImage;
+            DeleteOptionFromEnd.Click += DeleteOptionFromEnd_Click;
+            this.Controls.Add(DeleteOptionFromEnd);
 
             AddOptionBox = new PictureBox();
-            AddOptionBox.Location = new Point(300, point.Y + 110+1);
+            AddOptionBox.Location = new Point(300, point.Y + 110 + 1);
             AddOptionBox.Size = new Size(40, 30);
             AddOptionBox.Image = Properties.Resources.add;
             AddOptionBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -705,18 +744,27 @@ namespace Quiz
             this.Controls.Add(AddOptionBox);
 
         }
+
+        private void DeleteOptionFromEnd_Click(object sender, EventArgs e)
+        {
+            //////////////////delete option from end
+        }
+
+        public PictureBox DeleteOptionFromEnd { get; set; }
         int optioncount = 1;
         private void AddOptionBox_Click(object sender, EventArgs e)
         {
             ++optioncount;
             Option = new TextBox();
-            Option.Location = new Point(60,Point.Y + 80+ optioncount*35);
+            Option.Location = new Point(60, Point.Y + 80 + optioncount * 35);
             Option.Size = new Size(200, 30);
             Option.BackColor = Color.FromName("SpringGreen");
             Option.ForeColor = Color.FromName("Black");
             Option.Text = $"Option {optioncount}";
             Option.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
             this.Controls.Add(Option);
+
+
         }
 
         private void QuestionContext_Leave(object sender, EventArgs e)
@@ -767,7 +815,7 @@ namespace Quiz
                     {
                         lb.Dispose();
                     }
-                    else if(item is RadioButton rb)
+                    else if (item is RadioButton rb)
                     {
                         rb.Dispose();
                     }
@@ -814,7 +862,7 @@ namespace Quiz
         public List<QuestionBlock> CustomQuestionBlock { get; set; }
         void MakeNewQuestionBlock()
         {
-            
+
         }
         private void GoToTestButton_Click(object sender, EventArgs e)
         {

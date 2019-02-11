@@ -124,11 +124,11 @@
   <data name="returnpcbox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\returnpcbox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PercentImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PercentImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="PercentImage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PercentImage1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="correctanswer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\correctanswer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="thinkPerson1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\thinkPerson1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,14 +148,20 @@
   <data name="thinkPerson" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\thinkPerson.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deleteBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deleteBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pppercent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pppercent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="percentcircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\percentcircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PercentImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PercentImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="correctanswer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\correctanswer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="percentcircle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\percentcircle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,7 +169,7 @@
   <data name="PercentImage11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PercentImage11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="trashbox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trashbox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
