@@ -96,7 +96,7 @@ namespace Quiz
             labelQueue1.Size = new Size(30, 25);
             labelQueue1.Location = new Point(15, 40);
             labelQuestion1 = new Label();
-            labelQuestion1.Size = new Size(715, 145);
+            labelQuestion1.Size = new Size(700, 145);
             labelQuestion1.Location = new Point(45, 25);
             labelQuestion1.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
             labelQuestion1.ForeColor = Color.FromName("Black");
@@ -126,7 +126,7 @@ namespace Quiz
             GetResultBtn.Size = new Size(100, 30);
             GetResultBtn.UseCustomBackColor = true;
             GetResultBtn.UseCustomForeColor = true;
-            GetResultBtn.Location = new Point(740, 50);
+            GetResultBtn.Location = new Point(743, 50);
             GetResultBtn.Highlight = true;
             GetResultBtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
             GetResultBtn.Text = "GetResult";
@@ -540,6 +540,14 @@ namespace Quiz
                     {
                         bt.Dispose();
                     }
+                    else if(item is PictureBox pb)
+                    {
+                        pb.Dispose();
+                    }
+                    else if(item is RadioButton rb)
+                    {
+                        rb.Dispose();
+                    }
                     else if (item is TextBox tb)
                     {
                         tb.Dispose();
@@ -732,6 +740,9 @@ namespace Quiz
         /// </summary>
         private void LoadCreateOrDragTest()///////////CREATE////////////////////
         {
+            y = 0;
+            optioncount = 1;
+            count_calling = 0;
             for (int i = 0; i < 4; i++)
             {
                 foreach (var item in this.Controls)

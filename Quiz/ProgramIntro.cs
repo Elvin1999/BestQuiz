@@ -73,6 +73,22 @@ namespace Quiz
         public bool ExamClick { get; set; }
         private void buttonCreate_Click(object sender, EventArgs e)
         {
+            //for(int i=0;i<3;i++)
+            //foreach (var item in this.Controls)
+            //{
+            //        if(item is Label lb)
+            //        {
+            //            lb.Dispose();
+            //        }
+            //        else if(item is TextBox tb)
+            //        {
+            //            tb.Dispose();
+            //        }
+            //        else if(item is PictureBox pb)
+            //        {
+            //            pb.Dispose();
+            //        }
+            //}
             form.AutoScroll = true;
             form._IsClickedToCreate = true;
             form._IsClickedToExam = false;
@@ -87,6 +103,7 @@ namespace Quiz
         public Form1 form { get; set; }
         private void buttonTakeExam_Click(object sender, EventArgs e)
         {
+            form.AutoScroll = false;
             form._IsClickedToCreate = false;
             form._IsClickedToExam = true;
 
