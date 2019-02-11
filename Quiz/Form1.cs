@@ -691,6 +691,7 @@ namespace Quiz
         public TextBox QuestionContent { get; set; }
         public TextBox Option { get; set; }
         public PictureBox AddOptionBox { get; set; }
+        public RadioButton AnswerRadioButton { get; set; }
         private int count_calling = 0;
         private void CreateNewQuestionAndOptions(Point point)
         {
@@ -724,8 +725,15 @@ namespace Quiz
             Option.ForeColor = Color.FromName("Black");
             Option.Text = $"1.Option";
             Option.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
-
             this.Controls.Add(Option);
+
+            AnswerRadioButton = new RadioButton();
+            AnswerRadioButton.Size = new Size(40, 30);
+            AnswerRadioButton.Text = "No";
+            AnswerRadioButton.Location = new Point(10, point.Y + 115);
+            AnswerRadioButton.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+
+
             DeleteOptionFromEnd = new PictureBox();
             DeleteOptionFromEnd = new PictureBox();
             DeleteOptionFromEnd.Location = new Point(345, point.Y + 108);
@@ -747,11 +755,11 @@ namespace Quiz
 
         private void DeleteOptionFromEnd_Click(object sender, EventArgs e)//I don't know exactly :(
         {
-            if (optioncount !=1)
+            if (optioncount != 1)
             {
                 foreach (var item in this.Controls)
                 {
-                    if(item is TextBox tb)
+                    if (item is TextBox tb)
                     {
                         var result = tb.Text.Contains($"{optioncount}.");
                         if (result)
@@ -760,7 +768,7 @@ namespace Quiz
                         }
                     }
                 }
-            --optioncount;
+                --optioncount;
             }
         }
 
@@ -882,11 +890,54 @@ namespace Quiz
         {
             //go to the tests's section
         }
-
+        public ListView listView { get; set; }
+        public Button Edit { get; set; }
         private void EditByDrag_Click(object sender, EventArgs e)
         {
             //drag xml file to list view or something to edit
+            CreateNewOneButton.Enabled = false;
+            listView = new ListView();
+            listView.Size = new Size(150, 50);
+            listView.AllowDrop = true;
+            listView.Location = new Point(300, 40);
+            listView.BackColor = Color.FromName("SpringGreen");
+            listView.DragEnter += ListView_DragEnter;
+            listView.DragDrop += ListView_DragDrop;
+            this.Controls.Add(listView);
+
+            Edit = new Button();
+            Edit.Location = new Point(470, 40);
+            Edit.Size = new Size(50, 30);
+            Edit.Text = "Edit";
+            Edit.Font= new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            Edit.Click += Edit_Click;
+            Edit.BackColor = Color.FromName("SpringGreen");
+            this.Controls.Add(Edit);
         }
+
+        private void Edit_Click(object sender, EventArgs e)
+        {
+           //I have to see all question block that i can edit all of them . . .
+        }
+
+        private void ListView_DragDrop(object sender, DragEventArgs e)
+        {
+            listView.Items.Clear();
+            listView.BackColor = Color.FromName("SpringGreen");
+            var mydata = e.Data.GetData(DataFormats.FileDrop) as string[];
+            var Info = new FileInfo(mydata[0]);
+            ListViewItem item = new ListViewItem();
+            item.Text = Info.FullName;
+            // item.ImageIndex = count;
+            listView.Items.Add(item);
+        }
+
+        private void ListView_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+            listView.BackColor = Color.GreenYellow;
+        }
+
         int y = 0;
         public Point Point { get; set; }
         private void CreateNewOneButton_Click(object sender, EventArgs e)
@@ -1117,7 +1168,6 @@ namespace Quiz
                 textBoxSearch.Text = String.Empty;
             }
         }
-
         private void TextBoxSearch_Leave(object sender, EventArgs e)
         {
             if (textBoxSearch.Text == String.Empty)
@@ -1125,6 +1175,5 @@ namespace Quiz
                 textBoxSearch.Text = "Search";
             }
         }
-
     }
 }
