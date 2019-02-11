@@ -722,7 +722,7 @@ namespace Quiz
             Option.Size = new Size(200, 30);
             Option.BackColor = Color.FromName("SpringGreen");
             Option.ForeColor = Color.FromName("Black");
-            Option.Text = $"Option 1";
+            Option.Text = $"1.Option";
             Option.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
 
             this.Controls.Add(Option);
@@ -745,9 +745,23 @@ namespace Quiz
 
         }
 
-        private void DeleteOptionFromEnd_Click(object sender, EventArgs e)
+        private void DeleteOptionFromEnd_Click(object sender, EventArgs e)//I don't know exactly :(
         {
-            //////////////////delete option from end
+            if (optioncount !=1)
+            {
+                foreach (var item in this.Controls)
+                {
+                    if(item is TextBox tb)
+                    {
+                        var result = tb.Text.Contains($"{optioncount}.");
+                        if (result)
+                        {
+                            tb.Dispose();
+                        }
+                    }
+                }
+            --optioncount;
+            }
         }
 
         public PictureBox DeleteOptionFromEnd { get; set; }
@@ -760,7 +774,7 @@ namespace Quiz
             Option.Size = new Size(200, 30);
             Option.BackColor = Color.FromName("SpringGreen");
             Option.ForeColor = Color.FromName("Black");
-            Option.Text = $"Option {optioncount}";
+            Option.Text = $"{optioncount}.Option ";
             Option.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
             this.Controls.Add(Option);
 
@@ -791,7 +805,7 @@ namespace Quiz
             y = 0;
             optioncount = 1;
             count_calling = 0;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 6; i++)
             {
                 foreach (var item in this.Controls)
                 {
