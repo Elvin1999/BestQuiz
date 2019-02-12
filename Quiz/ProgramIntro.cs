@@ -22,12 +22,32 @@ namespace Quiz
         public Button buttonCreate { get; set; }
         public Button buttonTakeExam { get; set; }
         public Panel PanelBottom { get; set; }
-        public Button test1 { get; set; }
-        public Button test2 { get; set; }
-        public Button test3 { get; set; }
-        public Button test4 { get; set; }
+        public Button button1 { get; set; }
+        public Button button2 { get; set; }
+        public Button button3 { get; set; }
+        public Button button4 { get; set; }
         private void LoadProgramIntroduction()
         {
+            button1 = new Button();
+            button1.Size = new Size(44, 33);
+            button1.Location = new Point(682, 88);
+            this.Controls.Add(button1);
+
+            button2 = new Button();
+            button2.Size = new Size(44, 33);
+            button2.Location = new Point(727,88);
+            this.Controls.Add(button2);
+
+            button3 = new Button();
+            button3.Size = new Size(44, 33);
+            button3.Location = new Point(727,123);
+            this.Controls.Add(button3);
+
+            button4 = new Button();
+            button4.Size = new Size(44, 33);
+            button4.Location = new Point(682,123);
+            this.Controls.Add(button4);
+
             PanelBottom = new Panel();
             PanelBottom.Size = new Size(800, 66);
             PanelBottom.Location = new Point(0,384);
