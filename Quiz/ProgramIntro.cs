@@ -21,13 +21,23 @@ namespace Quiz
         public Panel LoginPanel { get; set; }
         public Button ExitButton { get; set; }
         public Label LoginNowLabel { get; set; }
+        public TextBox Emailtxb { get; set; }
+
         private void LoadLoginSystem()
         {
+            Emailtxb = new TextBox();
+            Emailtxb.Size = new Size(230, 30);
+            Emailtxb.Location = new Point(250,180);
+            Emailtxb.Text = "E-MAIL";
+            Emailtxb.Font = new Font("Comic Sans MS", 8, FontStyle.Italic);
+            Emailtxb.BackColor = Color.LightGreen;
+            Emailtxb.ForeColor = Color.Gray;
+            this.Controls.Add(Emailtxb);
             LoginNowLabel = new Label();
             LoginNowLabel.Size = new Size(250, 70);
             LoginNowLabel.Location = new Point(270, 100);
             LoginNowLabel.BackColor = Color.FromArgb(70, 0, 0, 0);
-            LoginNowLabel.Text = "  Login Now";
+            LoginNowLabel.Text = " Login Now";
             LoginNowLabel.ForeColor = Color.White;
             LoginNowLabel.Font = new Font("Comic Sans MS", 24, FontStyle.Italic);
             this.Controls.Add(LoginNowLabel);
@@ -50,11 +60,11 @@ namespace Quiz
             LoginTitle.ForeColor = Color.White;
             LoginTitle.Font = new Font("Comic Sans MS", 30, FontStyle.Italic);
             this.Controls.Add(LoginTitle);
-            
+
             LoginPanel = new Panel();
-            LoginPanel.Size = new Size(300, 320);
+            LoginPanel.Size = new Size(330, 320);
             LoginPanel.BackColor = Color.FromArgb(70, 0, 0, 0);
-            LoginPanel.Location = new Point(230, 100);
+            LoginPanel.Location = new Point(200, 100);
 
             this.Controls.Add(LoginPanel);
         }
