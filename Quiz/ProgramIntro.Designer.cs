@@ -28,57 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonTakeExam = new System.Windows.Forms.Button();
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // buttonTakeExam
-            // 
-            this.buttonTakeExam.BackColor = System.Drawing.Color.SpringGreen;
-            this.buttonTakeExam.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTakeExam.Location = new System.Drawing.Point(445, 312);
-            this.buttonTakeExam.Name = "buttonTakeExam";
-            this.buttonTakeExam.Size = new System.Drawing.Size(194, 66);
-            this.buttonTakeExam.TabIndex = 1;
-            this.buttonTakeExam.Text = "Take an examination";
-            this.buttonTakeExam.UseVisualStyleBackColor = false;
-            this.buttonTakeExam.Click += new System.EventHandler(this.buttonTakeExam_Click);
-            // 
-            // buttonCreate
-            // 
-            this.buttonCreate.BackColor = System.Drawing.Color.SpringGreen;
-            this.buttonCreate.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCreate.Location = new System.Drawing.Point(166, 312);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(173, 66);
-            this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Create New Test";
-            this.buttonCreate.UseVisualStyleBackColor = false;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
-            // 
-            // labelTitle
-            // 
-            this.labelTitle.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelTitle.Location = new System.Drawing.Point(74, 68);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(368, 138);
-            this.labelTitle.TabIndex = 0;
-            this.labelTitle.Text = "EasyQuiz";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.SpringGreen;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 384);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 66);
-            this.panel1.TabIndex = 2;
             // 
             // button1
             // 
@@ -125,14 +79,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.buttonTakeExam);
-            this.Controls.Add(this.labelTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProgramIntro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -144,10 +94,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Button buttonTakeExam;
-        private System.Windows.Forms.Button buttonCreate;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;

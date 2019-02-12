@@ -18,9 +18,51 @@ namespace Quiz
         }
         public Panel panelHeader { get; set; }
         public Button LogOutButton { get; set; }
+        public Label labelTitle { get; set; }
+        public Button buttonCreate { get; set; }
+        public Button buttonTakeExam { get; set; }
+        public Panel PanelBottom { get; set; }
+        public Button test1 { get; set; }
+        public Button test2 { get; set; }
+        public Button test3 { get; set; }
+        public Button test4 { get; set; }
         private void LoadProgramIntroduction()
         {
-            panelHeader = new Panel();
+            PanelBottom = new Panel();
+            PanelBottom.Size = new Size(800, 66);
+            PanelBottom.Location = new Point(0,384);
+            PanelBottom.BackColor = Color.FromName("SpringGreen");
+            PanelBottom.Dock = DockStyle.Bottom;
+
+            this.Controls.Add(PanelBottom);
+
+            buttonTakeExam = new Button();
+            buttonTakeExam.Size = new Size(205,66);
+            buttonTakeExam.Location = new Point(445,312);
+            buttonTakeExam.BackColor = Color.FromName("SpringGreen");
+            buttonTakeExam.Font = new Font("Comic Sans MS", 14, FontStyle.Italic);
+            buttonTakeExam.Text = "Take an examination";
+            buttonTakeExam.Click += ButtonTakeExam_Click;
+            this.Controls.Add(buttonTakeExam);
+
+            buttonCreate = new Button();
+            buttonCreate.Text = "Create new test";
+            buttonCreate.Font= new Font("Comic Sans MS", 14, FontStyle.Italic);
+            buttonCreate.BackColor = Color.FromName("SpringGreen");
+            buttonCreate.Size = new Size(185, 66);
+            buttonCreate.Location = new Point(166, 312);
+            buttonCreate.Click += ButtonCreate_Click;
+            this.Controls.Add(buttonCreate);
+
+            labelTitle = new Label();
+            labelTitle.Size = new Size(368, 138);
+            labelTitle.Location = new Point(74, 68);
+            labelTitle.Text = "Easy Quiz";
+            labelTitle.Font = new Font("Comic Sans MS", 48, FontStyle.Italic);
+            labelTitle.BackColor = Color.FromArgb(192, 255, 192);
+            this.Controls.Add(labelTitle);
+
+             panelHeader = new Panel();
             panelHeader.Dock = DockStyle.Top;
             panelHeader.BackColor = Color.FromName("SpringGreen");
             panelHeader.Location = new Point(0, 0);
@@ -37,6 +79,36 @@ namespace Quiz
             this.Controls.Add(LogOutButton);
             this.Controls.Add(panelHeader);
         }
+
+        private void ButtonTakeExam_Click(object sender, EventArgs e)
+        {
+            form.AutoScroll = false;
+            form._IsClickedToCreate = false;
+            form._IsClickedToExam = true;
+
+            this.Hide();
+
+            if (form.ShowDialog() == DialogResult.Cancel)
+            {
+                this.Show();
+            }
+        }
+
+       
+
+        private void ButtonCreate_Click(object sender, EventArgs e)
+        {
+
+            form.AutoScroll = true;
+            form._IsClickedToCreate = true;
+            form._IsClickedToExam = false;
+            this.Hide();
+            if (form.ShowDialog() == DialogResult.Cancel)
+            {
+                this.Show();
+            }
+        }
+   
 
         private void LogOutButton_Click(object sender, EventArgs e)
         {
@@ -105,32 +177,9 @@ namespace Quiz
         }
         public bool CreateClick { get; set; }
         public bool ExamClick { get; set; }
-        private void buttonCreate_Click(object sender, EventArgs e)
-        {
-            form.AutoScroll = true;
-            form._IsClickedToCreate = true;
-            form._IsClickedToExam = false;
-            this.Hide();
-            if (form.ShowDialog() == DialogResult.Cancel)
-            {
-                this.Show();
-            }
-        }
-
+        
         public Form1 form { get; set; }
-        private void buttonTakeExam_Click(object sender, EventArgs e)
-        {
-            form.AutoScroll = false;
-            form._IsClickedToCreate = false;
-            form._IsClickedToExam = true;
-
-            this.Hide();
-
-            if (form.ShowDialog() == DialogResult.Cancel)
-            {
-                this.Show();
-            }
-        }
+       
 
     }
 }
