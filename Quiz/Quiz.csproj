@@ -155,5 +155,11 @@
   <ItemGroup>
     <None Include="Resources\trashbox.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Green-Wallpaper-35.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green-wallpaper-12.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

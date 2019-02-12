@@ -11,11 +11,59 @@ namespace Quiz
 {
     public partial class ProgramIntro : Form
     {
+
         public ProgramIntro()
         {
             InitializeComponent();
-
+            this.BackColor = Color.FromName("SpringGreen");
         }
+        public Label LoginTitle { get; set; }
+        public Panel LoginPanel { get; set; }
+        public Button ExitButton { get; set; }
+        public Label LoginNowLabel { get; set; }
+        private void LoadLoginSystem()
+        {
+            LoginNowLabel = new Label();
+            LoginNowLabel.Size = new Size(250, 70);
+            LoginNowLabel.Location = new Point(270, 100);
+            LoginNowLabel.BackColor = Color.FromArgb(70, 0, 0, 0);
+            LoginNowLabel.Text = "  Login Now";
+            LoginNowLabel.ForeColor = Color.White;
+            LoginNowLabel.Font = new Font("Comic Sans MS", 24, FontStyle.Italic);
+            this.Controls.Add(LoginNowLabel);
+
+            ExitButton = new Button();
+            ExitButton.Size = new Size(44, 33);
+            ExitButton.Location = new Point(755, 0);
+            ExitButton.BackColor = Color.FromName("SpringGreen");
+            ExitButton.Click += ExitButton_Click;
+            ExitButton.Text = "X";
+            ExitButton.ForeColor = Color.White;
+            ExitButton.Font = new Font("Comic Sans MS", 14, FontStyle.Italic);
+            this.Controls.Add(ExitButton);
+
+            LoginTitle = new Label();
+            LoginTitle.Size = new Size(600, 80);
+            LoginTitle.Location = new Point(150, 20);
+            LoginTitle.BackColor = Color.FromName("SpringGreen");
+            LoginTitle.Text = "Welcome to Easyquiz";
+            LoginTitle.ForeColor = Color.White;
+            LoginTitle.Font = new Font("Comic Sans MS", 30, FontStyle.Italic);
+            this.Controls.Add(LoginTitle);
+            
+            LoginPanel = new Panel();
+            LoginPanel.Size = new Size(300, 320);
+            LoginPanel.BackColor = Color.FromArgb(70, 0, 0, 0);
+            LoginPanel.Location = new Point(230, 100);
+
+            this.Controls.Add(LoginPanel);
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         public Panel panelHeader { get; set; }
         public Button LogOutButton { get; set; }
         public Label labelTitle { get; set; }
@@ -35,30 +83,30 @@ namespace Quiz
 
             button2 = new Button();
             button2.Size = new Size(44, 33);
-            button2.Location = new Point(727,88);
+            button2.Location = new Point(727, 88);
             this.Controls.Add(button2);
 
             button3 = new Button();
             button3.Size = new Size(44, 33);
-            button3.Location = new Point(727,123);
+            button3.Location = new Point(727, 123);
             this.Controls.Add(button3);
 
             button4 = new Button();
             button4.Size = new Size(44, 33);
-            button4.Location = new Point(682,123);
+            button4.Location = new Point(682, 123);
             this.Controls.Add(button4);
 
             PanelBottom = new Panel();
             PanelBottom.Size = new Size(800, 66);
-            PanelBottom.Location = new Point(0,384);
+            PanelBottom.Location = new Point(0, 384);
             PanelBottom.BackColor = Color.FromName("SpringGreen");
             PanelBottom.Dock = DockStyle.Bottom;
 
             this.Controls.Add(PanelBottom);
 
             buttonTakeExam = new Button();
-            buttonTakeExam.Size = new Size(205,66);
-            buttonTakeExam.Location = new Point(445,312);
+            buttonTakeExam.Size = new Size(205, 66);
+            buttonTakeExam.Location = new Point(445, 312);
             buttonTakeExam.BackColor = Color.FromName("SpringGreen");
             buttonTakeExam.Font = new Font("Comic Sans MS", 14, FontStyle.Italic);
             buttonTakeExam.Text = "Take an examination";
@@ -67,7 +115,7 @@ namespace Quiz
 
             buttonCreate = new Button();
             buttonCreate.Text = "Create new test";
-            buttonCreate.Font= new Font("Comic Sans MS", 14, FontStyle.Italic);
+            buttonCreate.Font = new Font("Comic Sans MS", 14, FontStyle.Italic);
             buttonCreate.BackColor = Color.FromName("SpringGreen");
             buttonCreate.Size = new Size(185, 66);
             buttonCreate.Location = new Point(166, 312);
@@ -82,7 +130,7 @@ namespace Quiz
             labelTitle.BackColor = Color.FromArgb(192, 255, 192);
             this.Controls.Add(labelTitle);
 
-             panelHeader = new Panel();
+            panelHeader = new Panel();
             panelHeader.Dock = DockStyle.Top;
             panelHeader.BackColor = Color.FromName("SpringGreen");
             panelHeader.Location = new Point(0, 0);
@@ -92,7 +140,7 @@ namespace Quiz
             LogOutButton.Size = new Size(80, 30);
             LogOutButton.Location = new Point(718, 1);
             LogOutButton.Text = "LogOut";
-            LogOutButton.Font= new Font("Century", 10, FontStyle.Italic);
+            LogOutButton.Font = new Font("Century", 10, FontStyle.Italic);
             LogOutButton.BackColor = Color.FromName("SpringGreen");
             LogOutButton.Click += LogOutButton_Click;
 
@@ -114,7 +162,7 @@ namespace Quiz
             }
         }
 
-       
+
 
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
@@ -128,7 +176,7 @@ namespace Quiz
                 this.Show();
             }
         }
-   
+
 
         private void LogOutButton_Click(object sender, EventArgs e)
         {
@@ -137,17 +185,20 @@ namespace Quiz
 
         private void ProgramIntro_Load(object sender, EventArgs e)
         {
+            //first sign in sign up
+            LoadLoginSystem();
+            //after this
             /////////load ProgramIntroduction
-            LoadProgramIntroduction();
-            ////////
-            form = new Form1();
-            Timer timer = new Timer();
-            timer.Interval = 1000;
-            timer.Tick += Timer_Tick; timer.Start();
-            Timer timer2 = new Timer();
-            timer2.Interval = 100;
-            timer2.Tick += Timer2_Tick;
-            timer2.Start();
+            //LoadProgramIntroduction();
+            //////////
+            //form = new Form1();
+            //Timer timer = new Timer();
+            //timer.Interval = 1000;
+            //timer.Tick += Timer_Tick; timer.Start();
+            //Timer timer2 = new Timer();
+            //timer2.Interval = 100;
+            //timer2.Tick += Timer2_Tick;
+            //timer2.Start();
             //labelDateTime.Text = DateTime.Now.ToLongTimeString();
         }
         int counter = 0;
@@ -197,9 +248,9 @@ namespace Quiz
         }
         public bool CreateClick { get; set; }
         public bool ExamClick { get; set; }
-        
+
         public Form1 form { get; set; }
-       
+
 
     }
 }

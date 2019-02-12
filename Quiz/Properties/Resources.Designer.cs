@@ -113,6 +113,26 @@ namespace Quiz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap green_wallpaper_12 {
+            get {
+                object obj = ResourceManager.GetObject("green-wallpaper-12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Green_Wallpaper_35 {
+            get {
+                object obj = ResourceManager.GetObject("Green-Wallpaper-35", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap greenhuman {
             get {
                 object obj = ResourceManager.GetObject("greenhuman", resourceCulture);
