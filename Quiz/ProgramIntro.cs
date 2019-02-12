@@ -22,21 +22,51 @@ namespace Quiz
         public Button ExitButton { get; set; }
         public Label LoginNowLabel { get; set; }
         public TextBox Emailtxb { get; set; }
-
+        public TextBox Passwordtxb { get; set; }
+        public PictureBox MessageBoxpb { get; set; }
+        public PictureBox KeyBoxpb { get; set; }
         private void LoadLoginSystem()
         {
+            Passwordtxb = new TextBox();
+            Passwordtxb.Multiline = true;
+            Passwordtxb.PasswordChar='*';
+            Passwordtxb.MaxLength = 20;
+           
+            Passwordtxb.Text = "123456";
+            Passwordtxb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
+            Passwordtxb.BackColor = Color.FromName("SpringGreen");
+            Passwordtxb.ForeColor = Color.Gray;
+            Passwordtxb.Size = new Size(230, 30);
+            Passwordtxb.Location = new Point(250, 220);
+            this.Controls.Add(Passwordtxb);
+
+            MessageBoxpb = new PictureBox();
+            MessageBoxpb.Size = new Size(33, 30);
+            MessageBoxpb.Location = new Point(215, 178);
+            MessageBoxpb.Image = Properties.Resources.msnewwhite;
+            MessageBoxpb.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(MessageBoxpb);
+
+            KeyBoxpb = new PictureBox();
+            KeyBoxpb.Size = new Size(30, 25);
+            KeyBoxpb.Location = new Point(218, 220);
+            KeyBoxpb.Image = Properties.Resources.keywhite;
+            KeyBoxpb.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(KeyBoxpb);
+
             Emailtxb = new TextBox();
             Emailtxb.Size = new Size(230, 30);
             Emailtxb.Location = new Point(250,180);
+            Emailtxb.Multiline = true;
             Emailtxb.Text = "E-MAIL";
-            Emailtxb.Font = new Font("Comic Sans MS", 8, FontStyle.Italic);
-            Emailtxb.BackColor = Color.LightGreen;
+            Emailtxb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
+            Emailtxb.BackColor = Color.FromName("SpringGreen");
             Emailtxb.ForeColor = Color.Gray;
             this.Controls.Add(Emailtxb);
             LoginNowLabel = new Label();
-            LoginNowLabel.Size = new Size(250, 70);
-            LoginNowLabel.Location = new Point(270, 100);
-            LoginNowLabel.BackColor = Color.FromArgb(70, 0, 0, 0);
+            LoginNowLabel.Size = new Size(300, 60);
+            LoginNowLabel.Location = new Point(220, 100);
+            LoginNowLabel.BackColor = Color.FromName("SpringGreen");
             LoginNowLabel.Text = " Login Now";
             LoginNowLabel.ForeColor = Color.White;
             LoginNowLabel.Font = new Font("Comic Sans MS", 24, FontStyle.Italic);
@@ -63,7 +93,7 @@ namespace Quiz
 
             LoginPanel = new Panel();
             LoginPanel.Size = new Size(330, 320);
-            LoginPanel.BackColor = Color.FromArgb(70, 0, 0, 0);
+            LoginPanel.BackColor = Color.FromName("SpringGreen");
             LoginPanel.Location = new Point(200, 100);
 
             this.Controls.Add(LoginPanel);

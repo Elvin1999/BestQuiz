@@ -161,5 +161,26 @@
   <ItemGroup>
     <None Include="Resources\green-wallpaper-12.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MessageBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keygreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\messagegreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keywhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mswhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\msnewwhite.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
