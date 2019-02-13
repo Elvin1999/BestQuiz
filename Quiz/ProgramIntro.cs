@@ -347,7 +347,7 @@ namespace Quiz
                 foreach (var item in this.Controls)
                 {
                     if(item is Label lb)
-                    {
+                    { 
                         lb.Dispose();
                     }
                     else if(item is Button bt)
