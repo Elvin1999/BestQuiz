@@ -17,7 +17,9 @@ namespace Quiz
     {
         public Form1()
         {
+
             InitializeComponent();
+
             AnswerList = new List<string>();
             QuestionListSecond = new List<QuestionBlock>();
 
@@ -356,19 +358,21 @@ namespace Quiz
         /// <param name="e"></param>
         private void SaveAsPdfButton_Click(object sender, EventArgs e)
         {
-            string answer = String.Empty;
+            string answer = String.Empty; string question = String.Empty; string newquestion = String.Empty;
             for (int i = 0; i < QuestionListSecond.Count; i++)
             {
-                AllPdfData += "[" + (i + 1).ToString() + "]" + QuestionListSecond[i].Text + "\n";
+                question = QuestionListSecond[i].Text.TrimEnd();
+                newquestion = question.TrimStart();
+                AllPdfData += "\n[" + (i + 1).ToString() + "]" + "." + newquestion + "\n\n";
                 for (int k = 0; k < QuestionListSecond[i].Answers.Count; k++)
                 {
                     answer = QuestionListSecond[i].Answers[k].Text;
                     var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
-                    AllPdfData += "[" + (i + 1).ToString() + "." + (k + 1).ToString() + "]" + answer;
+                    var newanswer = answer.TrimEnd();
+                    AllPdfData += (char)(k + 65) + ")" + newanswer;
                     if (answer == correctanswer.Text)//correct answer
                     {
                         AllPdfData += " (Correct) ";
-
                     }
                     if (AnswerList[i] == answer)//my answer
                     {
@@ -377,18 +381,17 @@ namespace Quiz
                     AllPdfData += "\n";
                 }
             }
-            var pdffile = "mypdf4.pdf";
+            var pdffile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $@"\wqw.pdf";
+
             Document document = new Document();
-            //iTextSharp.text.Rectangle rectangle = new iTextSharp.text.Rectangle(300, 450);
-            //document.SetPageSize(rectangle);
+            iTextSharp.text.Font font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12);
+            // document.
             PdfWriter.GetInstance(document, new FileStream(pdffile, FileMode.Create));
             document.Open();
             Paragraph elements = new Paragraph(AllPdfData);
             document.Add(elements);
             document.Close();
-
         }
-
         public Label CorrectAnswerPercentLabel { get; set; }
         public Label UnCorrectAnswerPercentLabel { get; set; }
         public Label EmptyAnswerPercentLabel { get; set; }
