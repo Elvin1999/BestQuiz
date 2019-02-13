@@ -20,6 +20,27 @@ namespace Quiz
             QuestionListSecond = new List<QuestionBlock>();
 
         }
+        private List<QuestionBlock> GetQuestionList(string filename)
+        {
+            QuestionList2 = new List<QuestionBlock>();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
+            if (File.Exists(filename))
+            {
+                using (FileStream f = new FileStream(filename, FileMode.OpenOrCreate))
+                {
+                    try
+                    {
+                        QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
+            return QuestionList;
+        }
         public bool _IsClickedToCreate { get; set; }
         public bool _IsClickedToExam { get; set; }
         public List<QuestionBlock> QuestionList { get; set; }
@@ -910,23 +931,87 @@ namespace Quiz
             listView.BackColor = Color.FromName("SpringGreen");
             listView.DragEnter += ListView_DragEnter;
             listView.DragDrop += ListView_DragDrop;
+            listView.SelectedIndexChanged += ListView_SelectedIndexChanged;
             this.Controls.Add(listView);
 
             Edit = new Button();
             Edit.Location = new Point(470, 40);
             Edit.Size = new Size(50, 30);
             Edit.Text = "Edit";
-            Edit.Font= new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            Edit.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
             Edit.Click += Edit_Click;
             Edit.BackColor = Color.FromName("SpringGreen");
+            Edit.Enabled = false;
             this.Controls.Add(Edit);
         }
+        public bool IsClickedToEditButton { get; set; }
+        private void ListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Edit.Enabled = true;
+            if (listView.SelectedItems.Count != 0)
+            {
+                var file = listView.SelectedItems[0].Text.ToString();
+                FileNameForSerialize = file;
+                MessageBox.Show(file);
+                GetQuestionList(file);
+                IsClickedToEditButton = true;
+                DrawQuestionBlocksByEdit();
+            }
+        }
+        public string FileNameForSerialize { get; set; }
+        int lastYlocation = 0;
+        public QuestionBlock QuestionB { get; set; }
+        private void DrawQuestionBlocksByEdit()
+        {
+            
+            lastYlocation = listView.Location.Y + 70;
+            for (int i = 0; i < QuestionList.Count; i++)
+            {
+                lastYlocation += 10;
+                TextBox textBox = new TextBox();
+                textBox.Size = new Size(500, 50);
+                textBox.BackColor = Color.FromName("SpringGreen");
+                textBox.Location = new Point(20, lastYlocation);
+                textBox.Multiline = true;                
+                lastYlocation += 70;
+                textBox.Font = new Font("Comic Sans MS", 10, FontStyle.Underline);
+                textBox.Text = (i+1).ToString() + QuestionList[i].Text;
+                this.Controls.Add(textBox);
+                for (int k = 0; k < QuestionList[i].Answers.Count; k++)
+                {
+                    TextBox answer = new TextBox();
+                    answer.Size = new Size(250, 50);
+                    answer.BackColor = Color.FromName("SpringGreen");
+                    answer.Location = new Point(120, lastYlocation+2);
+                    answer.Multiline = true;
+                    lastYlocation += 50;
+                    answer.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
+                    answer.Text = (k+1).ToString() + QuestionList[i].Answers[k].Text;
+                    this.Controls.Add(answer);
 
+                }
+            }
+        }//int currentediting = 0;
         private void Edit_Click(object sender, EventArgs e)
         {
-           //I have to see all question block that i can edit all of them . . .
-        }
+            //I have to see all question block that i can edit all of them . . .
+            //IsClickedToEditButton = true;
+            //DrawQuestionBlocksByEdit();
+            //XmlSerializer xml = new XmlSerializer(typeof(QuestionBlock[]));
+            //var result = xml.Serialize(FileNameForSerialize, xml);
+            //File.WriteAllText(FileNameForSerialize, xml);
+            XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
+            if (File.Exists(FileNameForSerialize))
+            {
+                using (var stringwriter = new System.IO.StringWriter())
+                {
+                    serializer = new XmlSerializer(this.GetType());
+                    serializer.Serialize(stringwriter, QuestionList);
 
+                };
+
+            }
+        }
         private void ListView_DragDrop(object sender, DragEventArgs e)
         {
             listView.Items.Clear();
@@ -1130,7 +1215,7 @@ namespace Quiz
                 {
                     try
                     {
-                    QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+                        QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
 
                     }
                     catch (Exception)
