@@ -577,6 +577,10 @@ namespace Quiz
                     {
                         bt.Dispose();
                     }
+                    else if(item is ListView lv)
+                    {
+                        lv.Dispose();
+                    }
                     else if (item is PictureBox pb)
                     {
                         pb.Dispose();
@@ -852,6 +856,10 @@ namespace Quiz
                     else if (item is Button bt)
                     {
                         bt.Dispose();
+                    }
+                    else if(item is ListView lv)
+                    {
+                        lv.Dispose();
                     }
                     else if (item is TextBox tb)
                     {
