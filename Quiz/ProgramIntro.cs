@@ -239,6 +239,7 @@ namespace Quiz
         public Button button4 { get; set; }
         private void LoadProgramIntroduction()
         {
+            this.BackColor = Color.FromArgb(192, 255, 192);
             button1 = new Button();
             button1.Size = new Size(44, 33);
             button1.Location = new Point(682, 88);
@@ -343,6 +344,7 @@ namespace Quiz
 
         private void LogOutButton_Click(object sender, EventArgs e)
         {
+            this.BackColor = Color.FromName("SpringGreen");
             for(int i = 0; i < 4; i++)
                 foreach (var item in this.Controls)
                 {
