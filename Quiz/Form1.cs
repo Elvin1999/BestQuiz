@@ -237,6 +237,7 @@ namespace Quiz
         public PictureBox CirclePicture { get; set; }
         public PictureBox PercentPicture { get; set; }
         public Label ResultPercentLabel { get; set; }
+        public TextBox FilenameTextBox { get; set; }
         private void LoadThirdWindowControls()
         {
             CirclePicture = new PictureBox();
@@ -260,12 +261,22 @@ namespace Quiz
             this.Controls.Add(ResultPercentLabel); this.Controls.Add(CirclePicture);
             SaveAsPdfButton = new Button();
             SaveAsPdfButton.Size = new Size(150, 40);
-            SaveAsPdfButton.Location = new Point(600, 410);
+            SaveAsPdfButton.Location = new Point(600, 440);
             SaveAsPdfButton.BackColor = Color.FromName("SpringGreen");
             SaveAsPdfButton.Text = "Save as .pdf";
             SaveAsPdfButton.Font = new System.Drawing.Font("Century", 12, FontStyle.Italic);
             SaveAsPdfButton.Click += SaveAsPdfButton_Click;
             this.Controls.Add(SaveAsPdfButton);
+            FilenameTextBox = new TextBox();
+            FilenameTextBox.Location = new Point(600, 410);
+            FilenameTextBox.BackColor = Color.FromName("SpringGreen");
+            FilenameTextBox.Text = "filename.pdf";
+            FilenameTextBox.Size = new Size(200, 25);
+            FilenameTextBox.ForeColor = Color.Gray;
+            FilenameTextBox.Enter += FilenameTextBox_Enter;
+            FilenameTextBox.Leave += FilenameTextBox_Leave;
+            FilenameTextBox.Font = new System.Drawing.Font("Century", 8, FontStyle.Italic);
+            this.Controls.Add(FilenameTextBox);
 
             PersonImagePb = new PictureBox();
             PersonImagePb.Size = new Size(180, 240);
@@ -347,6 +358,24 @@ namespace Quiz
             empty_answer_percent = (100 * EmptyCount) / QuestionList.Count;
             InceasingRate = 1;
         }
+
+        private void FilenameTextBox_Leave(object sender, EventArgs e)
+        {
+            if (FilenameTextBox.Text == String.Empty)
+            {
+                FilenameTextBox.Text = "filename.pdf";
+            }
+        }
+
+        private void FilenameTextBox_Enter(object sender, EventArgs e)
+        {
+            if (FilenameTextBox.Text == "filename.pdf")
+            {
+                FilenameTextBox.Text = String.Empty;
+            }
+
+        }
+
         //int ccount = 0;//for cycle
         //int correctindexK = -1;
         //int myanswerindexK = -1;
@@ -381,16 +410,26 @@ namespace Quiz
                     AllPdfData += "\n";
                 }
             }
-            var pdffile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $@"\wqw.pdf";
+            if (FilenameTextBox.Text != "filename.xml")
+            {
+                string pdffile = String.Empty;
+                if (FilenameTextBox.Text.Contains(".pdf"))
+                {
+                    pdffile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $@"\{FilenameTextBox.Text}";
+                }
+                else
+                {
+                    pdffile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $@"\{FilenameTextBox.Text}.pdf";
+                }
+                Document document = new Document();
+                iTextSharp.text.Font font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12);
+                PdfWriter.GetInstance(document, new FileStream(pdffile, FileMode.Create));
+                document.Open();
+                Paragraph elements = new Paragraph(AllPdfData);
+                document.Add(elements);
+                document.Close();
+            }
 
-            Document document = new Document();
-            iTextSharp.text.Font font = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12);
-            // document.
-            PdfWriter.GetInstance(document, new FileStream(pdffile, FileMode.Create));
-            document.Open();
-            Paragraph elements = new Paragraph(AllPdfData);
-            document.Add(elements);
-            document.Close();
         }
         public Label CorrectAnswerPercentLabel { get; set; }
         public Label UnCorrectAnswerPercentLabel { get; set; }
