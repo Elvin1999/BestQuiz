@@ -260,6 +260,7 @@ namespace Quiz
             SaveAsPdfButton.BackColor = Color.FromName("SpringGreen");
             SaveAsPdfButton.Text = "Save as .pdf";
             SaveAsPdfButton.Font = new Font("Century", 12, FontStyle.Italic);
+            SaveAsPdfButton.Click += SaveAsPdfButton_Click;
             this.Controls.Add(SaveAsPdfButton);
 
             PersonImagePb = new PictureBox();
@@ -342,6 +343,54 @@ namespace Quiz
             empty_answer_percent = (100 * EmptyCount) / QuestionList.Count;
             InceasingRate = 1;
         }
+        int ccount = 0;//for cycle
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveAsPdfButton_Click(object sender, EventArgs e)
+        {
+            string answer = String.Empty;
+            for (int i = 0; i < QuestionListSecond.Count; i++)
+            {
+                for (int k = 0; k < QuestionListSecond[i].Answers.Count; k++)
+                {
+
+                    answer = QuestionListSecond[i].Answers[k].Text;
+                    var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                    if (answer == correctanswer.Text)//correct answer
+                    {
+                        ++ccount;
+                        //var index=QuestionListSecond[i].Answers.FindIndex(x => x.Text == correctanswer.Text);
+                        MessageBox.Show((k+1).ToString());
+                    }
+                    if (AnswerList[i] == answer)//my answer
+                    {
+                        MessageBox.Show((k + 1).ToString());
+                        ++ccount;
+                    }
+                    if (ccount == 2)
+                    {
+                        ccount = 0;
+                        break;
+                    }
+                }
+            }
+            //for (int i = 0; i < QuestionListSecond.Count; i++)
+            //{
+            //    var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+            //    if (AnswerList[i] == correctanswer.Text)
+            //    {
+            //        ++CorrectCount;
+            //    }
+            //    else
+            //    {
+            //        ++UnCorrectCount;
+            //    }
+            //}
+        }
+
         public Label CorrectAnswerPercentLabel { get; set; }
         public Label UnCorrectAnswerPercentLabel { get; set; }
         public Label EmptyAnswerPercentLabel { get; set; }
@@ -577,7 +626,7 @@ namespace Quiz
                     {
                         bt.Dispose();
                     }
-                    else if(item is ListView lv)
+                    else if (item is ListView lv)
                     {
                         lv.Dispose();
                     }
@@ -857,7 +906,7 @@ namespace Quiz
                     {
                         bt.Dispose();
                     }
-                    else if(item is ListView lv)
+                    else if (item is ListView lv)
                     {
                         lv.Dispose();
                     }
@@ -994,7 +1043,7 @@ namespace Quiz
                     answer.Multiline = true;
                     lastYlocation += 50;
                     answer.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
-                    answer.Text = (i + 1).ToString() + "." + (k + 1).ToString() +"      "+QuestionList[i].Answers[k].Text;
+                    answer.Text = (i + 1).ToString() + "." + (k + 1).ToString() + "      " + QuestionList[i].Answers[k].Text;
                     this.Controls.Add(answer);
 
                 }
@@ -1156,7 +1205,7 @@ namespace Quiz
                 {
                     for (int k = 0; k < questionlist[curindex].Answers.Count; k++)
                     {
-                        questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                        //questionlist[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
                         RadioButton radioButton = new RadioButton();
                         radioButton.Size = new Size(350, 60);
                         radioButton.Location = new Point(110, 192 + y);
