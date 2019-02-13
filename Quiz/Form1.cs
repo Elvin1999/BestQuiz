@@ -963,7 +963,6 @@ namespace Quiz
         public QuestionBlock QuestionB { get; set; }
         private void DrawQuestionBlocksByEdit()
         {
-            
             lastYlocation = listView.Location.Y + 70;
             for (int i = 0; i < QuestionList.Count; i++)
             {
@@ -972,21 +971,22 @@ namespace Quiz
                 textBox.Size = new Size(500, 50);
                 textBox.BackColor = Color.FromName("SpringGreen");
                 textBox.Location = new Point(20, lastYlocation);
-                textBox.Multiline = true;                
+                textBox.Multiline = true;
                 lastYlocation += 70;
                 textBox.Font = new Font("Comic Sans MS", 10, FontStyle.Underline);
-                textBox.Text = (i+1).ToString() + QuestionList[i].Text;
+                textBox.Text = (i + 1).ToString() + QuestionList[i].Text;
                 this.Controls.Add(textBox);
                 for (int k = 0; k < QuestionList[i].Answers.Count; k++)
                 {
+                    lastYlocation += 5;
                     TextBox answer = new TextBox();
                     answer.Size = new Size(250, 50);
                     answer.BackColor = Color.FromName("SpringGreen");
-                    answer.Location = new Point(120, lastYlocation+2);
+                    answer.Location = new Point(120, lastYlocation + 2);
                     answer.Multiline = true;
                     lastYlocation += 50;
                     answer.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
-                    answer.Text = (k+1).ToString() + QuestionList[i].Answers[k].Text;
+                    answer.Text = (i + 1).ToString() + "." + (k + 1).ToString() +"      "+QuestionList[i].Answers[k].Text;
                     this.Controls.Add(answer);
 
                 }
@@ -1007,7 +1007,6 @@ namespace Quiz
                 {
                     serializer = new XmlSerializer(this.GetType());
                     serializer.Serialize(stringwriter, QuestionList);
-
                 };
 
             }
