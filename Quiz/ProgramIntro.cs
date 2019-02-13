@@ -25,19 +25,54 @@ namespace Quiz
         public TextBox Passwordtxb { get; set; }
         public PictureBox MessageBoxpb { get; set; }
         public PictureBox KeyBoxpb { get; set; }
+        public Label DontHaveAccountLb { get; set; }
+        public Button LoginButton { get; set; }
+        public Label RegisterNowLb { get; set; }
         private void LoadLoginSystem()
         {
+            RegisterNowLb = new Label();
+            RegisterNowLb.Size = new Size(120, 25);
+            RegisterNowLb.Location = new Point(390, 350);
+            RegisterNowLb.Text = "Register Now";
+            RegisterNowLb.Font= new Font("Comic Sans MS", 10, FontStyle.Underline);
+            RegisterNowLb.BackColor = Color.FromName("SpringGreen");
+            RegisterNowLb.ForeColor = Color.White;
+            RegisterNowLb.Click += RegisterNowLb_Click;
+            RegisterNowLb.MouseEnter += RegisterNowLb_MouseEnter;
+            RegisterNowLb.MouseLeave += RegisterNowLb_MouseLeave;
+            this.Controls.Add(RegisterNowLb);
+
+            DontHaveAccountLb = new Label();
+            DontHaveAccountLb.Size = new Size(200, 25);
+            DontHaveAccountLb.Location = new Point(230, 350);
+            DontHaveAccountLb.Text = "Don't Have an Account ?";
+            DontHaveAccountLb.Font= new Font("Comic Sans MS", 10, FontStyle.Regular);
+            DontHaveAccountLb.ForeColor = Color.White;
+            this.Controls.Add(DontHaveAccountLb);
+
+            LoginButton = new Button();
+            LoginButton.Size = new Size(130, 40);
+            LoginButton.Location = new Point(300,300);
+            LoginButton.Text = "Login";
+            LoginButton.Font = new Font("Comic Sans MS", 14, FontStyle.Bold);
+            LoginButton.BackColor = Color.FromName("SpringGreen");
+            LoginButton.ForeColor = Color.White;
+            LoginButton.Click += LoginButton_Click;
+            this.Controls.Add(LoginButton);
+            
+
             Passwordtxb = new TextBox();
             Passwordtxb.Multiline = true;
             Passwordtxb.PasswordChar='*';
-            Passwordtxb.MaxLength = 20;
-           
+            Passwordtxb.MaxLength = 20;           
             Passwordtxb.Text = "123456";
             Passwordtxb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
             Passwordtxb.BackColor = Color.FromName("SpringGreen");
             Passwordtxb.ForeColor = Color.Gray;
             Passwordtxb.Size = new Size(230, 30);
-            Passwordtxb.Location = new Point(250, 220);
+            Passwordtxb.Location = new Point(250, 230);
+            Passwordtxb.Enter += Passwordtxb_Enter;
+            Passwordtxb.Leave += Passwordtxb_Leave;
             this.Controls.Add(Passwordtxb);
 
             MessageBoxpb = new PictureBox();
@@ -49,7 +84,7 @@ namespace Quiz
 
             KeyBoxpb = new PictureBox();
             KeyBoxpb.Size = new Size(30, 25);
-            KeyBoxpb.Location = new Point(218, 220);
+            KeyBoxpb.Location = new Point(218, 230);
             KeyBoxpb.Image = Properties.Resources.keywhite;
             KeyBoxpb.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(KeyBoxpb);
@@ -62,6 +97,8 @@ namespace Quiz
             Emailtxb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
             Emailtxb.BackColor = Color.FromName("SpringGreen");
             Emailtxb.ForeColor = Color.Gray;
+            Emailtxb.Enter += Emailtxb_Enter;
+            Emailtxb.Leave += Emailtxb_Leave;
             this.Controls.Add(Emailtxb);
             LoginNowLabel = new Label();
             LoginNowLabel.Size = new Size(300, 60);
@@ -84,7 +121,7 @@ namespace Quiz
 
             LoginTitle = new Label();
             LoginTitle.Size = new Size(600, 80);
-            LoginTitle.Location = new Point(150, 20);
+            LoginTitle.Location = new Point(150, 30);
             LoginTitle.BackColor = Color.FromName("SpringGreen");
             LoginTitle.Text = "Welcome to Easyquiz";
             LoginTitle.ForeColor = Color.White;
@@ -95,8 +132,94 @@ namespace Quiz
             LoginPanel.Size = new Size(330, 320);
             LoginPanel.BackColor = Color.FromName("SpringGreen");
             LoginPanel.Location = new Point(200, 100);
+            //this.Controls.Add(LoginPanel);
+        }
 
-            this.Controls.Add(LoginPanel);
+        private void Emailtxb_Leave(object sender, EventArgs e)
+        {
+            if (Emailtxb.Text == String.Empty)
+            {
+                Emailtxb.Text = "E-MAIL";
+            }
+        }
+
+        private void Emailtxb_Enter(object sender, EventArgs e)
+        {
+            if (Emailtxb.Text == "E-MAIL")
+            {
+                Emailtxb.Text = String.Empty;
+            }
+        }
+
+        private void Passwordtxb_Leave(object sender, EventArgs e)
+        {
+            if (Passwordtxb.Text == String.Empty)
+            {
+                Passwordtxb.Text = "123456";
+            }
+        }
+
+        private void Passwordtxb_Enter(object sender, EventArgs e)
+        {
+            if (Passwordtxb.Text == "123456")
+            {
+                Passwordtxb.Text = String.Empty;
+            }
+        }
+
+        private void RegisterNowLb_MouseLeave(object sender, EventArgs e)
+        {
+            RegisterNowLb.ForeColor = Color.White;
+        }
+
+        private void RegisterNowLb_MouseEnter(object sender, EventArgs e)
+        {
+            RegisterNowLb.ForeColor = Color.Black;
+        }
+
+        private void RegisterNowLb_Click(object sender, EventArgs e)
+        {
+            //Cross to registriation
+        }
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            //Check in datebase and cross to EasyQuiz system . . .
+            /////////load ProgramIntroduction
+            for(int i=0;i<4;i++)
+                foreach (var item in this.Controls)
+                {
+                    if(item is Label lb)
+                    {
+                        lb.Dispose();
+                    }
+                    else if(item is Button bt)
+                    {
+                        bt.Dispose();
+                    }
+                    else if(item is PictureBox pb)
+                    {
+                        pb.Dispose();
+                    }
+                    else if(item is TextBox tb)
+                    {
+                        tb.Dispose();
+                    }
+                    else if(item is Panel pn)
+                    {
+                        pn.Dispose();
+                    }
+                }
+            LoadProgramIntroduction();
+            ////////
+            form = new Form1();
+            Timer timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += Timer_Tick; timer.Start();
+            Timer timer2 = new Timer();
+            timer2.Interval = 100;
+            timer2.Tick += Timer2_Tick;
+            timer2.Start();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -220,7 +343,23 @@ namespace Quiz
 
         private void LogOutButton_Click(object sender, EventArgs e)
         {
-            //LoadLoginSystem();
+            for(int i = 0; i < 4; i++)
+                foreach (var item in this.Controls)
+                {
+                    if(item is Label lb)
+                    {
+                        lb.Dispose();
+                    }
+                    else if(item is Button bt)
+                    {
+                        bt.Dispose();
+                    }
+                    else if (item is Panel pn)
+                    {
+                        pn.Dispose();
+                    }
+                }
+            LoadLoginSystem();
         }
 
         private void ProgramIntro_Load(object sender, EventArgs e)
