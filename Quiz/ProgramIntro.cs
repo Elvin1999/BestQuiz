@@ -16,6 +16,8 @@ namespace Quiz
         {
             InitializeComponent();
             this.BackColor = Color.FromName("SpringGreen");
+            Database database = new Database();
+            database.UserDataBase = new List<User>();
         }
         public Label LoginTitle { get; set; }
         public Panel LoginPanel { get; set; }
@@ -186,6 +188,7 @@ namespace Quiz
         {
             //Check in datebase and cross to EasyQuiz system . . .
             /////////load ProgramIntroduction
+
             for(int i=0;i<4;i++)
                 foreach (var item in this.Controls)
                 {
@@ -368,19 +371,7 @@ namespace Quiz
         {
             //first sign in sign up
             LoadLoginSystem();
-            //after this
-            /////////load ProgramIntroduction
-            //LoadProgramIntroduction();
-            //////////
-            //form = new Form1();
-            //Timer timer = new Timer();
-            //timer.Interval = 1000;
-            //timer.Tick += Timer_Tick; timer.Start();
-            //Timer timer2 = new Timer();
-            //timer2.Interval = 100;
-            //timer2.Tick += Timer2_Tick;
-            //timer2.Start();
-            //labelDateTime.Text = DateTime.Now.ToLongTimeString();
+ 
         }
         int counter = 0;
         private void Timer2_Tick(object sender, EventArgs e)
