@@ -130,11 +130,11 @@ namespace Quiz
             LoginTitle.Font = new Font("Comic Sans MS", 30, FontStyle.Italic);
             this.Controls.Add(LoginTitle);
 
-            LoginPanel = new Panel();
-            LoginPanel.Size = new Size(330, 320);
-            LoginPanel.BackColor = Color.FromName("SpringGreen");
-            LoginPanel.Location = new Point(200, 100);
-            //this.Controls.Add(LoginPanel);
+            //LoginPanel = new Panel();
+            //LoginPanel.Size = new Size(330, 320);
+            //LoginPanel.BackColor = Color.FromName("SpringGreen");
+            //LoginPanel.Location = new Point(200, 100);
+            ////this.Controls.Add(LoginPanel);
         }
 
         private void Emailtxb_Leave(object sender, EventArgs e)

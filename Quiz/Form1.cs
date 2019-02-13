@@ -682,6 +682,8 @@ namespace Quiz
 
         private void PictureBoxReturn_Click(object sender, EventArgs e)
         {
+            IsClickedToSubmitButton = false;
+            QuestionListSecond.Clear();
             DialogResult = DialogResult.Cancel;
         }
         public Button CreateNewOneButton { get; set; }
@@ -810,6 +812,11 @@ namespace Quiz
         /// </summary>
         private void LoadCreateOrDragTest()///////////CREATE////////////////////
         {
+            IsClickedToSubmitButton = false;
+            QuestionListSecond.Clear();
+            //QuestionList2.Clear();
+            //QuestionList.Clear();
+            MessageBox.Show("Test");
             y = 0;
             optioncount = 1;
             count_calling = 0;
@@ -983,6 +990,8 @@ namespace Quiz
             if (dialogResult == DialogResult.OK)
             {
                 DialogResult = DialogResult.Cancel;
+                IsClickedToSubmitButton = false;
+                QuestionListSecond.Clear();
             }
         }
         private void RadioButton_Click(object sender, EventArgs e)
@@ -1119,7 +1128,14 @@ namespace Quiz
             {
                 using (FileStream f = new FileStream(filename, FileMode.OpenOrCreate))
                 {
+                    try
+                    {
                     QuestionList = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
                 using (FileStream f = new FileStream(filename, FileMode.OpenOrCreate))
                 {
