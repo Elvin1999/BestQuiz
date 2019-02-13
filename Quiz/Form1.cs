@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -68,7 +70,7 @@ namespace Quiz
             metroBtnSubmit.Text = "Submit";
             metroBtnSubmit.UseCustomBackColor = true;
             metroBtnSubmit.UseCustomForeColor = true;
-            metroBtnSubmit.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
+            metroBtnSubmit.Font = new System.Drawing.Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroBtnSubmit.Click += MetroBtnSubmit_Click;
             this.Controls.Add(metroBtnSubmit);
 
@@ -80,7 +82,7 @@ namespace Quiz
             metroNextbtn.UseCustomForeColor = true;
             metroNextbtn.BackColor = Color.FromName("SpringGreen");
             metroNextbtn.Text = "Next";
-            metroNextbtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
+            metroNextbtn.Font = new System.Drawing.Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroNextbtn.Click += MetroNextbtn_Click;
             this.Controls.Add(metroNextbtn);
 
@@ -92,7 +94,7 @@ namespace Quiz
             metroBackbtn.UseCustomBackColor = true;
             metroBackbtn.UseCustomForeColor = true;
             metroBackbtn.Text = "Back";
-            metroBackbtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
+            metroBackbtn.Font = new System.Drawing.Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroBackbtn.Click += MetroBackbtn_Click;
             this.Controls.Add(metroBackbtn);
             metroAcceptbtn = new MetroFramework.Controls.MetroButton();
@@ -102,7 +104,7 @@ namespace Quiz
             metroAcceptbtn.UseCustomForeColor = true;
             metroAcceptbtn.Location = new Point(326, 490);
             metroAcceptbtn.Highlight = true;
-            metroAcceptbtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
+            metroAcceptbtn.Font = new System.Drawing.Font("Monotype Corsiva", 10, FontStyle.Italic);
             metroAcceptbtn.Text = "Accept";
             metroAcceptbtn.Click += MetroAcceptbtn_Click;
             this.Controls.Add(metroAcceptbtn);
@@ -110,27 +112,27 @@ namespace Quiz
             labelQueueQuestion = new Label();
             labelQueueQuestion.Size = new Size(120, 20);
             labelQueueQuestion.Location = new Point(12, 490);
-            labelQueueQuestion.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            labelQueueQuestion.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
             labelQueue1 = new Label();
             labelQueue1.Text = "1";
-            labelQueue1.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            labelQueue1.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
             labelQueue1.Size = new Size(30, 25);
             labelQueue1.Location = new Point(15, 40);
             labelQuestion1 = new Label();
             labelQuestion1.Size = new Size(700, 145);
             labelQuestion1.Location = new Point(45, 25);
-            labelQuestion1.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
+            labelQuestion1.Font = new System.Drawing.Font("Monotype Corsiva", 16, FontStyle.Italic);
             labelQuestion1.ForeColor = Color.FromName("Black");
             ExamTimeLabel = new Label();
             ExamTimeLabel.Size = new Size(100, 40);
             ExamTimeLabel.Location = new Point(650, 0);
             ExamTimeLabel.Text = "Exam time";
-            ExamTimeLabel.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
+            ExamTimeLabel.Font = new System.Drawing.Font("Monotype Corsiva", 16, FontStyle.Italic);
             ExamTimeLabel.ForeColor = Color.FromName("Black");
             QuizTime = new Label();
             QuizTime.Size = new Size(120, 40);
             QuizTime.Location = new Point(750, 0);
-            QuizTime.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
+            QuizTime.Font = new System.Drawing.Font("Monotype Corsiva", 16, FontStyle.Italic);
             QuizTime.Text = currenttime.ToLongTimeString();
             QuizTime.BackColor = Color.FromName("SpringGreen");
             this.Controls.Add(QuizTime); this.Controls.Add(ExamTimeLabel);
@@ -149,7 +151,7 @@ namespace Quiz
             GetResultBtn.UseCustomForeColor = true;
             GetResultBtn.Location = new Point(743, 50);
             GetResultBtn.Highlight = true;
-            GetResultBtn.Font = new Font("Monotype Corsiva", 10, FontStyle.Italic);
+            GetResultBtn.Font = new System.Drawing.Font("Monotype Corsiva", 10, FontStyle.Italic);
             GetResultBtn.Text = "GetResult";
             GetResultBtn.Click += GetResultBtn_Click;
             this.Controls.Add(GetResultBtn);
@@ -252,14 +254,14 @@ namespace Quiz
             ResultPercentLabel.Location = new Point(94, 280);
             ResultPercentLabel.Text = "29";
             ResultPercentLabel.BackColor = Color.FromName("SpringGreen");
-            ResultPercentLabel.Font = new Font("Copper", 26, FontStyle.Italic);
+            ResultPercentLabel.Font = new System.Drawing.Font("Copper", 26, FontStyle.Italic);
             this.Controls.Add(ResultPercentLabel); this.Controls.Add(CirclePicture);
             SaveAsPdfButton = new Button();
             SaveAsPdfButton.Size = new Size(150, 40);
             SaveAsPdfButton.Location = new Point(600, 410);
             SaveAsPdfButton.BackColor = Color.FromName("SpringGreen");
             SaveAsPdfButton.Text = "Save as .pdf";
-            SaveAsPdfButton.Font = new Font("Century", 12, FontStyle.Italic);
+            SaveAsPdfButton.Font = new System.Drawing.Font("Century", 12, FontStyle.Italic);
             SaveAsPdfButton.Click += SaveAsPdfButton_Click;
             this.Controls.Add(SaveAsPdfButton);
 
@@ -274,7 +276,7 @@ namespace Quiz
             BackButton.BackColor = Color.FromName("SpringGreen");
             CorrectBarButton = new Button();
             CorrectBarButton.Size = new Size(50, 230);
-            CorrectBarButton.Font = new Font("Century", 10, FontStyle.Italic);
+            CorrectBarButton.Font = new System.Drawing.Font("Century", 10, FontStyle.Italic);
             CorrectBarButton.Location = new Point(350, 220);
             CorrectBarButton.BackColor = Color.Green;
             CorrectBarButton.Text = "\nC\no\nr\nr\ne\nc\nt\n";
@@ -282,7 +284,7 @@ namespace Quiz
 
             UnCorrectBarButton = new Button();
             UnCorrectBarButton.Size = new Size(50, 230);
-            UnCorrectBarButton.Font = new Font("Century", 10, FontStyle.Italic);
+            UnCorrectBarButton.Font = new System.Drawing.Font("Century", 10, FontStyle.Italic);
             UnCorrectBarButton.Location = new Point(402, 220);
             UnCorrectBarButton.BackColor = Color.Red;
             UnCorrectBarButton.Text = "\nW\nr\no\nn\ng";
@@ -290,14 +292,14 @@ namespace Quiz
 
             EmptyAnswerButton = new Button();
             EmptyAnswerButton.Size = new Size(50, 230);
-            EmptyAnswerButton.Font = new Font("Century", 10, FontStyle.Italic);
+            EmptyAnswerButton.Font = new System.Drawing.Font("Century", 10, FontStyle.Italic);
             EmptyAnswerButton.Location = new Point(454, 220);
             EmptyAnswerButton.BackColor = Color.Orange;
             EmptyAnswerButton.Text = "\nE\nm\np\nt\ny";
             this.Controls.Add(EmptyAnswerButton);
 
             SuccessLabel = new Label();
-            SuccessLabel.Font = new Font("Monotype Corsiva", 60, FontStyle.Italic);
+            SuccessLabel.Font = new System.Drawing.Font("Monotype Corsiva", 60, FontStyle.Italic);
             SuccessLabel.Size = new Size(300, 400);
             SuccessLabel.Location = new Point(0, 25);
             SuccessLabel.Text = "Your Success .";
@@ -316,7 +318,7 @@ namespace Quiz
             timerdc.Start();
 
             CorrectAnswerPercentLabel = new Label();
-            CorrectAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
+            CorrectAnswerPercentLabel.Font = new System.Drawing.Font("Century", 10, FontStyle.Regular);
             CorrectAnswerPercentLabel.Size = new Size(50, 50);
             CorrectAnswerPercentLabel.Location = new Point(352, 98);
             CorrectAnswerPercentLabel.Text = "45";
@@ -324,7 +326,7 @@ namespace Quiz
             this.Controls.Add(CorrectAnswerPercentLabel);
 
             UnCorrectAnswerPercentLabel = new Label();
-            UnCorrectAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
+            UnCorrectAnswerPercentLabel.Font = new System.Drawing.Font("Century", 10, FontStyle.Regular);
             UnCorrectAnswerPercentLabel.Location = new Point(402, 98);
             UnCorrectAnswerPercentLabel.Size = new Size(50, 50);
             UnCorrectAnswerPercentLabel.Text = "15";
@@ -332,7 +334,7 @@ namespace Quiz
             this.Controls.Add(UnCorrectAnswerPercentLabel);
 
             EmptyAnswerPercentLabel = new Label();
-            EmptyAnswerPercentLabel.Font = new Font("Century", 10, FontStyle.Regular);
+            EmptyAnswerPercentLabel.Font = new System.Drawing.Font("Century", 10, FontStyle.Regular);
             EmptyAnswerPercentLabel.Location = new Point(452, 98);
             EmptyAnswerPercentLabel.Size = new Size(50, 50);
             EmptyAnswerPercentLabel.Text = "40";
@@ -343,7 +345,10 @@ namespace Quiz
             empty_answer_percent = (100 * EmptyCount) / QuestionList.Count;
             InceasingRate = 1;
         }
-        int ccount = 0;//for cycle
+        //int ccount = 0;//for cycle
+        //int correctindexK = -1;
+        //int myanswerindexK = -1;
+        public string AllPdfData { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -354,41 +359,34 @@ namespace Quiz
             string answer = String.Empty;
             for (int i = 0; i < QuestionListSecond.Count; i++)
             {
+                AllPdfData += "[" + (i + 1).ToString() + "]" + QuestionListSecond[i].Text + "\n";
                 for (int k = 0; k < QuestionListSecond[i].Answers.Count; k++)
                 {
-
                     answer = QuestionListSecond[i].Answers[k].Text;
                     var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
+                    AllPdfData += "[" + (i + 1).ToString() + "." + (k + 1).ToString() + "]" + answer;
                     if (answer == correctanswer.Text)//correct answer
                     {
-                        ++ccount;
-                        //var index=QuestionListSecond[i].Answers.FindIndex(x => x.Text == correctanswer.Text);
-                        MessageBox.Show((k+1).ToString());
+                        AllPdfData += " (Correct) ";
+
                     }
                     if (AnswerList[i] == answer)//my answer
                     {
-                        MessageBox.Show((k + 1).ToString());
-                        ++ccount;
+                        AllPdfData += " (YourAnswer) ";
                     }
-                    if (ccount == 2)
-                    {
-                        ccount = 0;
-                        break;
-                    }
+                    AllPdfData += "\n";
                 }
             }
-            //for (int i = 0; i < QuestionListSecond.Count; i++)
-            //{
-            //    var correctanswer = QuestionListSecond[i].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
-            //    if (AnswerList[i] == correctanswer.Text)
-            //    {
-            //        ++CorrectCount;
-            //    }
-            //    else
-            //    {
-            //        ++UnCorrectCount;
-            //    }
-            //}
+            var pdffile = "mypdf4.pdf";
+            Document document = new Document();
+            //iTextSharp.text.Rectangle rectangle = new iTextSharp.text.Rectangle(300, 450);
+            //document.SetPageSize(rectangle);
+            PdfWriter.GetInstance(document, new FileStream(pdffile, FileMode.Create));
+            document.Open();
+            Paragraph elements = new Paragraph(AllPdfData);
+            document.Add(elements);
+            document.Close();
+
         }
 
         public Label CorrectAnswerPercentLabel { get; set; }
@@ -593,7 +591,7 @@ namespace Quiz
                 Button testbtn = new Button();
                 testbtn.Size = new Size(40, 150);
                 testbtn.Location = new Point(30 + x, 100);
-                testbtn.Font = new Font("Century", 10, FontStyle.Italic);
+                testbtn.Font = new System.Drawing.Font("Century", 10, FontStyle.Italic);
                 testbtn.BackColor = Color.ForestGreen;
                 rnd = new Random();
                 testbtn.Click += Testbtn_Click;
@@ -653,7 +651,7 @@ namespace Quiz
             buttonContinue.Location = new Point(682, 446);
             buttonContinue.BackColor = Color.FromName("SpringGreen");
             buttonContinue.Text = "Continue";
-            buttonContinue.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            buttonContinue.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
             buttonContinue.Click += ButtonContinue_Click;
             this.Controls.Add(buttonContinue);
 
@@ -662,7 +660,7 @@ namespace Quiz
             Refresh.Location = new Point(550, 446);
             Refresh.BackColor = Color.FromName("SpringGreen");
             Refresh.Text = "Refresh";
-            Refresh.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            Refresh.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
             Refresh.Click += Refresh_Click;
             this.Controls.Add(Refresh);
 
@@ -676,7 +674,7 @@ namespace Quiz
             CountOfQuest = new Label();
             CountOfQuest.BackColor = Color.FromName("SpringGreen");
             CountOfQuest.Text = "Count of question";
-            CountOfQuest.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            CountOfQuest.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
             CountOfQuest.Size = new Size(150, 30);
             CountOfQuest.Location = new Point(100, 457);
             this.Controls.Add(CountOfQuest);
@@ -691,7 +689,7 @@ namespace Quiz
             QuestionLabelFirstW = new Label();
             QuestionLabelFirstW.Size = new Size(235, 59);
             QuestionLabelFirstW.Location = new Point(65, 22);
-            QuestionLabelFirstW.Font = new Font("Monotype Corsiva", 36, FontStyle.Italic);
+            QuestionLabelFirstW.Font = new System.Drawing.Font("Monotype Corsiva", 36, FontStyle.Italic);
             QuestionLabelFirstW.BackColor = Color.FromName("SpringGreen");
             QuestionLabelFirstW.Text = "Quiz list";
             this.Controls.Add(QuestionLabelFirstW);
@@ -699,7 +697,7 @@ namespace Quiz
             textBoxSearch = new TextBox();
             textBoxSearch.Size = new Size(172, 25);
             textBoxSearch.Location = new Point(537, 22);
-            textBoxSearch.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            textBoxSearch.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
             textBoxSearch.BackColor = Color.FromName("SpringGreen");
             textBoxSearch.Text = "Search";
             textBoxSearch.KeyPress += TextBoxSearch_KeyPress;
@@ -777,14 +775,14 @@ namespace Quiz
             LineOfQuestion.Size = new Size(44, 33);
             LineOfQuestion.Location = new Point(10, point.Y);
             LineOfQuestion.Text = count_calling.ToString();
-            LineOfQuestion.Font = new Font("Monotype Corsiva", 16, FontStyle.Italic);
+            LineOfQuestion.Font = new System.Drawing.Font("Monotype Corsiva", 16, FontStyle.Italic);
             LineOfQuestion.BackColor = Color.FromName("SpringGreen");
             this.Controls.Add(LineOfQuestion);
 
             QuestionContent = new TextBox();
             QuestionContent.Size = new Size(450, 100);
             QuestionContent.BackColor = Color.FromName("SpringGreen");
-            QuestionContent.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            QuestionContent.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
             QuestionContent.ForeColor = Color.FromName("Black");
             QuestionContent.Multiline = true;
             QuestionContent.Location = new Point(60, point.Y);
@@ -800,14 +798,14 @@ namespace Quiz
             Option.BackColor = Color.FromName("SpringGreen");
             Option.ForeColor = Color.FromName("Black");
             Option.Text = $"1.Option";
-            Option.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            Option.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
             this.Controls.Add(Option);
 
             AnswerRadioButton = new RadioButton();
             AnswerRadioButton.Size = new Size(40, 30);
             AnswerRadioButton.Text = "No";
             AnswerRadioButton.Location = new Point(10, point.Y + 115);
-            AnswerRadioButton.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            AnswerRadioButton.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
 
 
             DeleteOptionFromEnd = new PictureBox();
@@ -859,7 +857,7 @@ namespace Quiz
             Option.BackColor = Color.FromName("SpringGreen");
             Option.ForeColor = Color.FromName("Black");
             Option.Text = $"{optioncount}.Option ";
-            Option.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            Option.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
             this.Controls.Add(Option);
 
 
@@ -942,7 +940,7 @@ namespace Quiz
             CreateNewOneButton.BackColor = Color.FromName("SpringGreen");
             CreateNewOneButton.Click += CreateNewOneButton_Click;
             CreateNewOneButton.Text = "Create new one";
-            CreateNewOneButton.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            CreateNewOneButton.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
             this.Controls.Add(CreateNewOneButton);
 
             GoToTestButton = new Button();
@@ -951,7 +949,7 @@ namespace Quiz
             GoToTestButton.BackColor = Color.FromName("SpringGreen");
             GoToTestButton.Click += GoToTestButton_Click;
             GoToTestButton.Text = "Save and Go to tests";
-            GoToTestButton.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            GoToTestButton.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
             GoToTestButton.Enabled = false;
             //if you clicked to save button This button will enabled true
             this.Controls.Add(GoToTestButton);
@@ -962,7 +960,7 @@ namespace Quiz
             EditByDrag.BackColor = Color.FromName("SpringGreen");
             EditByDrag.Click += EditByDrag_Click;
             EditByDrag.Text = "Edit by draging";
-            EditByDrag.Font = new Font("Monotype Corsiva", 14, FontStyle.Italic);
+            EditByDrag.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
             this.Controls.Add(EditByDrag);
         }
         public QuestionBlock question { get; set; }
@@ -995,7 +993,7 @@ namespace Quiz
             Edit.Location = new Point(470, 40);
             Edit.Size = new Size(50, 30);
             Edit.Text = "Edit";
-            Edit.Font = new Font("Monotype Corsiva", 12, FontStyle.Italic);
+            Edit.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
             Edit.Click += Edit_Click;
             Edit.BackColor = Color.FromName("SpringGreen");
             Edit.Enabled = false;
@@ -1030,7 +1028,7 @@ namespace Quiz
                 textBox.Location = new Point(20, lastYlocation);
                 textBox.Multiline = true;
                 lastYlocation += 70;
-                textBox.Font = new Font("Comic Sans MS", 10, FontStyle.Underline);
+                textBox.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Underline);
                 textBox.Text = (i + 1).ToString() + QuestionList[i].Text;
                 this.Controls.Add(textBox);
                 for (int k = 0; k < QuestionList[i].Answers.Count; k++)
@@ -1042,7 +1040,7 @@ namespace Quiz
                     answer.Location = new Point(120, lastYlocation + 2);
                     answer.Multiline = true;
                     lastYlocation += 50;
-                    answer.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
+                    answer.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
                     answer.Text = (i + 1).ToString() + "." + (k + 1).ToString() + "      " + QuestionList[i].Answers[k].Text;
                     this.Controls.Add(answer);
 
@@ -1165,7 +1163,7 @@ namespace Quiz
             BackButton.UseCustomBackColor = true;
             BackButton.UseCustomForeColor = true;
             BackButton.BackColor = Color.FromName("SpringGreen");
-            BackButton.Font = new Font("Century", 12, FontStyle.Italic);
+            BackButton.Font = new System.Drawing.Font("Century", 12, FontStyle.Italic);
             BackButton.Size = new Size(50, 23);
             BackButton.Location = new Point(0, 0);
             BackButton.Highlight = true;
@@ -1211,7 +1209,7 @@ namespace Quiz
                         radioButton.Location = new Point(110, 192 + y);
 
                         radioButton.Text = questionlist[curindex].Answers[k].Text;
-                        radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                        radioButton.Font = new System.Drawing.Font("Century", 10, FontStyle.Italic);
                         y += 60;
                         var correctanswer = QuestionListSecond[curindex].Answers.SingleOrDefault(x => x.IsCorrect == "Yes");
                         if (radioButton.Text == correctanswer.Text)
@@ -1246,7 +1244,7 @@ namespace Quiz
                         radioButton.Size = new Size(350, 60);
                         radioButton.Location = new Point(56, 192 + y);
                         radioButton.Text = questionlist[curindex].Answers[k].Text;
-                        radioButton.Font = new Font("Century", 10, FontStyle.Italic);
+                        radioButton.Font = new System.Drawing.Font("Century", 10, FontStyle.Italic);
                         y += 60;
                         radioButton.Click += RadioButton_Click;
                         this.Controls.Add(radioButton);
