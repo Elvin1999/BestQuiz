@@ -69,7 +69,7 @@ namespace Quiz
             Passwordtxb.Multiline = true;
             Passwordtxb.PasswordChar = '*';
             Passwordtxb.MaxLength = 20;
-            Passwordtxb.Text = "123456";
+            Passwordtxb.Text = "admin";
             Passwordtxb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
             Passwordtxb.BackColor = Color.FromName("SpringGreen");
             Passwordtxb.ForeColor = Color.Gray;
@@ -102,6 +102,7 @@ namespace Quiz
             Emailtxb.BackColor = Color.FromName("SpringGreen");
             Emailtxb.ForeColor = Color.Gray;
             Emailtxb.Enter += Emailtxb_Enter;
+            Emailtxb.KeyPress += Emailtxb_KeyPress;
             Emailtxb.Leave += Emailtxb_Leave;
             this.Controls.Add(Emailtxb);
             LoginNowLabel = new Label();
@@ -131,12 +132,19 @@ namespace Quiz
             LoginTitle.ForeColor = Color.White;
             LoginTitle.Font = new Font("Comic Sans MS", 30, FontStyle.Italic);
             this.Controls.Add(LoginTitle);
+        }
 
-            //LoginPanel = new Panel();
-            //LoginPanel.Size = new Size(330, 320);
-            //LoginPanel.BackColor = Color.FromName("SpringGreen");
-            //LoginPanel.Location = new Point(200, 100);
-            ////this.Controls.Add(LoginPanel);
+        private void Emailtxb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (regex.IsMatch(Emailtxb.Text))
+            {
+                Emailtxb.ForeColor = Color.Green;
+            }
+            else
+            {
+                Emailtxb.ForeColor = Color.Red;
+            }
         }
 
         private void Emailtxb_Leave(object sender, EventArgs e)
@@ -159,13 +167,13 @@ namespace Quiz
         {
             if (Passwordtxb.Text == String.Empty)
             {
-                Passwordtxb.Text = "123456";
+                Passwordtxb.Text = "admin";
             }
         }
 
         private void Passwordtxb_Enter(object sender, EventArgs e)
         {
-            if (Passwordtxb.Text == "123456")
+            if (Passwordtxb.Text == "admin")
             {
                 Passwordtxb.Text = String.Empty;
             }
@@ -185,58 +193,104 @@ namespace Quiz
         {
             //Cross to registriation
         }
-
+        public Label ErrorEmailLabel { get; set; }
+        public Label ErrorPasswordLabel { get; set; }
         private void LoginButton_Click(object sender, EventArgs e)
         {
             //Check in datebase and cross to EasyQuiz system . . .
             /////////load ProgramIntroduction
 
-
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            if (regex.IsMatch(Emailtxb.Text))
+            try
             {
-                var item1 = userContext.Users.SingleOrDefault(x => x.Email == Emailtxb.Text);
-                if (item1 != null)
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                if (regex.IsMatch(Emailtxb.Text))
                 {
-                    if (item1.Password == Passwordtxb.Text)
+                    var item1 = userContext.Users.SingleOrDefault(x => x.Email == Emailtxb.Text);
+                    Emailtxb.ForeColor = Color.Green;
+                    if (item1 != null)
                     {
-                        for (int i = 0; i < 4; i++)
-                            foreach (var item in this.Controls)
-                            {
-                                if (item is Label lb)
+                        if (item1.Password == Passwordtxb.Text)
+                        {
+                            Passwordtxb.ForeColor = Color.Green;
+                            for (int i = 0; i < 4; i++)
+                                foreach (var item in this.Controls)
                                 {
-                                    lb.Dispose();
+                                    if (item is Label lb)
+                                    {
+                                        lb.Dispose();
+                                    }
+                                    else if (item is Button bt)
+                                    {
+                                        bt.Dispose();
+                                    }
+                                    else if (item is PictureBox pb)
+                                    {
+                                        pb.Dispose();
+                                    }
+                                    else if (item is TextBox tb)
+                                    {
+                                        tb.Dispose();
+                                    }
+                                    else if (item is Panel pn)
+                                    {
+                                        pn.Dispose();
+                                    }
                                 }
-                                else if (item is Button bt)
-                                {
-                                    bt.Dispose();
-                                }
-                                else if (item is PictureBox pb)
-                                {
-                                    pb.Dispose();
-                                }
-                                else if (item is TextBox tb)
-                                {
-                                    tb.Dispose();
-                                }
-                                else if (item is Panel pn)
-                                {
-                                    pn.Dispose();
-                                }
-                            }
-                        LoadProgramIntroduction();
-                        form = new Form1();
-                        Timer timer = new Timer();
-                        timer.Interval = 1000;
-                        timer.Tick += Timer_Tick; timer.Start();
-                        Timer timer2 = new Timer();
-                        timer2.Interval = 100;
-                        timer2.Tick += Timer2_Tick;
-                        timer2.Start();
+                            LoadProgramIntroduction();
+                            form = new Form1();
+                            Timer timer = new Timer();
+                            timer.Interval = 1000;
+                            timer.Tick += Timer_Tick; timer.Start();
+                            Timer timer2 = new Timer();
+                            timer2.Interval = 100;
+                            timer2.Tick += Timer2_Tick;
+                            timer2.Start();
+                        }
+                        else
+                        {
+                            Passwordtxb.ForeColor = Color.Red;//password is not correct
+                            ErrorEmailLabel.Dispose();                                  //MessageBox.Show("password is not correct");
+                            ErrorPasswordLabel = new Label();
+                            ErrorPasswordLabel.Size = new Size(230, 30);
+                            ErrorPasswordLabel.Location = new Point(250, 262);
+                            ErrorPasswordLabel.Text = "Password is not correct";
+                            ErrorPasswordLabel.ForeColor = Color.Red;
+                            ErrorPasswordLabel.Font = new Font("Comic Sans Ms", 10, FontStyle.Regular);
+                            this.Controls.Add(ErrorPasswordLabel);
+                        }
                     }
+                    else
+                    {
+
+                        Emailtxb.ForeColor = Color.Red;//i did not find item but regex is correct . . .
+                        //MessageBox.Show("I did not find item but regex is correct");
+                        ErrorEmailLabel = new Label();
+                        ErrorEmailLabel.Size = new Size(400, 30);
+                        ErrorEmailLabel.Location = new Point(250, 212);
+                        ErrorEmailLabel.Text = $"{Emailtxb.Text} didn't find write correct email or register.";
+                        ErrorEmailLabel.ForeColor = Color.Red;
+                        ErrorEmailLabel.Font = new Font("Comic Sans MS", 8, FontStyle.Regular);
+                        this.Controls.Add(ErrorEmailLabel);
+                    }
+
+                }
+                else
+                {
+                    Emailtxb.ForeColor = Color.Red;//regex is not correct
+                    ErrorEmailLabel = new Label();
+                    ErrorEmailLabel.Size = new Size(260, 30);
+                    ErrorEmailLabel.Location = new Point(250, 212);
+                    ErrorEmailLabel.Text = $"Email is not correct";
+                    ErrorEmailLabel.ForeColor = Color.Red;
+                    ErrorEmailLabel.Font = new Font("Comic Sans MS", 9, FontStyle.Regular);
+                    this.Controls.Add(ErrorEmailLabel);
+                    //MessageBox.Show("Regex is not correct");
                 }
             }
-            ////////
+            catch (Exception)
+            {
+            }
+
 
         }
 
