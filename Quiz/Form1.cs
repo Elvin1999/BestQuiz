@@ -366,7 +366,6 @@ namespace Quiz
                 FilenameTextBox.Text = "filename.pdf";
             }
         }
-
         private void FilenameTextBox_Enter(object sender, EventArgs e)
         {
             if (FilenameTextBox.Text == "filename.pdf")
