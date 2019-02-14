@@ -215,12 +215,10 @@ namespace Quiz
             RgsReplayPasswordtb.Location = new Point(250, 270);
             RgsReplayPasswordtb.KeyPress += RgsReplayPasswordtb_KeyPress;
             RgsReplayPasswordtb.Enabled = false;
-            //RgsReplayPasswordtb.Enter += Passwordtxb_Enter;
-            //RgsReplayPasswordtb.Leave += Passwordtxb_Leave;
             this.Controls.Add(RgsReplayPasswordtb);
             RgsReplayPasswordLb = new Label();
-            RgsReplayPasswordLb.Size = new Size(180, 30);
-            RgsReplayPasswordLb.Location = new Point(484, 273);
+            RgsReplayPasswordLb.Size = new Size(120, 30);
+            RgsReplayPasswordLb.Location = new Point(90, 273);
             RgsReplayPasswordLb.ForeColor = Color.Gray;
             RgsReplayPasswordLb.Text = "Replay Password";
             RgsReplayPasswordLb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
@@ -233,9 +231,9 @@ namespace Quiz
             RgsEmailtb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
             RgsEmailtb.BackColor = Color.FromName("SpringGreen");
             RgsEmailtb.ForeColor = Color.Gray;
-            RgsEmailtb.Enter += Emailtxb_Enter;
+            RgsEmailtb.Enter += RgsEmailtb_Enter;
             RgsEmailtb.KeyPress += RgsEmailtb_KeyPress;
-            RgsEmailtb.Leave += Emailtxb_Leave;
+            RgsEmailtb.Leave += RgsEmailtb_Leave;
             this.Controls.Add(RgsEmailtb);
             RegistriationLabel = new Label();
             RegistriationLabel.Size = new Size(600, 80);
@@ -267,23 +265,53 @@ namespace Quiz
 
         }
 
+        private void RgsEmailtb_Leave(object sender, EventArgs e)
+        {
+
+            if (RgsEmailtb.Text == String.Empty)
+            {
+                RgsEmailtb.Text = "E-MAIL";
+            }
+        }
+        private void RgsEmailtb_Enter(object sender, EventArgs e)
+        {
+            if (RgsEmailtb.Text == "E-MAIL")
+            {
+                RgsEmailtb.Text = String.Empty;
+            }
+        }
+
         private void RgsPasswordtb_Leave(object sender, EventArgs e)
         {
-           
+            if (RgsPasswordtb.Text == String.Empty)
+            {
+                RgsPasswordtb.Text = "admin";
+            }
         }
 
         private void RgsPasswordtb_Enter(object sender, EventArgs e)
         {
             try
             {
+                if (RgsPasswordtb.Text == "admin")
+                {
+                    RgsPasswordtb.Text = String.Empty;
+                }
                 var item = userContext.Users.SingleOrDefault(x => x.Email == RgsEmailtb.Text);
                 if (item != null)
-                {
-                    MessageBox.Show($"{RgsEmailtb.Text} is already exist");
+                {                    
+                    ErrorEmailLabel = new Label();
+                    ErrorEmailLabel.Size = new Size(230, 30);
+                    ErrorEmailLabel.Location = new Point(280, 212);
+                    ErrorEmailLabel.Text = $"{RgsEmailtb.Text} is already exist";
+                    ErrorEmailLabel.ForeColor = Color.Red;
+                    ErrorEmailLabel.Font = new Font("Comic Sans MS", 8, FontStyle.Regular);
+                    this.Controls.Add(ErrorEmailLabel);
                     RgsPasswordtb.Enabled = false;
                 }
                 else
                 {
+                    ErrorEmailLabel.Dispose();
                     RgsPasswordtb.Enabled = true;
                 }
             }
@@ -385,33 +413,44 @@ namespace Quiz
                     {
                         if (RgsPasswordtb.Text.Length < 8)
                         {
-                            MessageBox.Show("Must be at least 8 character . . .");
-                            //MessageBox.Show(RgsPasswordtb.Text.Length.ToString());
+                            ErrorPasswordLabel = new Label();
+                            ErrorPasswordLabel.Size = new Size(230, 30);
+                            ErrorPasswordLabel.Location = new Point(484, 237);
+                            ErrorPasswordLabel.Text = "Must be at least 8 character";
+                            ErrorPasswordLabel.ForeColor = Color.Red;
+                            ErrorPasswordLabel.Font = new Font("Comic Sans Ms", 10, FontStyle.Regular);
+                            this.Controls.Add(ErrorPasswordLabel);
                             RgsReplayPasswordtb.Enabled = false;
                             return false;
                         }
                         else
                         {
-                            MessageBox.Show("Password okay");
+                            ErrorPasswordLabel.Dispose();
                             RgsReplayPasswordtb.Enabled = true;
                             if (RgsReplayPasswordtb.Text == RgsPasswordtb.Text)
                             {
-                                MessageBox.Show("Replay Password okay");
                                 RgsReplayPasswordtb.ForeColor = Color.Green;
+                                ErrorPasswordLabel.Dispose();
                                 return true;
                             }
                             else
                             {
-                                MessageBox.Show("Replay Password is not correct");
+                                ErrorPasswordLabel = new Label();
+                                ErrorPasswordLabel.Size = new Size(230, 30);
+                                ErrorPasswordLabel.Location = new Point(484, 280);
+                                ErrorPasswordLabel.Text = "Replay Password is not correct";
+                                ErrorPasswordLabel.ForeColor = Color.Red;
+                                ErrorPasswordLabel.Font = new Font("Comic Sans Ms", 10, FontStyle.Regular);
+                                this.Controls.Add(ErrorPasswordLabel);
                                 RgsReplayPasswordtb.ForeColor = Color.Red;
                                 return false;
                             }
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show($"{RgsEmailtb.Text} is already exist");
-                    }
+                    //else
+                    //{
+                    //    //MessageBox.Show($"{RgsEmailtb.Text} is already exist");
+                    //}
 
                 }
                 else
