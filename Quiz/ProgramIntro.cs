@@ -133,7 +133,160 @@ namespace Quiz
             LoginTitle.Font = new Font("Comic Sans MS", 30, FontStyle.Italic);
             this.Controls.Add(LoginTitle);
         }
+        public Label RegistriationLabel { get; set; }
+        public PictureBox RgsEmailbx { get; set; }
+        public PictureBox RgsPasswordbx { get; set; }
+        public TextBox RgsEmailtb { get; set; }
+        public TextBox RgsPasswordtb { get; set; }
+        public TextBox RgsReplayPasswordtb { get; set; }
+        public Label RgsReplayPasswordLb { get; set; }
+        public Button RgsLoginbt { get; set; }
+        private void LoadRegistriationSection()
+        {
+            for (int i = 0; i < 4; i++)
+                foreach (var item in this.Controls)
+                {
+                    if (item is TextBox tb)
+                    {
+                        tb.Dispose();
+                    }
+                    else if (item is Label lb)
+                    {
+                        lb.Dispose();
+                    }
+                    else if (item is Button bt)
+                    {
+                        bt.Dispose();
+                    }
+                    else if (item is Panel pn)
+                    {
+                        pn.Dispose();
+                    }
+                    else if (item is PictureBox pb)
+                    {
+                        pb.Dispose();
+                    }
+                }/////////////
+            RgsLoginbt = new Button();
+            RgsLoginbt.Size = new Size(100, 33);
+            RgsLoginbt.Location = new Point(700, 0);
+            RgsLoginbt.BackColor = Color.FromName("SpringGreen");
+            RgsLoginbt.Click += RgsLoginbt_Click;
+            RgsLoginbt.Text = "Login";
+            RgsLoginbt.ForeColor = Color.White;
+            RgsLoginbt.Font = new Font("Comic Sans MS", 14, FontStyle.Italic);
+            this.Controls.Add(RgsLoginbt);
 
+            RgsPasswordtb = new TextBox();
+            RgsPasswordtb.Multiline = true;
+            RgsPasswordtb.PasswordChar = '*';
+            RgsPasswordtb.MaxLength = 20;
+            RgsPasswordtb.Text = "admin";
+            RgsPasswordtb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
+            RgsPasswordtb.BackColor = Color.FromName("SpringGreen");
+            RgsPasswordtb.ForeColor = Color.Gray;
+            RgsPasswordtb.Size = new Size(230, 30);
+            RgsPasswordtb.Location = new Point(250, 230);
+            RgsPasswordtb.Enter += Passwordtxb_Enter;
+            RgsPasswordtb.Leave += Passwordtxb_Leave;
+            RgsPasswordtb.Enabled = false;
+            this.Controls.Add(RgsPasswordtb);
+            RgsReplayPasswordtb = new TextBox();
+            RgsReplayPasswordtb.Multiline = true;
+            RgsReplayPasswordtb.PasswordChar = '*';
+            RgsReplayPasswordtb.MaxLength = 20;
+            RgsReplayPasswordtb.Text = "";
+            RgsReplayPasswordtb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
+            RgsReplayPasswordtb.BackColor = Color.FromName("SpringGreen");
+            RgsReplayPasswordtb.ForeColor = Color.Gray;
+            RgsReplayPasswordtb.Size = new Size(230, 30);
+            RgsReplayPasswordtb.Location = new Point(250, 270);
+            RgsReplayPasswordtb.Enabled = false;
+            //RgsReplayPasswordtb.Enter += Passwordtxb_Enter;
+            //RgsReplayPasswordtb.Leave += Passwordtxb_Leave;
+            this.Controls.Add(RgsReplayPasswordtb);
+            RgsReplayPasswordLb = new Label();
+            RgsReplayPasswordLb.Size = new Size(180, 30);
+            RgsReplayPasswordLb.Location = new Point(484, 273);
+            RgsReplayPasswordLb.ForeColor = Color.Gray;
+            RgsReplayPasswordLb.Text = "Replay Password";
+            RgsReplayPasswordLb.Font= new Font("Comic Sans MS", 10, FontStyle.Italic);
+            this.Controls.Add(RgsReplayPasswordLb);
+            RgsEmailtb = new TextBox();
+            RgsEmailtb.Size = new Size(230, 30);
+            RgsEmailtb.Location = new Point(250, 180);
+            RgsEmailtb.Multiline = true;
+            RgsEmailtb.Text = "E-MAIL";
+            RgsEmailtb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
+            RgsEmailtb.BackColor = Color.FromName("SpringGreen");
+            RgsEmailtb.ForeColor = Color.Gray;
+            RgsEmailtb.Enter += Emailtxb_Enter;
+            RgsEmailtb.KeyPress += Emailtxb_KeyPress;
+            RgsEmailtb.Leave += Emailtxb_Leave;
+            this.Controls.Add(RgsEmailtb);
+            RegistriationLabel = new Label();
+            RegistriationLabel.Size = new Size(600, 80);
+            RegistriationLabel.Location = new Point(150, 30);
+            RegistriationLabel.BackColor = Color.FromName("SpringGreen");
+            RegistriationLabel.Text = "Registriation";
+            RegistriationLabel.ForeColor = Color.White;
+            RegistriationLabel.Font = new Font("Comic Sans MS", 30, FontStyle.Italic);
+            this.Controls.Add(RegistriationLabel);
+            RgsEmailbx = new PictureBox();
+            RgsEmailbx.Size = new Size(33, 30);
+            RgsEmailbx.Location = new Point(215, 178);
+            RgsEmailbx.Image = Properties.Resources.msnewwhite;
+            RgsEmailbx.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(RgsEmailbx);
+
+            RgsPasswordbx = new PictureBox();
+            RgsPasswordbx.Size = new Size(30, 25);
+            RgsPasswordbx.Location = new Point(218, 230);
+            RgsPasswordbx.Image = Properties.Resources.keywhite;
+            RgsPasswordbx.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(RgsPasswordbx);
+            RgsPasswordbx = new PictureBox();
+            RgsPasswordbx.Size = new Size(30, 25);
+            RgsPasswordbx.Location = new Point(218, 270);
+            RgsPasswordbx.Image = Properties.Resources.keywhite;
+            RgsPasswordbx.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(RgsPasswordbx);
+
+        }
+
+        private void RgsLoginbt_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 4; i++)
+                foreach (var item in this.Controls)
+                {
+                    if (item is TextBox tb)
+                    {
+                        tb.Dispose();
+                    }
+                    else if (item is Label lb)
+                    {
+                        lb.Dispose();
+                    }
+                    else if (item is Button bt)
+                    {
+                        bt.Dispose();
+                    }
+                    else if (item is Panel pn)
+                    {
+                        pn.Dispose();
+                    }
+                    else if (item is PictureBox pb)
+                    {
+                        pb.Dispose();
+                    }
+                }/////////////
+            LoadLoginSystem();
+        }
+
+        //private bool IsCorrectRegistriation()
+        //{
+        //    return true;
+        //}
         private void Emailtxb_KeyPress(object sender, KeyPressEventArgs e)
         {
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
@@ -188,10 +341,10 @@ namespace Quiz
         {
             RegisterNowLb.ForeColor = Color.Black;
         }
-
+        
         private void RegisterNowLb_Click(object sender, EventArgs e)
         {
-            //Cross to registriation
+            LoadRegistriationSection();
         }
         public Label ErrorEmailLabel { get; set; }
         public Label ErrorPasswordLabel { get; set; }
