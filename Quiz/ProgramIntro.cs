@@ -141,6 +141,7 @@ namespace Quiz
         public TextBox RgsReplayPasswordtb { get; set; }
         public Label RgsReplayPasswordLb { get; set; }
         public Button RgsLoginbt { get; set; }
+        public Button Registerbt { get; set; }
         private void LoadRegistriationSection()
         {
             for (int i = 0; i < 4; i++)
@@ -167,6 +168,16 @@ namespace Quiz
                         pb.Dispose();
                     }
                 }/////////////
+            Registerbt = new Button();
+            Registerbt.Size = new Size(130, 40);
+            Registerbt.Location = new Point(300, 330);
+            Registerbt.Text = "Register";
+            Registerbt.Font = new Font("Comic Sans MS", 14, FontStyle.Bold);
+            Registerbt.BackColor = Color.FromName("SpringGreen");
+            Registerbt.ForeColor = Color.White;
+            //LoginButton.Click += LoginButton_Click;
+            this.Controls.Add(Registerbt);
+
             RgsLoginbt = new Button();
             RgsLoginbt.Size = new Size(100, 33);
             RgsLoginbt.Location = new Point(700, 0);
