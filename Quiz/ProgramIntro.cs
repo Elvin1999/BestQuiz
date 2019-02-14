@@ -198,8 +198,8 @@ namespace Quiz
             RgsPasswordtb.ForeColor = Color.Gray;
             RgsPasswordtb.Size = new Size(230, 30);
             RgsPasswordtb.Location = new Point(250, 230);
-            RgsPasswordtb.Enter += Passwordtxb_Enter;
-            RgsPasswordtb.Leave += Passwordtxb_Leave;
+            RgsPasswordtb.Enter += RgsPasswordtb_Enter;
+            RgsPasswordtb.Leave += RgsPasswordtb_Leave;
             RgsPasswordtb.KeyPress += RgsPasswordtb_KeyPress;
             RgsPasswordtb.Enabled = false;
             this.Controls.Add(RgsPasswordtb);
@@ -213,6 +213,7 @@ namespace Quiz
             RgsReplayPasswordtb.ForeColor = Color.Gray;
             RgsReplayPasswordtb.Size = new Size(230, 30);
             RgsReplayPasswordtb.Location = new Point(250, 270);
+            RgsReplayPasswordtb.KeyPress += RgsReplayPasswordtb_KeyPress;
             RgsReplayPasswordtb.Enabled = false;
             //RgsReplayPasswordtb.Enter += Passwordtxb_Enter;
             //RgsReplayPasswordtb.Leave += Passwordtxb_Leave;
@@ -264,6 +265,36 @@ namespace Quiz
             RgsPasswordbx.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(RgsPasswordbx);
 
+        }
+
+        private void RgsPasswordtb_Leave(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void RgsPasswordtb_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                var item = userContext.Users.SingleOrDefault(x => x.Email == RgsEmailtb.Text);
+                if (item != null)
+                {
+                    MessageBox.Show($"{RgsEmailtb.Text} is already exist");
+                    RgsPasswordtb.Enabled = false;
+                }
+                else
+                {
+                    RgsPasswordtb.Enabled = true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+        }
+
+        private void RgsReplayPasswordtb_KeyPress(object sender, KeyPressEventArgs e)
+        {/////////after I have make some problem in here
         }
 
         private void RgsPasswordtb_KeyPress(object sender, KeyPressEventArgs e)
@@ -366,11 +397,13 @@ namespace Quiz
                             if (RgsReplayPasswordtb.Text == RgsPasswordtb.Text)
                             {
                                 MessageBox.Show("Replay Password okay");
+                                RgsReplayPasswordtb.ForeColor = Color.Green;
                                 return true;
                             }
                             else
                             {
                                 MessageBox.Show("Replay Password is not correct");
+                                RgsReplayPasswordtb.ForeColor = Color.Red;
                                 return false;
                             }
                         }
