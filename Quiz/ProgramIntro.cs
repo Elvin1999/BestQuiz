@@ -175,7 +175,7 @@ namespace Quiz
             Registerbt.Font = new Font("Comic Sans MS", 14, FontStyle.Bold);
             Registerbt.BackColor = Color.FromName("SpringGreen");
             Registerbt.ForeColor = Color.White;
-            //LoginButton.Click += LoginButton_Click;
+            Registerbt.Click += Registerbt_Click;
             this.Controls.Add(Registerbt);
 
             RgsLoginbt = new Button();
@@ -200,6 +200,7 @@ namespace Quiz
             RgsPasswordtb.Location = new Point(250, 230);
             RgsPasswordtb.Enter += Passwordtxb_Enter;
             RgsPasswordtb.Leave += Passwordtxb_Leave;
+            RgsPasswordtb.KeyPress += RgsPasswordtb_KeyPress;
             RgsPasswordtb.Enabled = false;
             this.Controls.Add(RgsPasswordtb);
             RgsReplayPasswordtb = new TextBox();
@@ -221,7 +222,7 @@ namespace Quiz
             RgsReplayPasswordLb.Location = new Point(484, 273);
             RgsReplayPasswordLb.ForeColor = Color.Gray;
             RgsReplayPasswordLb.Text = "Replay Password";
-            RgsReplayPasswordLb.Font= new Font("Comic Sans MS", 10, FontStyle.Italic);
+            RgsReplayPasswordLb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
             this.Controls.Add(RgsReplayPasswordLb);
             RgsEmailtb = new TextBox();
             RgsEmailtb.Size = new Size(230, 30);
@@ -232,7 +233,7 @@ namespace Quiz
             RgsEmailtb.BackColor = Color.FromName("SpringGreen");
             RgsEmailtb.ForeColor = Color.Gray;
             RgsEmailtb.Enter += Emailtxb_Enter;
-            RgsEmailtb.KeyPress += Emailtxb_KeyPress;
+            RgsEmailtb.KeyPress += RgsEmailtb_KeyPress;
             RgsEmailtb.Leave += Emailtxb_Leave;
             this.Controls.Add(RgsEmailtb);
             RegistriationLabel = new Label();
@@ -265,6 +266,51 @@ namespace Quiz
 
         }
 
+        private void RgsPasswordtb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (RgsPasswordtb.Text.Length >= 8)
+            {
+                RgsPasswordtb.ForeColor = Color.Green;
+                RgsReplayPasswordtb.Enabled = true;
+            }
+            else
+            {
+                RgsPasswordtb.ForeColor = Color.Red;
+                RgsReplayPasswordtb.Enabled = false;
+            }
+        }
+
+        public bool IsMatchEmail { get; set; }
+        private void RgsEmailtb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (regex.IsMatch(RgsEmailtb.Text))
+            {
+                IsMatchEmail = true;
+                RgsEmailtb.ForeColor = Color.Green;
+                RgsPasswordtb.Enabled = true;
+            }
+            else
+            {
+                IsMatchEmail = false;
+                RgsEmailtb.ForeColor = Color.Red;
+                RgsPasswordtb.Enabled = false;
+            }
+        }
+
+        private void Registerbt_Click(object sender, EventArgs e)
+        {
+            User user;
+            if (IsCorrectRegistriation())
+            {
+                user = new User()
+                {
+                    Email = RgsEmailtb.Text,
+                    Password = RgsPasswordtb.Text
+                };
+                userContext.Users.Add(user);
+                userContext.SaveChanges();
+            }
+        }
         private void RgsLoginbt_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < 4; i++)
@@ -294,13 +340,60 @@ namespace Quiz
             LoadLoginSystem();
         }
 
-        //private bool IsCorrectRegistriation()
-        //{
-        //    return true;
-        //}
+        //Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        Regex regex = new Regex(@"^[a-z0-9][-a-z0-9.!#$%&'*+-=?^_`{|}~\/]+@([-a-z0-9]+\.)+[a-z]{2,5}$");
+        private bool IsCorrectRegistriation()
+        {
+            try
+            {
+                if (IsMatchEmail)
+                {
+                    RgsPasswordtb.Enabled = true;
+                    var item1 = userContext.Users.SingleOrDefault(x => x.Email == RgsEmailtb.Text);
+                    if (item1 == null)
+                    {
+                        if (RgsPasswordtb.Text.Length < 8)
+                        {
+                            MessageBox.Show("Must be at least 8 character . . .");
+                            //MessageBox.Show(RgsPasswordtb.Text.Length.ToString());
+                            RgsReplayPasswordtb.Enabled = false;
+                            return false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Password okay");
+                            RgsReplayPasswordtb.Enabled = true;
+                            if (RgsReplayPasswordtb.Text == RgsPasswordtb.Text)
+                            {
+                                MessageBox.Show("Replay Password okay");
+                                return true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Replay Password is not correct");
+                                return false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{RgsEmailtb.Text} is already exist");
+                    }
+
+                }
+                else
+                {
+                    RgsPasswordtb.Enabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
         private void Emailtxb_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             if (regex.IsMatch(Emailtxb.Text))
             {
                 Emailtxb.ForeColor = Color.Green;
@@ -352,7 +445,7 @@ namespace Quiz
         {
             RegisterNowLb.ForeColor = Color.Black;
         }
-        
+
         private void RegisterNowLb_Click(object sender, EventArgs e)
         {
             LoadRegistriationSection();
@@ -363,10 +456,9 @@ namespace Quiz
         {
             //Check in datebase and cross to EasyQuiz system . . .
             /////////load ProgramIntroduction
-
             try
             {
-                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+
                 if (regex.IsMatch(Emailtxb.Text))
                 {
                     var item1 = userContext.Users.SingleOrDefault(x => x.Email == Emailtxb.Text);
