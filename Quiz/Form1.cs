@@ -591,7 +591,7 @@ namespace Quiz
         {
             XmlFilesBySearch = new List<string>();
             XmlFiles = new List<string>();
-            DirectoryName = Directory.GetCurrentDirectory()+"\\users";
+            DirectoryName = Directory.GetCurrentDirectory() + "\\users";
             Files = Directory.GetFiles(DirectoryName);
             foreach (var item in Files)
             {
@@ -648,7 +648,7 @@ namespace Quiz
         {
             Button btn = sender as Button;
             FileName = btn.Text;
-
+            CurrentIndex = 0;
         }
         public PictureBox pictureBoxReturn { get; set; }
         public Label QuestionLabelFirstW { get; set; }
@@ -1223,7 +1223,7 @@ namespace Quiz
                 int y = 0;
                 labelQueue1.Text = (curindex + 1).ToString();
                 labelQueueQuestion.Text = "Question " + (curindex + 1) + " of " + questionlist.Count;
-                if (curindex < questionlist.Count - 1)
+                if (curindex <= questionlist.Count - 1)/////////////////////
                     labelQuestion1.Text = questionlist[curindex].Text;
                 if (IsClickedToSubmitButton)
                     metroAcceptbtn.Enabled = false;
@@ -1306,7 +1306,7 @@ namespace Quiz
             QuestionList2 = new List<QuestionBlock>();
 
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
-            if (File.Exists(DirectoryName+"\\"+filename))
+            if (File.Exists(DirectoryName + "\\" + filename))
             {
                 using (FileStream f = new FileStream(DirectoryName + "\\" + filename, FileMode.OpenOrCreate))
                 {
@@ -1339,15 +1339,21 @@ namespace Quiz
                         if (TestQuestionCount > QuestionList.Count)
                         {
                             MessageBox.Show("Count must be less than test's questions count !");
+                            LoadFirstPageOfForm();
+                        }
+                        if (TestQuestionCount == 0)
+                        {
+                            MessageBox.Show("Count must be at least one !");
+                            LoadFirstPageOfForm();
                         }
                         else
-                        {
+                        {///maybe i change this stuation
                             QuestionList.RemoveRange(TestQuestionCount, QuestionList.Count - TestQuestionCount);
                             QuestionList2.RemoveRange(TestQuestionCount, QuestionList2.Count - TestQuestionCount);
+                            ShowTest(QuestionList, CurrentIndex);
                         }
                     }
                 }
-                ShowTest(QuestionList, CurrentIndex);
             }
         }
         public int TestQuestionCount { get; set; }
