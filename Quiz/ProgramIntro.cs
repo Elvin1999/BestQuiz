@@ -288,7 +288,6 @@ namespace Quiz
                 RgsPasswordtb.Text = "admin";
             }
         }
-
         private void RgsPasswordtb_Enter(object sender, EventArgs e)
         {
             try

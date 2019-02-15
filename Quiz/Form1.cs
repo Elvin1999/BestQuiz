@@ -591,7 +591,7 @@ namespace Quiz
         {
             XmlFilesBySearch = new List<string>();
             XmlFiles = new List<string>();
-            DirectoryName = Directory.GetCurrentDirectory();
+            DirectoryName = Directory.GetCurrentDirectory()+"\\users";
             Files = Directory.GetFiles(DirectoryName);
             foreach (var item in Files)
             {
@@ -640,6 +640,8 @@ namespace Quiz
                 x += 43;
                 this.Controls.Add(testbtn);
             }
+
+
         }
 
         private void Testbtn_Click(object sender, EventArgs e)
@@ -1304,9 +1306,9 @@ namespace Quiz
             QuestionList2 = new List<QuestionBlock>();
 
             XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
-            if (File.Exists(filename))
+            if (File.Exists(DirectoryName+"\\"+filename))
             {
-                using (FileStream f = new FileStream(filename, FileMode.OpenOrCreate))
+                using (FileStream f = new FileStream(DirectoryName + "\\" + filename, FileMode.OpenOrCreate))
                 {
                     try
                     {
@@ -1317,11 +1319,18 @@ namespace Quiz
                     {
                     }
                 }
-                using (FileStream f = new FileStream(filename, FileMode.OpenOrCreate))
+                using (FileStream f = new FileStream(DirectoryName + "\\" + filename, FileMode.OpenOrCreate))
                 {
-                    QuestionList2 = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+                    try
+                    {
+                        QuestionList2 = (serializer.Deserialize(f) as QuestionBlock[]).ToList();
+
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
-                if (IsClickedToContinueButton)
+                if (IsClickedToContinueButton)//burda cast elemese de dushur bura amma dushmemelidi . . .
                 {
                     if (maskedTxtCount.Text != String.Empty)
                     {
