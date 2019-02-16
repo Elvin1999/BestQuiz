@@ -1064,11 +1064,9 @@ namespace Quiz
         RadioButton correctRb = new RadioButton();
         private void DrawQuestionBlocksByEdit()
         {
-
             lastYlocation = listView.Location.Y + 70;
             for (int i = 0; i < QuestionList.Count; i++)
             {
-
                 readquestionblock = new ReadQuestionBlock();
                 readquestionblock.Answer = new List<TextBox>();
                 readquestionblock.AnswerRadioButtons = new List<RadioButton>();
@@ -1107,7 +1105,7 @@ namespace Quiz
                     correctRb.Text = ((char)(k + 65)).ToString();
                     if (QuestionList[i].Answers[k].IsCorrect == "Yes")
                     {
-                        correctRb.Checked = true;
+                        correctRb.Checked = true; 
                     }
                     readquestionblock.AnswerRadioButtons.Add(correctRb);
                     groupBox.Controls.Add(correctRb);
