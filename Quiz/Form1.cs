@@ -1203,27 +1203,38 @@ namespace Quiz
             QuestionBlock block = new QuestionBlock();
             QuestionList = new List<QuestionBlock>();
             QuestionList.Clear();
-            //for (int i = 0; i < questionBlockreadlist.Count; i++)
-            //{
-            //    MessageBox.Show(questionBlockreadlist[i].Question.Text);
-            //    block.Text = questionBlockreadlist[i].Question.Text;
-            //    block.Answers = new List<Answer>();
-            //    for (int k = 0; k < questionBlockreadlist[i].Answer.Count; k++)
-            //    {
-            //        block.Answers[k].Text = "something";//questionBlockreadlist[i].Answer[k].Text;
-            //        if (questionBlockreadlist[i].AnswerRadioButtons[k].Checked)
-            //        {
+            try
+            {
+                for (int i = 0; i < questionBlockreadlist.Count; i++)
+                {
+                    block.Text = questionBlockreadlist[i].Question.Text;
+                    block.Answers = new List<Answer>();
+                    for (int k = 0; k < questionBlockreadlist[i].Answer.Count; k++)
+                    {
+                        Answer answer = new Answer();
+                        answer.id = k;
+                        answer.Text=questionBlockreadlist[i].Answer[k].Text;
+                        
+                        if (questionBlockreadlist[i].AnswerRadioButtons[k].Checked)
+                        {
 
-            //            block.Answers[k].IsCorrect = "Yes";
-            //        }
-            //        else
-            //        {
-            //            block.Answers[k].IsCorrect = "No";
-            //        }
-            //    }
-            //    QuestionList.Add(block);
-            //    block = new QuestionBlock();
-            //}
+                            answer.IsCorrect = "Yes";
+                        }
+                        else
+                        {
+                            answer.IsCorrect = "No";
+                        }
+                        block.Answers.Add(answer);
+                    }
+                    QuestionList.Add(block);
+                    block = new QuestionBlock();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message); 
+            }
+
 
             //XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             //if (File.Exists(FileNameForSerialize))
