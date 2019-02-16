@@ -997,6 +997,14 @@ namespace Quiz
             //if you clicked to save button This button will enabled true
             this.Controls.Add(GoToTestButton);
 
+            textBoxfilename = new TextBox();
+            textBoxfilename.Size = new Size(100, 30);
+            textBoxfilename.Text = "filename";
+
+            textBoxfilename.Font = new System.Drawing.Font("Comic Sans MS", 8, FontStyle.Italic);
+            textBoxfilename.Location = new Point(GoToTestButton.Location.X + 80, GoToTestButton.Location.Y + 35);
+            this.Controls.Add(textBoxfilename);
+
             EditByDrag = new Button();
             EditByDrag.Location = new Point(300, 1);
             EditByDrag.Size = new Size(150, 32);
@@ -1006,15 +1014,46 @@ namespace Quiz
             EditByDrag.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
             this.Controls.Add(EditByDrag);
         }
+        public TextBox textBoxfilename { get; set; }
         public QuestionBlock question { get; set; }
         public List<QuestionBlock> CustomQuestionBlock { get; set; }
         void MakeNewQuestionBlock()
         {
 
         }
+        public string FileNameFromSaveAndGotoBtn { get; set; }
         private void GoToTestButton_Click(object sender, EventArgs e)
         {
-            //go to the tests's section
+            if (textBoxfilename.Text != String.Empty)
+            {
+                FileNameForSerialize = textBoxfilename.Text;
+                Random random = new Random();
+                string ctn = random.Next(0, 1000).ToString();
+                FileNameForSerialize += ctn + ".xml";
+
+                DirectoryName = Directory.GetCurrentDirectory() + "\\users";
+                string fname = DirectoryName + "\\" + FileNameForSerialize;
+                MessageBox.Show(fname);
+                try
+                {
+
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<QuestionBlock>));
+                    if (!File.Exists(fname))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fname))
+                        {
+                            serializer.Serialize(sw, QuestionList);
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+
         }
         public ListView listView { get; set; }
         public Button Edit { get; set; }
@@ -1082,7 +1121,7 @@ namespace Quiz
         int countlocation = 30;
         private void DrawQuestionBlocksByEdit()
         {
-
+            GoToTestButton.Enabled = true;
             lastYlocation = listView.Location.Y + 70;
             for (int i = 0; i < QuestionList.Count; i++)
             {
@@ -1213,8 +1252,8 @@ namespace Quiz
                     {
                         Answer answer = new Answer();
                         answer.id = k;
-                        answer.Text=questionBlockreadlist[i].Answer[k].Text;
-                        
+                        answer.Text = questionBlockreadlist[i].Answer[k].Text;
+
                         if (questionBlockreadlist[i].AnswerRadioButtons[k].Checked)
                         {
 
@@ -1232,19 +1271,10 @@ namespace Quiz
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message); 
+                MessageBox.Show(ex.Message);
             }
 
 
-            //XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
-            //if (File.Exists(FileNameForSerialize))
-            //{
-            //    using (var stringwriter = new System.IO.StringWriter())
-            //    {
-            //        serializer.Serialize(stringwriter, QuestionList);
-            //    };
-
-            //}
         }
         private void ListView_DragDrop(object sender, DragEventArgs e)
         {
