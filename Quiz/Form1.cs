@@ -1068,7 +1068,7 @@ namespace Quiz
             lastYlocation = listView.Location.Y + 70;
             for (int i = 0; i < QuestionList.Count; i++)
             {
-                
+
                 readquestionblock = new ReadQuestionBlock();
                 readquestionblock.Answer = new List<TextBox>();
                 readquestionblock.AnswerRadioButtons = new List<RadioButton>();
@@ -1082,31 +1082,32 @@ namespace Quiz
                 lastYlocation += 70;
                 GroupBox groupBox = new GroupBox();
                 groupBox.Size = new Size(400, 250);
-                groupBox.Location = new Point(50, lastYlocation-20);
+                groupBox.Location = new Point(50, lastYlocation - 20);
                 question.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Underline);
                 question.Text = (i + 1).ToString() + QuestionList[i].Text;
                 this.Controls.Add(question);
                 readquestionblock.Question = question;
                 int countlocation = 30;
                 for (int k = 0; k < QuestionList[i].Answers.Count; k++)
-                {                    
+                {
                     lastYlocation += 5;
                     TextBox answer = new TextBox();
                     answer.Size = new Size(250, 50);
                     answer.BackColor = Color.FromName("SpringGreen");
-                    answer.Location = new Point(120, lastYlocation + 2);
+                    answer.Location = new Point(140, lastYlocation + 2);
                     answer.Multiline = true;
                     answer.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
                     answer.Text = (i + 1).ToString() + "." + (k + 1).ToString() + "      " + QuestionList[i].Answers[k].Text;
                     this.Controls.Add(answer);
                     correctRb = new RadioButton();
-                    correctRb.Size = new Size(20, 30);
-                    correctRb.Location = new Point(40, countlocation);
+                    correctRb.Size = new Size(30, 30);
+                    correctRb.Font = new System.Drawing.Font("Comic Sans MS", 8, FontStyle.Italic);
+                    correctRb.Location = new Point(15, countlocation);
                     correctRb.BackColor = Color.FromName("SpringGreen");
+                    correctRb.Text = ((char)(k + 65)).ToString();
                     if (QuestionList[i].Answers[k].IsCorrect == "Yes")
                     {
-                     
-                    correctRb.Checked = true;
+                        correctRb.Checked = true;
                     }
                     readquestionblock.AnswerRadioButtons.Add(correctRb);
                     groupBox.Controls.Add(correctRb);
@@ -1114,8 +1115,8 @@ namespace Quiz
                     lastYlocation += 50;
                     countlocation += 55;
                 }
-               this.Controls.Add(groupBox);
-                
+                this.Controls.Add(groupBox);
+
                 questionBlockreadlist.Add(readquestionblock);
             }
         }//int currentediting = 0;
