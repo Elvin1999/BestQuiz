@@ -931,7 +931,7 @@ namespace Quiz
             QuestionListSecond.Clear();
             //QuestionList2.Clear();
             //QuestionList.Clear();
-            MessageBox.Show("Test");
+            //MessageBox.Show("Test");
             y = 0;
             optioncount = 1;
             count_calling = 0;
@@ -1047,11 +1047,18 @@ namespace Quiz
             Add.Size = new Size(50, 30);
             Add.Text = "Add";
             Add.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
-            // Add.Click += Edit_Click;
+            Add.Click += Add_Click;
             Add.BackColor = Color.FromName("SpringGreen");
 
             this.Controls.Add(Add);
         }
+
+        private void Add_Click(object sender, EventArgs e)
+        {
+            AddQuestionBlock();
+            Add.Enabled = false;
+        }
+
         public bool IsClickedToEditButton { get; set; }
         private void ListView_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1060,7 +1067,7 @@ namespace Quiz
             {
                 var file = listView.SelectedItems[0].Text.ToString();
                 FileNameForSerialize = file;
-                MessageBox.Show(file);
+                //MessageBox.Show(file);
                 GetQuestionList(file);
                 IsClickedToEditButton = true;
                 DrawQuestionBlocksByEdit();
@@ -1133,71 +1140,65 @@ namespace Quiz
             LastPointY = lastYlocation + 10;
         }//int currentediting = 0;
         public int LastPointY { get; set; }
-        int PointForAnswerBlock = 0;
+        int PointForAnswerBlock = 0; int icurrent = 1;
         private void AddQuestionBlock()
         {
             //lastYlocation += 20;
             TextBox question = new TextBox();
             question.Size = new Size(500, 50);
             question.BackColor = Color.FromName("SpringGreen");
-            question.Location = new Point(20, LastPointY+10);
+            question.Location = new Point(20, LastPointY + 10);
             question.Multiline = true;
+            question.Text = $"Question {icurrent}";
             question.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
             this.Controls.Add(question);
             GroupBox groupBox = new GroupBox();
             groupBox.Size = new Size(400, 250);
             groupBox.Location = new Point(50, LastPointY + 70);
             PointForAnswerBlock = 30;
-            TextBox answer1 = new TextBox();
-            answer1.Size = new Size(250, 50);
-            answer1.BackColor = Color.FromName("Green");
-            answer1.Location = new Point(100, PointForAnswerBlock);
-            answer1.Multiline = true;
-            answer1.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
-            groupBox.Controls.Add(answer1);
-            PointForAnswerBlock += 52;
-
-            TextBox answer2 = new TextBox();
-            answer2.Size = new Size(250, 50);
-            answer2.BackColor = Color.FromName("Green");
-            answer2.Location = new Point(100, PointForAnswerBlock);
-            answer2.Multiline = true;
-            answer2.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
-            groupBox.Controls.Add(answer2);
-            PointForAnswerBlock += 52;
-
-            TextBox answer3 = new TextBox();
-            answer3.Size = new Size(250, 50);
-            answer3.BackColor = Color.FromName("Green");
-            answer3.Location = new Point(100, PointForAnswerBlock);
-            answer3.Multiline = true;
-            answer3.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
-            groupBox.Controls.Add(answer3);
-            PointForAnswerBlock += 52;
-
-            TextBox answer4 = new TextBox();
-            answer4.Size = new Size(250, 50);
-            answer4.BackColor = Color.FromName("Green");
-            answer4.Location = new Point(100, PointForAnswerBlock);
-            answer4.Multiline = true;
-            answer4.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
-            groupBox.Controls.Add(answer4);
+            readquestionblock = new ReadQuestionBlock();
+            readquestionblock.Answer = new List<TextBox>();
+            readquestionblock.AnswerRadioButtons = new List<RadioButton>();
+            readquestionblock.Question = new TextBox();
+            readquestionblock.Question = question;
+            for (int i = 0; i < 4; i++)
+            {
+                TextBox answer1 = new TextBox();
+                answer1.Size = new Size(250, 50);
+                answer1.BackColor = Color.FromName("SpringGreen");
+                answer1.Location = new Point(100, PointForAnswerBlock + (i) * 52);
+                answer1.Multiline = true;
+                answer1.Text = $"option {i + 1}";
+                answer1.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+                groupBox.Controls.Add(answer1);
+                RadioButton radioButton1 = new RadioButton();
+                radioButton1.Location = new Point(15, PointForAnswerBlock + (i) * 52 + 5);
+                radioButton1.Size = new Size(30, 30);
+                radioButton1.Text = ((char)(i + 65)).ToString();
+                radioButton1.Font = new System.Drawing.Font("Comic Sans MS", 8, FontStyle.Italic);
+                radioButton1.BackColor = Color.FromName("SpringGreen");
+                radioButton1.ForeColor = Color.Black;
+                groupBox.Controls.Add(radioButton1);
+                readquestionblock.AnswerRadioButtons.Add(radioButton1);
+                readquestionblock.Answer.Add(answer1);
+            }
+            ++icurrent;
+            questionBlockreadlist.Add(readquestionblock);
             this.Controls.Add(groupBox);
             PointForAnswerBlock = 0;
             LastPointY += 330;
-            //lastYlocation += 280;
 
         }
         private void Edit_Click(object sender, EventArgs e)
         {
 
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    MessageBox.Show(questionBlockreadlist[i].Question.Text);
-            //    MessageBox.Show(questionBlockreadlist[i].Answer[0].Text);
-            //    MessageBox.Show(questionBlockreadlist[i].AnswerRadioButtons[0].Checked.ToString());
-            //}
-            AddQuestionBlock();
+
+            //MessageBox.Show(questionBlockreadlist[20].Question.Text);
+            //MessageBox.Show(questionBlockreadlist[20].Answer[0].Text);
+            //MessageBox.Show(questionBlockreadlist[20].AnswerRadioButtons[0].Checked.ToString());
+
+
+            Add.Enabled = true;
 
             QuestionBlock block = new QuestionBlock();
             QuestionList = new List<QuestionBlock>();
@@ -1244,6 +1245,7 @@ namespace Quiz
             item.Text = Info.FullName;
             // item.ImageIndex = count;
             listView.Items.Add(item);
+            icurrent = 1;
         }
 
         private void ListView_DragEnter(object sender, DragEventArgs e)
@@ -1514,7 +1516,7 @@ namespace Quiz
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            MessageBox.Show($" X {e.Location.X} Y {e.Location.Y}");
+            // MessageBox.Show($" X {e.Location.X} Y {e.Location.Y}");
         }
     }
 }
