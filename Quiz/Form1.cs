@@ -667,6 +667,10 @@ namespace Quiz
                     {
                         bt.Dispose();
                     }
+                    else if (item is GroupBox gb)
+                    {
+                        gb.Dispose();
+                    }
                     else if (item is ListView lv)
                     {
                         lv.Dispose();
@@ -1498,30 +1502,39 @@ namespace Quiz
                     {
                     }
                 }
-                if (IsClickedToContinueButton)//burda cast elemese de dushur bura amma dushmemelidi . . .
+                try
                 {
-                    if (maskedTxtCount.Text != String.Empty)
+                    if (IsClickedToContinueButton)//burda cast elemese de dushur bura amma dushmemelidi . . .
                     {
-                        TestQuestionCount = int.Parse(maskedTxtCount.Text);
 
-                        if (TestQuestionCount > QuestionList.Count)
+                        if (maskedTxtCount.Text != String.Empty)
                         {
-                            MessageBox.Show("Count must be less than test's questions count !");
-                            LoadFirstPageOfForm();
+                            TestQuestionCount = int.Parse(maskedTxtCount.Text);
+
+                            if (TestQuestionCount > QuestionList.Count)
+                            {
+                                MessageBox.Show("Count must be less than test's questions count !");
+                                LoadFirstPageOfForm();
+                            }
+                            else if (TestQuestionCount == 0)
+                            {
+                                MessageBox.Show("Count must be at least one !");
+                                LoadFirstPageOfForm();
+                            }
+                            else if (TestQuestionCount > 0 && TestQuestionCount <= QuestionList.Count)
+                            {
+                                QuestionList.RemoveRange(TestQuestionCount, QuestionList.Count - TestQuestionCount);
+                                QuestionList2.RemoveRange(TestQuestionCount, QuestionList2.Count - TestQuestionCount);
+                            }
                         }
-                        if (TestQuestionCount == 0)
-                        {
-                            MessageBox.Show("Count must be at least one !");
-                            LoadFirstPageOfForm();
-                        }
-                        else
-                        {///maybe i change this stuation
-                            QuestionList.RemoveRange(TestQuestionCount, QuestionList.Count - TestQuestionCount);
-                            QuestionList2.RemoveRange(TestQuestionCount, QuestionList2.Count - TestQuestionCount);
-                            ShowTest(QuestionList, CurrentIndex);
-                        }
+                        CurrentIndex = 0;
+                        ShowTest(QuestionList, CurrentIndex);
                     }
                 }
+                catch (Exception)
+                {
+                }
+
             }
         }
         public int TestQuestionCount { get; set; }
