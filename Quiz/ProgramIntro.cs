@@ -180,11 +180,11 @@ namespace Quiz
             this.Controls.Add(Registerbt);
 
             HidePasswordPb = new PictureBox();
-            HidePasswordPb.Size = new Size(33, 30);
+            HidePasswordPb.Size = new Size(30, 28);
             HidePasswordPb.Location = new Point(485, 228);
-            HidePasswordPb.Image = Properties.Resources.msnewwhite;
-            HidePasswordPb.SizeMode = PictureBoxSizeMode.StretchImage;
             HidePasswordPb.Click += HidePasswordPb_Click;
+            HidePasswordPb.Image = Properties.Resources.UnHideEye;
+            HidePasswordPb.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(HidePasswordPb);
 
             RgsLoginbt = new Button();
@@ -281,10 +281,14 @@ namespace Quiz
                 IsClickedToHidePassword = false;
                 RgsReplayPasswordtb.UseSystemPasswordChar = false;
                 RgsPasswordtb.UseSystemPasswordChar = false;
+                HidePasswordPb.Image = Properties.Resources.hideEye;
+                HidePasswordPb.Image = Properties.Resources.UnHideEye;
+                HidePasswordPb.SizeMode = PictureBoxSizeMode.StretchImage;
             }
             else
             {
-        
+                HidePasswordPb.Image = Properties.Resources.hideEye;
+                HidePasswordPb.SizeMode = PictureBoxSizeMode.StretchImage;
                 IsClickedToHidePassword = true;
                 RgsPasswordtb.UseSystemPasswordChar = true;
                 RgsReplayPasswordtb.UseSystemPasswordChar = true;
