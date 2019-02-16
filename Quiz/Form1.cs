@@ -1018,6 +1018,7 @@ namespace Quiz
         }
         public ListView listView { get; set; }
         public Button Edit { get; set; }
+        public Button Add { get; set; }
         private void EditByDrag_Click(object sender, EventArgs e)
         {
             //drag xml file to list view or something to edit
@@ -1041,6 +1042,15 @@ namespace Quiz
             Edit.BackColor = Color.FromName("SpringGreen");
             Edit.Enabled = false;
             this.Controls.Add(Edit);
+            Add = new Button();
+            Add.Location = new Point(525, 40);
+            Add.Size = new Size(50, 30);
+            Add.Text = "Add";
+            Add.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
+           // Add.Click += Edit_Click;
+            Add.BackColor = Color.FromName("SpringGreen");
+   
+            this.Controls.Add(Add);
         }
         public bool IsClickedToEditButton { get; set; }
         private void ListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -1062,9 +1072,11 @@ namespace Quiz
         List<ReadQuestionBlock> questionBlockreadlist = new List<ReadQuestionBlock>();
         ReadQuestionBlock readquestionblock = new ReadQuestionBlock();
         RadioButton correctRb = new RadioButton();
+        int countlocation = 30;
         private void DrawQuestionBlocksByEdit()
         {
-            lastYlocation = listView.Location.Y + 70;
+            
+               lastYlocation = listView.Location.Y + 70;
             for (int i = 0; i < QuestionList.Count; i++)
             {
                 readquestionblock = new ReadQuestionBlock();
@@ -1085,7 +1097,7 @@ namespace Quiz
                 question.Text = (i + 1).ToString() + QuestionList[i].Text;
                 this.Controls.Add(question);
                 readquestionblock.Question = question;
-                int countlocation = 30;
+                countlocation = 30;
                 for (int k = 0; k < QuestionList[i].Answers.Count; k++)
                 {
                     lastYlocation += 5;
@@ -1112,23 +1124,52 @@ namespace Quiz
                     readquestionblock.Answer.Add(answer);
                     lastYlocation += 50;
                     countlocation += 55;
+                    
                 }
                 this.Controls.Add(groupBox);
 
                 questionBlockreadlist.Add(readquestionblock);
             }
+            LastPointY = lastYlocation + 10;
         }//int currentediting = 0;
+        public int LastPointY { get; set; }
         private void Edit_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 20; i++)
-            {
-                MessageBox.Show(questionBlockreadlist[i].Question.Text);
-                MessageBox.Show(questionBlockreadlist[i].Answer[0].Text);
-                MessageBox.Show(questionBlockreadlist[i].AnswerRadioButtons[0].Checked.ToString());
-            }
+           
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    MessageBox.Show(questionBlockreadlist[i].Question.Text);
+            //    MessageBox.Show(questionBlockreadlist[i].Answer[0].Text);
+            //    MessageBox.Show(questionBlockreadlist[i].AnswerRadioButtons[0].Checked.ToString());
+            //}
+            TextBox question = new TextBox();
+            question.Size = new Size(500, 50);
+            question.BackColor = Color.FromName("Green");
+            question.Location = new Point(20, LastPointY + 10);
+            question.Multiline = true;
+            question.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            this.Controls.Add(question);
+            MessageBox.Show("Test");
+            LastPointY += 55;
+            TextBox answer1 = new TextBox();
+            answer1.Size = new Size(250, 50);
+            answer1.BackColor = Color.FromName("Green");
+            answer1.Location = new Point(20, LastPointY + 10);
+            answer1.Multiline = true;
+            answer1.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            this.Controls.Add(answer1);
+            MessageBox.Show("Test");
+            LastPointY += 55;
+            TextBox answer2 = new TextBox();
+            answer2.Size = new Size(250, 50);
+            answer2.BackColor = Color.FromName("Green");
+            answer2.Location = new Point(20, LastPointY + 10);
+            answer2.Multiline = true;
+            answer2.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            this.Controls.Add(answer2);
+            MessageBox.Show("Test");
             //MessageBox.Show($"{questionBlockreadlist.Count}");
             //I have to see all question block that i can edit all of them . . .
-
             //IsClickedToEditButton = true;
             //DrawQuestionBlocksByEdit();
             //XmlSerializer xml = new XmlSerializer(typeof(QuestionBlock[]));
@@ -1424,6 +1465,11 @@ namespace Quiz
             {
                 textBoxSearch.Text = "Search";
             }
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show($" X {e.Location.X} Y {e.Location.Y}");
         }
     }
 }
