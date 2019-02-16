@@ -1047,9 +1047,9 @@ namespace Quiz
             Add.Size = new Size(50, 30);
             Add.Text = "Add";
             Add.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
-           // Add.Click += Edit_Click;
+            // Add.Click += Edit_Click;
             Add.BackColor = Color.FromName("SpringGreen");
-   
+
             this.Controls.Add(Add);
         }
         public bool IsClickedToEditButton { get; set; }
@@ -1075,8 +1075,8 @@ namespace Quiz
         int countlocation = 30;
         private void DrawQuestionBlocksByEdit()
         {
-            
-               lastYlocation = listView.Location.Y + 70;
+
+            lastYlocation = listView.Location.Y + 70;
             for (int i = 0; i < QuestionList.Count; i++)
             {
                 readquestionblock = new ReadQuestionBlock();
@@ -1117,14 +1117,14 @@ namespace Quiz
                     correctRb.Text = ((char)(k + 65)).ToString();
                     if (QuestionList[i].Answers[k].IsCorrect == "Yes")
                     {
-                        correctRb.Checked = true; 
+                        correctRb.Checked = true;
                     }
                     readquestionblock.AnswerRadioButtons.Add(correctRb);
                     groupBox.Controls.Add(correctRb);
                     readquestionblock.Answer.Add(answer);
                     lastYlocation += 50;
                     countlocation += 55;
-                    
+
                 }
                 this.Controls.Add(groupBox);
 
@@ -1133,57 +1133,102 @@ namespace Quiz
             LastPointY = lastYlocation + 10;
         }//int currentediting = 0;
         public int LastPointY { get; set; }
+        int PointForAnswerBlock = 0;
+        private void AddQuestionBlock()
+        {
+            //lastYlocation += 20;
+            TextBox question = new TextBox();
+            question.Size = new Size(500, 50);
+            question.BackColor = Color.FromName("SpringGreen");
+            question.Location = new Point(20, LastPointY+10);
+            question.Multiline = true;
+            question.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            this.Controls.Add(question);
+            GroupBox groupBox = new GroupBox();
+            groupBox.Size = new Size(400, 250);
+            groupBox.Location = new Point(50, LastPointY + 70);
+            PointForAnswerBlock = 30;
+            TextBox answer1 = new TextBox();
+            answer1.Size = new Size(250, 50);
+            answer1.BackColor = Color.FromName("Green");
+            answer1.Location = new Point(100, PointForAnswerBlock);
+            answer1.Multiline = true;
+            answer1.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            groupBox.Controls.Add(answer1);
+            PointForAnswerBlock += 52;
+
+            TextBox answer2 = new TextBox();
+            answer2.Size = new Size(250, 50);
+            answer2.BackColor = Color.FromName("Green");
+            answer2.Location = new Point(100, PointForAnswerBlock);
+            answer2.Multiline = true;
+            answer2.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            groupBox.Controls.Add(answer2);
+            PointForAnswerBlock += 52;
+
+            TextBox answer3 = new TextBox();
+            answer3.Size = new Size(250, 50);
+            answer3.BackColor = Color.FromName("Green");
+            answer3.Location = new Point(100, PointForAnswerBlock);
+            answer3.Multiline = true;
+            answer3.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            groupBox.Controls.Add(answer3);
+            PointForAnswerBlock += 52;
+
+            TextBox answer4 = new TextBox();
+            answer4.Size = new Size(250, 50);
+            answer4.BackColor = Color.FromName("Green");
+            answer4.Location = new Point(100, PointForAnswerBlock);
+            answer4.Multiline = true;
+            answer4.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            groupBox.Controls.Add(answer4);
+            this.Controls.Add(groupBox);
+            PointForAnswerBlock = 0;
+            LastPointY += 330;
+            //lastYlocation += 280;
+
+        }
         private void Edit_Click(object sender, EventArgs e)
         {
-           
+
             //for (int i = 0; i < 20; i++)
             //{
             //    MessageBox.Show(questionBlockreadlist[i].Question.Text);
             //    MessageBox.Show(questionBlockreadlist[i].Answer[0].Text);
             //    MessageBox.Show(questionBlockreadlist[i].AnswerRadioButtons[0].Checked.ToString());
             //}
-            TextBox question = new TextBox();
-            question.Size = new Size(500, 50);
-            question.BackColor = Color.FromName("Green");
-            question.Location = new Point(20, LastPointY + 10);
-            question.Multiline = true;
-            question.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
-            this.Controls.Add(question);
-            MessageBox.Show("Test");
-            LastPointY += 55;
-            TextBox answer1 = new TextBox();
-            answer1.Size = new Size(250, 50);
-            answer1.BackColor = Color.FromName("Green");
-            answer1.Location = new Point(20, LastPointY + 10);
-            answer1.Multiline = true;
-            answer1.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
-            this.Controls.Add(answer1);
-            MessageBox.Show("Test");
-            LastPointY += 55;
-            TextBox answer2 = new TextBox();
-            answer2.Size = new Size(250, 50);
-            answer2.BackColor = Color.FromName("Green");
-            answer2.Location = new Point(20, LastPointY + 10);
-            answer2.Multiline = true;
-            answer2.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
-            this.Controls.Add(answer2);
-            MessageBox.Show("Test");
-            //MessageBox.Show($"{questionBlockreadlist.Count}");
-            //I have to see all question block that i can edit all of them . . .
-            //IsClickedToEditButton = true;
-            //DrawQuestionBlocksByEdit();
-            //XmlSerializer xml = new XmlSerializer(typeof(QuestionBlock[]));
-            //var result = xml.Serialize(FileNameForSerialize, xml);
-            //File.WriteAllText(FileNameForSerialize, xml);
+            AddQuestionBlock();
 
+            QuestionBlock block = new QuestionBlock();
+            QuestionList = new List<QuestionBlock>();
+            QuestionList.Clear();
+            //for (int i = 0; i < questionBlockreadlist.Count; i++)
+            //{
+            //    MessageBox.Show(questionBlockreadlist[i].Question.Text);
+            //    block.Text = questionBlockreadlist[i].Question.Text;
+            //    block.Answers = new List<Answer>();
+            //    for (int k = 0; k < questionBlockreadlist[i].Answer.Count; k++)
+            //    {
+            //        block.Answers[k].Text = "something";//questionBlockreadlist[i].Answer[k].Text;
+            //        if (questionBlockreadlist[i].AnswerRadioButtons[k].Checked)
+            //        {
 
+            //            block.Answers[k].IsCorrect = "Yes";
+            //        }
+            //        else
+            //        {
+            //            block.Answers[k].IsCorrect = "No";
+            //        }
+            //    }
+            //    QuestionList.Add(block);
+            //    block = new QuestionBlock();
+            //}
 
             //XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
             //if (File.Exists(FileNameForSerialize))
             //{
             //    using (var stringwriter = new System.IO.StringWriter())
             //    {
-            //        serializer = new XmlSerializer(this.GetType());
             //        serializer.Serialize(stringwriter, QuestionList);
             //    };
 
