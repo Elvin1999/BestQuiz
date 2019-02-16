@@ -32,6 +32,7 @@ namespace Quiz
         public Label DontHaveAccountLb { get; set; }
         public Button LoginButton { get; set; }
         public Label RegisterNowLb { get; set; }
+        public PictureBox HidePasswordInSignIn { get; set; }
         private void LoadLoginSystem()
         {
             RegisterNowLb = new Label();
@@ -54,6 +55,7 @@ namespace Quiz
             DontHaveAccountLb.ForeColor = Color.White;
             this.Controls.Add(DontHaveAccountLb);
 
+
             LoginButton = new Button();
             LoginButton.Size = new Size(130, 40);
             LoginButton.Location = new Point(300, 300);
@@ -64,6 +66,13 @@ namespace Quiz
             LoginButton.Click += LoginButton_Click;
             this.Controls.Add(LoginButton);
 
+            HidePasswordInSignIn = new PictureBox();
+            HidePasswordInSignIn.Size = new Size(30, 28);
+            HidePasswordInSignIn.Location = new Point(485, 228);
+            HidePasswordInSignIn.Click += HidePasswordInSignIn_Click;
+            HidePasswordInSignIn.Image = Properties.Resources.UnHideEye;
+            HidePasswordInSignIn.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(HidePasswordInSignIn);
 
             Passwordtxb = new TextBox();
             Passwordtxb.Multiline = true;
@@ -132,7 +141,30 @@ namespace Quiz
             LoginTitle.ForeColor = Color.White;
             LoginTitle.Font = new Font("Comic Sans MS", 30, FontStyle.Italic);
             this.Controls.Add(LoginTitle);
+            IsClickedToHidePassword = false;
         }
+
+        private void HidePasswordInSignIn_Click(object sender, EventArgs e)
+        {
+            if (IsClickedToHidePassword)
+            {
+                IsClickedToHidePassword = false;
+                Passwordtxb.UseSystemPasswordChar = false;
+
+ 
+                HidePasswordInSignIn.Image = Properties.Resources.UnHideEye;
+                HidePasswordInSignIn.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else
+            {
+                HidePasswordInSignIn.Image = Properties.Resources.hideEye;
+                HidePasswordInSignIn.SizeMode = PictureBoxSizeMode.StretchImage;
+                IsClickedToHidePassword = true;
+                Passwordtxb.UseSystemPasswordChar = true;
+                
+            }
+        }
+
         public Label RegistriationLabel { get; set; }
         public PictureBox RgsEmailbx { get; set; }
         public PictureBox RgsPasswordbx { get; set; }
@@ -445,7 +477,7 @@ namespace Quiz
                         {
                             ErrorPasswordLabel = new Label();
                             ErrorPasswordLabel.Size = new Size(230, 30);
-                            ErrorPasswordLabel.Location = new Point(484, 237);
+                            ErrorPasswordLabel.Location = new Point(520, 237);
                             ErrorPasswordLabel.Text = "Must be at least 8 character";
                             ErrorPasswordLabel.ForeColor = Color.Red;
                             ErrorPasswordLabel.Font = new Font("Comic Sans Ms", 10, FontStyle.Regular);
