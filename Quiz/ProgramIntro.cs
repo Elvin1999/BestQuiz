@@ -69,7 +69,7 @@ namespace Quiz
             Passwordtxb.Multiline = true;
             Passwordtxb.PasswordChar = '*';
             Passwordtxb.MaxLength = 20;
-            Passwordtxb.Text = "admin";
+            Passwordtxb.Text = "123456";//admin
             Passwordtxb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
             Passwordtxb.BackColor = Color.FromName("SpringGreen");
             Passwordtxb.ForeColor = Color.Gray;
@@ -97,7 +97,7 @@ namespace Quiz
             Emailtxb.Size = new Size(230, 30);
             Emailtxb.Location = new Point(250, 180);
             Emailtxb.Multiline = true;
-            Emailtxb.Text = "E-MAIL";
+            Emailtxb.Text = "camalzade1@gmail.com";//E-MAIL
             Emailtxb.Font = new Font("Comic Sans MS", 10, FontStyle.Italic);
             Emailtxb.BackColor = Color.FromName("SpringGreen");
             Emailtxb.ForeColor = Color.Gray;
@@ -818,7 +818,5 @@ namespace Quiz
         public bool ExamClick { get; set; }
 
         public Form1 form { get; set; }
-
-
     }
 }

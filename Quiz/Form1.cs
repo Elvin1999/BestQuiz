@@ -1059,55 +1059,95 @@ namespace Quiz
         public string FileNameForSerialize { get; set; }
         int lastYlocation = 0;
         public QuestionBlock QuestionB { get; set; }
+        List<ReadQuestionBlock> questionBlockreadlist = new List<ReadQuestionBlock>();
+        ReadQuestionBlock readquestionblock = new ReadQuestionBlock();
+        RadioButton correctRb = new RadioButton();
         private void DrawQuestionBlocksByEdit()
         {
+
             lastYlocation = listView.Location.Y + 70;
             for (int i = 0; i < QuestionList.Count; i++)
             {
+                
+                readquestionblock = new ReadQuestionBlock();
+                readquestionblock.Answer = new List<TextBox>();
+                readquestionblock.AnswerRadioButtons = new List<RadioButton>();
+                readquestionblock.Question = new TextBox();
                 lastYlocation += 10;
-                TextBox textBox = new TextBox();
-                textBox.Size = new Size(500, 50);
-                textBox.BackColor = Color.FromName("SpringGreen");
-                textBox.Location = new Point(20, lastYlocation);
-                textBox.Multiline = true;
+                TextBox question = new TextBox();
+                question.Size = new Size(500, 50);
+                question.BackColor = Color.FromName("SpringGreen");
+                question.Location = new Point(20, lastYlocation);
+                question.Multiline = true;
                 lastYlocation += 70;
-                textBox.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Underline);
-                textBox.Text = (i + 1).ToString() + QuestionList[i].Text;
-                this.Controls.Add(textBox);
+                GroupBox groupBox = new GroupBox();
+                groupBox.Size = new Size(400, 250);
+                groupBox.Location = new Point(50, lastYlocation-20);
+                question.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Underline);
+                question.Text = (i + 1).ToString() + QuestionList[i].Text;
+                this.Controls.Add(question);
+                readquestionblock.Question = question;
+                int countlocation = 30;
                 for (int k = 0; k < QuestionList[i].Answers.Count; k++)
-                {
+                {                    
                     lastYlocation += 5;
                     TextBox answer = new TextBox();
                     answer.Size = new Size(250, 50);
                     answer.BackColor = Color.FromName("SpringGreen");
                     answer.Location = new Point(120, lastYlocation + 2);
                     answer.Multiline = true;
-                    lastYlocation += 50;
                     answer.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
                     answer.Text = (i + 1).ToString() + "." + (k + 1).ToString() + "      " + QuestionList[i].Answers[k].Text;
                     this.Controls.Add(answer);
-
+                    correctRb = new RadioButton();
+                    correctRb.Size = new Size(20, 30);
+                    correctRb.Location = new Point(40, countlocation);
+                    correctRb.BackColor = Color.FromName("SpringGreen");
+                    if (QuestionList[i].Answers[k].IsCorrect == "Yes")
+                    {
+                     
+                    correctRb.Checked = true;
+                    }
+                    readquestionblock.AnswerRadioButtons.Add(correctRb);
+                    groupBox.Controls.Add(correctRb);
+                    readquestionblock.Answer.Add(answer);
+                    lastYlocation += 50;
+                    countlocation += 55;
                 }
+               this.Controls.Add(groupBox);
+                
+                questionBlockreadlist.Add(readquestionblock);
             }
         }//int currentediting = 0;
         private void Edit_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < 20; i++)
+            {
+                MessageBox.Show(questionBlockreadlist[i].Question.Text);
+                MessageBox.Show(questionBlockreadlist[i].Answer[0].Text);
+                MessageBox.Show(questionBlockreadlist[i].AnswerRadioButtons[0].Checked.ToString());
+            }
+            //MessageBox.Show($"{questionBlockreadlist.Count}");
             //I have to see all question block that i can edit all of them . . .
+
             //IsClickedToEditButton = true;
             //DrawQuestionBlocksByEdit();
             //XmlSerializer xml = new XmlSerializer(typeof(QuestionBlock[]));
             //var result = xml.Serialize(FileNameForSerialize, xml);
             //File.WriteAllText(FileNameForSerialize, xml);
-            XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
-            if (File.Exists(FileNameForSerialize))
-            {
-                using (var stringwriter = new System.IO.StringWriter())
-                {
-                    serializer = new XmlSerializer(this.GetType());
-                    serializer.Serialize(stringwriter, QuestionList);
-                };
 
-            }
+
+
+            //XmlSerializer serializer = new XmlSerializer(typeof(QuestionBlock[]));
+            //if (File.Exists(FileNameForSerialize))
+            //{
+            //    using (var stringwriter = new System.IO.StringWriter())
+            //    {
+            //        serializer = new XmlSerializer(this.GetType());
+            //        serializer.Serialize(stringwriter, QuestionList);
+            //    };
+
+            //}
         }
         private void ListView_DragDrop(object sender, DragEventArgs e)
         {
