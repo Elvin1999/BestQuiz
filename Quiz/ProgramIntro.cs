@@ -142,6 +142,7 @@ namespace Quiz
         public Label RgsReplayPasswordLb { get; set; }
         public Button RgsLoginbt { get; set; }
         public Button Registerbt { get; set; }
+        public PictureBox HidePasswordPb { get; set; }
         private void LoadRegistriationSection()
         {
             for (int i = 0; i < 4; i++)
@@ -177,6 +178,14 @@ namespace Quiz
             Registerbt.ForeColor = Color.White;
             Registerbt.Click += Registerbt_Click;
             this.Controls.Add(Registerbt);
+
+            HidePasswordPb = new PictureBox();
+            HidePasswordPb.Size = new Size(33, 30);
+            HidePasswordPb.Location = new Point(485, 228);
+            HidePasswordPb.Image = Properties.Resources.msnewwhite;
+            HidePasswordPb.SizeMode = PictureBoxSizeMode.StretchImage;
+            HidePasswordPb.Click += HidePasswordPb_Click;
+            this.Controls.Add(HidePasswordPb);
 
             RgsLoginbt = new Button();
             RgsLoginbt.Size = new Size(100, 33);
@@ -264,6 +273,23 @@ namespace Quiz
             this.Controls.Add(RgsPasswordbx);
 
         }
+        public bool IsClickedToHidePassword { get; set; }
+        private void HidePasswordPb_Click(object sender, EventArgs e)
+        {
+            if (IsClickedToHidePassword)
+            {
+                IsClickedToHidePassword = false;
+                RgsReplayPasswordtb.UseSystemPasswordChar = false;
+                RgsPasswordtb.UseSystemPasswordChar = false;
+            }
+            else
+            {
+        
+                IsClickedToHidePassword = true;
+                RgsPasswordtb.UseSystemPasswordChar = true;
+                RgsReplayPasswordtb.UseSystemPasswordChar = true;
+            }
+        }
 
         private void RgsEmailtb_Leave(object sender, EventArgs e)
         {
@@ -298,7 +324,7 @@ namespace Quiz
                 }
                 var item = userContext.Users.SingleOrDefault(x => x.Email == RgsEmailtb.Text);
                 if (item != null)
-                {                    
+                {
                     ErrorEmailLabel = new Label();
                     ErrorEmailLabel.Size = new Size(230, 30);
                     ErrorEmailLabel.Location = new Point(280, 212);
@@ -310,6 +336,7 @@ namespace Quiz
                 }
                 else
                 {
+                    if(ErrorEmailLabel != null)
                     ErrorEmailLabel.Dispose();
                     RgsPasswordtb.Enabled = true;
                 }
@@ -424,12 +451,14 @@ namespace Quiz
                         }
                         else
                         {
+                            if(ErrorPasswordLabel!=null)
                             ErrorPasswordLabel.Dispose();
                             RgsReplayPasswordtb.Enabled = true;
                             if (RgsReplayPasswordtb.Text == RgsPasswordtb.Text)
                             {
                                 RgsReplayPasswordtb.ForeColor = Color.Green;
-                                ErrorPasswordLabel.Dispose();
+                                if (ErrorPasswordLabel != null)
+                                    ErrorPasswordLabel.Dispose();
                                 return true;
                             }
                             else
@@ -446,10 +475,10 @@ namespace Quiz
                             }
                         }
                     }
-                    //else
-                    //{
-                    //    //MessageBox.Show($"{RgsEmailtb.Text} is already exist");
-                    //}
+                    else
+                    {
+                       // MessageBox.Show($"{RgsEmailtb.Text} is already exist");
+                    }
 
                 }
                 else
@@ -576,6 +605,7 @@ namespace Quiz
                         else
                         {
                             Passwordtxb.ForeColor = Color.Red;//password is not correct
+                            if(ErrorEmailLabel != null)
                             ErrorEmailLabel.Dispose();                                  //MessageBox.Show("password is not correct");
                             ErrorPasswordLabel = new Label();
                             ErrorPasswordLabel.Size = new Size(230, 30);
@@ -739,8 +769,6 @@ namespace Quiz
                 this.Show();
             }
         }
-
-
         private void LogOutButton_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.FromName("SpringGreen");
@@ -767,7 +795,6 @@ namespace Quiz
         {
             //first sign in sign up
             LoadLoginSystem();
-
         }
         int counter = 0;
         private void Timer2_Tick(object sender, EventArgs e)

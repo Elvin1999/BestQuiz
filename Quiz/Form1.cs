@@ -1465,7 +1465,6 @@ namespace Quiz
                         this.Controls.Add(radioButton);
                     }
                 }
-
             }
             catch (Exception)
             {
