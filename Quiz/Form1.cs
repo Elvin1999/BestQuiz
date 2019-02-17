@@ -189,7 +189,10 @@ namespace Quiz
                 EmptyCount = QuestionList.Count - (CorrectCount + UnCorrectCount);
                 CurrentIndex = 0;
                 if (QuestionListSecond.Count != 0)
+                {
                     ShowTest(QuestionListSecond, CurrentIndex);
+
+                }
                 GetResultButton();
             }
             catch (Exception)
@@ -209,6 +212,10 @@ namespace Quiz
                     if (item is RadioButton rb)
                     {
                         rb.Dispose();
+                    }
+                    else if (item is GroupBox gb)
+                    {
+                        gb.Dispose();
                     }
                     else if (item is Button bt)
                     {
@@ -409,7 +416,7 @@ namespace Quiz
                     AllPdfData += "\n";
                 }
             }
-            if (FilenameTextBox.Text != "filename.xml")
+            if (FilenameTextBox.Text != "filename.pdf")
             {
                 string pdffile = String.Empty;
                 if (FilenameTextBox.Text.Contains(".pdf"))
@@ -632,9 +639,11 @@ namespace Quiz
                 Button testbtn = new Button();
                 testbtn.Size = new Size(40, 150);
                 testbtn.Location = new Point(30 + x, 100);
+                System.Threading.Thread.Sleep(5);
                 testbtn.Font = new System.Drawing.Font("Century", 10, FontStyle.Italic);
-                testbtn.BackColor = Color.ForestGreen;
                 rnd = new Random();
+                System.Threading.Thread.Sleep(5);
+                testbtn.BackColor = Color.FromArgb(rnd.Next(0, 256), rnd.Next(0, 256), 0);
                 testbtn.Click += Testbtn_Click;
                 testbtn.Text = FileName;
                 x += 43;
@@ -772,6 +781,10 @@ namespace Quiz
                     {
                         lb.Dispose();
                     }
+                    else if (item is GroupBox gb)
+                    {
+                        gb.Dispose();
+                    }
                     else if (item is Button button)
                     {
                         button.Dispose();
@@ -813,65 +826,139 @@ namespace Quiz
         public TextBox Option { get; set; }
         public PictureBox AddOptionBox { get; set; }
         public RadioButton AnswerRadioButton { get; set; }
+        public Button SaveChangeBtn { get; set; }
+        public Button AddQuestion { get; set; }
         private int count_calling = 0;
         private void CreateNewQuestionAndOptions(Point point)
         {
-            optioncount = 1;
-            ++count_calling;
-            LineOfQuestion = new Label();
-            LineOfQuestion.Size = new Size(44, 33);
-            LineOfQuestion.Location = new Point(10, point.Y);
-            LineOfQuestion.Text = count_calling.ToString();
-            LineOfQuestion.Font = new System.Drawing.Font("Monotype Corsiva", 16, FontStyle.Italic);
-            LineOfQuestion.BackColor = Color.FromName("SpringGreen");
-            this.Controls.Add(LineOfQuestion);
+            LastPointY = 70;
+            questionBlockreadlist.Clear();
+            questionBlockreadlist = new List<ReadQuestionBlock>();
+            textBoxfilename = new TextBox();
+            textBoxfilename.Size = new Size(100, 30);
+            textBoxfilename.Text = "filename";
+            textBoxfilename.Font = new System.Drawing.Font("Comic Sans MS", 8, FontStyle.Italic);
+            textBoxfilename.Location = new Point(GoToTestButton.Location.X + 150, GoToTestButton.Location.Y + 35);
+            this.Controls.Add(textBoxfilename);
 
-            QuestionContent = new TextBox();
-            QuestionContent.Size = new Size(450, 100);
-            QuestionContent.BackColor = Color.FromName("SpringGreen");
-            QuestionContent.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
-            QuestionContent.ForeColor = Color.FromName("Black");
-            QuestionContent.Multiline = true;
-            QuestionContent.Location = new Point(60, point.Y);
-            QuestionContent.Text = "Question's content";
-            QuestionContent.Enter += QuestionContext_Enter;
-            QuestionContent.Leave += QuestionContext_Leave;
-            this.Controls.Add(QuestionContent);
+            CreateNewOneButton.Enabled = false;
 
+            SaveChangeBtn = new Button();
+            SaveChangeBtn.Location = new Point(470, 40);
+            SaveChangeBtn.Size = new Size(80, 30);
+            SaveChangeBtn.Text = "SaveChanges";
+            SaveChangeBtn.Font = new System.Drawing.Font("Monotype Corsiva", 8, FontStyle.Italic);
+            SaveChangeBtn.Click += SaveChangeBtn_Click;
+            SaveChangeBtn.BackColor = Color.FromName("SpringGreen");
+            SaveChangeBtn.Enabled = false;
+            this.Controls.Add(SaveChangeBtn);
+            AddQuestion = new Button();
+            AddQuestion.Location = new Point(600, 40);
+            AddQuestion.Size = new Size(50, 30);
+            AddQuestion.Text = "Add";
+            AddQuestion.Font = new System.Drawing.Font("Monotype Corsiva", 8, FontStyle.Italic);
+            AddQuestion.Click += AddQuestion_Click;
+            AddQuestion.BackColor = Color.FromName("SpringGreen");
 
-            Option = new TextBox();
-            Option.Location = new Point(60, point.Y + 115);
-            Option.Size = new Size(200, 30);
-            Option.BackColor = Color.FromName("SpringGreen");
-            Option.ForeColor = Color.FromName("Black");
-            Option.Text = $"1.Option";
-            Option.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
-            this.Controls.Add(Option);
-
-            AnswerRadioButton = new RadioButton();
-            AnswerRadioButton.Size = new Size(40, 30);
-            AnswerRadioButton.Text = "No";
-            AnswerRadioButton.Location = new Point(10, point.Y + 115);
-            AnswerRadioButton.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
+            this.Controls.Add(AddQuestion);
 
 
-            DeleteOptionFromEnd = new PictureBox();
-            DeleteOptionFromEnd = new PictureBox();
-            DeleteOptionFromEnd.Location = new Point(345, point.Y + 108);
-            DeleteOptionFromEnd.Size = new Size(45, 40);
-            DeleteOptionFromEnd.Image = Properties.Resources.trashbox;
-            DeleteOptionFromEnd.SizeMode = PictureBoxSizeMode.StretchImage;
-            DeleteOptionFromEnd.Click += DeleteOptionFromEnd_Click;
-            this.Controls.Add(DeleteOptionFromEnd);
+        }
 
-            AddOptionBox = new PictureBox();
-            AddOptionBox.Location = new Point(300, point.Y + 110 + 1);
-            AddOptionBox.Size = new Size(40, 30);
-            AddOptionBox.Image = Properties.Resources.add;
-            AddOptionBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            AddOptionBox.Click += AddOptionBox_Click;
-            this.Controls.Add(AddOptionBox);
+        private void SaveChangeBtn_Click(object sender, EventArgs e)
+        {
+            SaveChangeBtn.Enabled = true;
+            AddQuestion.Enabled = true;
+            GoToTestButton.Enabled = true;
+            QuestionBlock block = new QuestionBlock();
+            QuestionList = new List<QuestionBlock>();
+            QuestionList.Clear();
+            try
+            {
+                for (int i = 0; i < questionBlockreadlist.Count; i++)
+                {
+                    block.Text = questionBlockreadlist[i].Question.Text;
+                    block.Answers = new List<Answer>();
+                    for (int k = 0; k < questionBlockreadlist[i].Answer.Count; k++)
+                    {
+                        Answer answer = new Answer();
+                        answer.id = k;
+                        answer.Text = questionBlockreadlist[i].Answer[k].Text;
 
+                        if (questionBlockreadlist[i].AnswerRadioButtons[k].Checked)
+                        {
+
+                            answer.IsCorrect = "Yes";
+                        }
+                        else
+                        {
+                            answer.IsCorrect = "No";
+                        }
+                        block.Answers.Add(answer);
+                    }
+                    QuestionList.Add(block);
+                    block = new QuestionBlock();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AddQuestionBlockForCreation()
+        {
+            TextBox question = new TextBox();
+            question.Size = new Size(500, 50);
+            question.BackColor = Color.FromName("SpringGreen");
+            question.Location = new Point(20, LastPointY + 10);
+            question.Multiline = true;
+            question.Text = $"Question {icurrent}";
+            question.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+            this.Controls.Add(question);
+            GroupBox groupBox = new GroupBox();
+            groupBox.Size = new Size(400, 250);
+            groupBox.Location = new Point(50, LastPointY + 70);
+            PointForAnswerBlock = 30;
+            readquestionblock = new ReadQuestionBlock();
+            readquestionblock.Answer = new List<TextBox>();
+            readquestionblock.AnswerRadioButtons = new List<RadioButton>();
+            readquestionblock.Question = new TextBox();
+            readquestionblock.Question = question;
+            for (int i = 0; i < 4; i++)
+            {
+                TextBox answer1 = new TextBox();
+                answer1.Size = new Size(250, 50);
+                answer1.BackColor = Color.FromName("SpringGreen");
+                answer1.Location = new Point(100, PointForAnswerBlock + (i) * 52);
+                answer1.Multiline = true;
+                answer1.Text = $"option {i + 1}";
+                answer1.Font = new System.Drawing.Font("Comic Sans MS", 10, FontStyle.Italic);
+                groupBox.Controls.Add(answer1);
+                RadioButton radioButton1 = new RadioButton();
+                radioButton1.Location = new Point(15, PointForAnswerBlock + (i) * 52 + 5);
+                radioButton1.Size = new Size(30, 30);
+                radioButton1.Text = ((char)(i + 65)).ToString();
+                radioButton1.Font = new System.Drawing.Font("Comic Sans MS", 8, FontStyle.Italic);
+                radioButton1.BackColor = Color.FromName("SpringGreen");
+                radioButton1.ForeColor = Color.Black;
+                groupBox.Controls.Add(radioButton1);
+                readquestionblock.AnswerRadioButtons.Add(radioButton1);
+                readquestionblock.Answer.Add(answer1);
+            }
+            ++icurrent;
+            questionBlockreadlist.Add(readquestionblock);
+            this.Controls.Add(groupBox);
+            PointForAnswerBlock = 0;
+            LastPointY += 330;
+
+        }
+        private void AddQuestion_Click(object sender, EventArgs e)
+        {
+            AddQuestionBlockForCreation();
+            AddQuestion.Enabled = false;
+            SaveChangeBtn.Enabled = true;
+            GoToTestButton.Enabled = true;
         }
 
         private void DeleteOptionFromEnd_Click(object sender, EventArgs e)//I don't know exactly :(
@@ -951,6 +1038,10 @@ namespace Quiz
                     {
                         bt.Dispose();
                     }
+                    else if(item is GroupBox gb)
+                    {
+                        gb.Dispose();
+                    }
                     else if (item is ListView lv)
                     {
                         lv.Dispose();
@@ -1001,13 +1092,13 @@ namespace Quiz
             //if you clicked to save button This button will enabled true
             this.Controls.Add(GoToTestButton);
 
-            textBoxfilename = new TextBox();
-            textBoxfilename.Size = new Size(100, 30);
-            textBoxfilename.Text = "filename";
+            //textBoxfilename = new TextBox();
+            //textBoxfilename.Size = new Size(100, 30);
+            //textBoxfilename.Text = "filename";
 
-            textBoxfilename.Font = new System.Drawing.Font("Comic Sans MS", 8, FontStyle.Italic);
-            textBoxfilename.Location = new Point(GoToTestButton.Location.X + 80, GoToTestButton.Location.Y + 35);
-            this.Controls.Add(textBoxfilename);
+            //textBoxfilename.Font = new System.Drawing.Font("Comic Sans MS", 8, FontStyle.Italic);
+            //textBoxfilename.Location = new Point(GoToTestButton.Location.X + 80, GoToTestButton.Location.Y + 35);
+            //this.Controls.Add(textBoxfilename);
 
             EditByDrag = new Button();
             EditByDrag.Location = new Point(300, 1);
@@ -1021,10 +1112,6 @@ namespace Quiz
         public TextBox textBoxfilename { get; set; }
         public QuestionBlock question { get; set; }
         public List<QuestionBlock> CustomQuestionBlock { get; set; }
-        void MakeNewQuestionBlock()
-        {
-
-        }
         public string FileNameFromSaveAndGotoBtn { get; set; }
         private void GoToTestButton_Click(object sender, EventArgs e)
         {
@@ -1036,6 +1123,15 @@ namespace Quiz
                 FileNameForSerialize += ctn + ".xml";
 
                 DirectoryName = Directory.GetCurrentDirectory() + "\\users";
+                if (!Directory.Exists(DirectoryName))
+                {
+                   // MessageBox.Show("Create Directory");
+                    DirectoryInfo di = Directory.CreateDirectory(DirectoryName);
+                }
+                else
+                {
+                    //MessageBox.Show("Is already exist this Folder");
+                }
                 string fname = DirectoryName + "\\" + FileNameForSerialize;
                 MessageBox.Show(fname);
                 try
@@ -1056,14 +1152,20 @@ namespace Quiz
                     MessageBox.Show(ex.Message);
                 }
             }
-
-
         }
         public ListView listView { get; set; }
         public Button Edit { get; set; }
         public Button Add { get; set; }
         private void EditByDrag_Click(object sender, EventArgs e)
         {
+            textBoxfilename = new TextBox();
+            textBoxfilename.Size = new Size(100, 30);
+            textBoxfilename.Text = "filename";
+
+            textBoxfilename.Font = new System.Drawing.Font("Comic Sans MS", 8, FontStyle.Italic);
+            textBoxfilename.Location = new Point(GoToTestButton.Location.X + 80, GoToTestButton.Location.Y + 35);
+            this.Controls.Add(textBoxfilename);
+
             //drag xml file to list view or something to edit
             CreateNewOneButton.Enabled = false;
             listView = new ListView();
@@ -1411,6 +1513,10 @@ namespace Quiz
                         if (item is PictureBox pb)
                         {
                             pb.Dispose();
+                        }
+                        else if (item is GroupBox gb)
+                        {
+                            gb.Dispose();
                         }
                     }
                 }

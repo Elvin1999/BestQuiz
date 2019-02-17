@@ -188,6 +188,10 @@ namespace Quiz
                     {
                         lb.Dispose();
                     }
+                    else if (item is GroupBox gb)
+                    {
+                        gb.Dispose();
+                    }
                     else if (item is Button bt)
                     {
                         bt.Dispose();
@@ -448,6 +452,10 @@ namespace Quiz
                     else if (item is Button bt)
                     {
                         bt.Dispose();
+                    }
+                    else if (item is GroupBox gb)
+                    {
+                        gb.Dispose();
                     }
                     else if (item is Panel pn)
                     {
@@ -818,6 +826,10 @@ namespace Quiz
                     else if (item is Button bt)
                     {
                         bt.Dispose();
+                    }
+                    else if (item is GroupBox gb)
+                    {
+                        gb.Dispose();
                     }
                     else if (item is Panel pn)
                     {
