@@ -166,6 +166,7 @@ namespace Quiz
 
         private void MetroBtnSubmit_Click(object sender, EventArgs e)
         {
+     
             try
             {
                 CorrectCount = 0;
@@ -191,7 +192,19 @@ namespace Quiz
                 if (QuestionListSecond.Count != 0)
                 {
                     ShowTest(QuestionListSecond, CurrentIndex);
-
+                }
+                else
+                {
+                    BackButton.Enabled = false;
+                    metroNextbtn.Enabled = false;
+                    for(int i=0;i<3;i++)
+                        foreach (var item in this.Controls)
+                        {
+                            if(item is RadioButton rb)
+                            {
+                                rb.Dispose();
+                            }
+                        }
                 }
                 GetResultButton();
             }
@@ -668,7 +681,7 @@ namespace Quiz
         public Button Refresh { get; set; }
         private void LoadFirstPageOfForm()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 6; i++)
             {
                 foreach (var item in this.Controls)
                 {
@@ -1501,7 +1514,7 @@ namespace Quiz
                     labelQuestion1.Text = questionlist[curindex].Text;
                 if (IsClickedToSubmitButton)
                     metroAcceptbtn.Enabled = false;
-                for (int i = 0; i < 2 * questionlist[curindex].Answers.Count; i++)
+                for (int i = 0; i < 4 * questionlist[curindex].Answers.Count; i++)
                 {
                     foreach (var item in this.Controls)
                     {
