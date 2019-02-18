@@ -114,7 +114,7 @@ namespace Quiz
             labelQueueQuestion = new Label();
             labelQueueQuestion.Size = new Size(120, 20);
             labelQueueQuestion.Location = new Point(12, 490);
-            labelQueueQuestion.Font = new System.Drawing.Font("Monotype Corsiva", 12, FontStyle.Italic);
+            labelQueueQuestion.Font = new System.Drawing.Font("Monotype Corsiva", 8, FontStyle.Italic);
             labelQueue1 = new Label();
             labelQueue1.Text = "1";
             labelQueue1.Font = new System.Drawing.Font("Monotype Corsiva", 14, FontStyle.Italic);
